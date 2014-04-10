@@ -4,6 +4,7 @@ $(document).ready(function(){
 		$('#'+this.name).toggle();
 	});
     //jpalyer
+    /*
     var myOtherOne = new CirclePlayer("#jquery_jplayer_2",
 			{   //wav:"file/attack.wav",
                 mp3:"file/love.mp3",
@@ -15,7 +16,7 @@ $(document).ready(function(){
                 swfPath: "jquery/plugin/jplayer/",
                 supplied: "m4a, oga, wav, mp3",
                 //solution: "flash, html"
-			});
+			});*/
 
 });
 //浮动通菜单栏

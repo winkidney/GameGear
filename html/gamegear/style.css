@@ -191,6 +191,11 @@ article {
     margin: 0 5px 10px 0;
 }
 
+.node h5{
+    height: 2em;
+    width: 100px;
+    overflow: hidden;
+}
 .node-child{
     width: 100px;
     }
