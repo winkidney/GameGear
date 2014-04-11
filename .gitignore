@@ -1,4 +1,8 @@
 # Byte-compiled / optimized / DLL files
+*.db
+.settings
+.gitignore
+localsettings.py
 .directory
 ref
 __pycache__/
