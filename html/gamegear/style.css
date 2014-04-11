@@ -60,6 +60,9 @@ h5{
 .gray-bg{
     background-color: #333333;
 }
+.deep-bg{
+    background-color: #2E2E2E;
+}
 .radius-5{
     border-radius: 5px;
 }
@@ -165,7 +168,7 @@ h5{
 /*end latest-posts*/
 /*start right-content*/
 #right-content{
-    width: 80%;
+    width: 50%;
     padding-top: 15px;
     padding-left: 10px;
     padding-right: 10px;
@@ -202,5 +205,14 @@ article {
 /*end node*/
 /*end article*/
 /*end right-content*/
+/*start topic div*/
+#topic{
+    width: 30%;
+    padding: 20px 20px;
+}
+.topic-ul li{
+    margin-top:5px;
+}
+/*end topic div*/
 /*end main-container*/
 /*end div boxed*/
