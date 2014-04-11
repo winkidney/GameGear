@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cn" lang="cn">
+
+<head>
+    <title>GameGear</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <!--jquery-ui-->
+		<link href="jquery/css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+		<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script-->
+		<script src="jquery/js/jquery-1.11.0.min.js"></script>
+		<script src="jquery/plugin/jquery-ui-1.10.3.custom.min.js"></script>
+	<!--juery-ui end-->
+	<!--img box start-->
+		<link rel="stylesheet" href="jquery/plugin/prettyPhoto/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
+		<script src="jquery/plugin/prettyPhoto/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+	<!--img box end-->
+    <!--player start-->
+        <link rel="stylesheet" href="jquery/plugin/jplayer/css/not.the.skin.css">
+		<link rel="stylesheet" href="jquery/plugin/jplayer/circle.skin/circle.player.css">
+        <script type="text/javascript" src="jquery/plugin/jplayer/js/jquery.transform2d.js"></script>
+		<script type="text/javascript" src="jquery/plugin/jplayer/js/jquery.grab.js"></script>
+		<script type="text/javascript" src="jquery/plugin/jplayer/jquery.jplayer.min.js"></script>
+		<script type="text/javascript" src="jquery/plugin/jplayer/js/mod.csstransforms.min.js"></script>
+		<script type="text/javascript" src="jquery/plugin/jplayer/js/circle.player.js"></script>
+    <!--end player-->
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	
+    <div id="boxed">
+        <div id="header">
+            <div id="logo" ><a><img src="img/logo.png"/></a></div>
+            <nav id="nav">
+                <ul id="navmenu" class="no-list-style">
+                    <li><a>Home</a><a class="show-menu">&nbsp;■</a></li>
+                    <li><a>我的账户</a><a class="show-menu">&nbsp;■</a></li>
+                    <li>
+                        <a>文档库</a><a class="show-menu" name="documents">&nbsp;■</a>
+                        <ul class="menu-content no-list-style" id="documents">
+                            <li><a>Gevent</a></li>
+                            <li><a>Cocos2d</a></li>
+                            <li><a>PyGame</a></li>
+                        </ul>
+                    </li>
+                    <li><a>浏览</a><a class="show-menu" name="browse">&nbsp;■</a>
+                        <ul class="menu-content no-list-style" id="browse">
+                            <li><a>2D 艺术</a></li>
+                            <li><a>3D 艺术</a></li>
+                            <li><a>概念艺术</a></li>
+                            <li><a>贴图</a></li>
+                            <li><a>音效</a></li>
+                            <li><a>游戏企划</a></li>
+                            <li><a>程序文档</a></li>
+                            <li><a>游戏制作教程</a></li>
+                        </ul>
+                    </li>
+                    <li><a>上传作品</a><a class="show-menu">&nbsp;■</a></li>
+                    <li>
+                        <a>精选集</a><a class="show-menu" name="collection">&nbsp;■</a>
+                        <ul class="menu-content no-list-style" id="collection">
+                            <li><a>我的精选集</a></li>
+                            <li><a>浏览精选集</a></li>
+                            <li><a>创建精选集</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a>排行榜</a><a class="show-menu" name="leader-list">&nbsp;■</a>
+                        <ul class="menu-content no-list-style" id="leader-list">
+                            <li><a>综合评分</a></li>
+                            <li><a>2D 艺术</a></li>
+                            <li><a>3D 艺术</a></li>
+                            <li><a>概念艺术</a></li>
+                            <li><a>贴图</a></li>
+                            <li><a>音效</a></li>
+                            <li><a>游戏企划</a></li>
+                            <li><a>程序文档</a></li>
+                            <li><a>游戏制作教程</a></li>
+                        </ul>
+                    </li>
+                    </li>
+                    <li><a>关于</a><a class="show-menu">&nbsp;■</a></li>
+                    <li><a>留言板</a><a class="show-menu">&nbsp;■</a></li>
+                    <li><a>更多 >>></a></li>
+                    <li class="clear"></li>
+                </ul>
+            </nav>
+        </div><!--end div header-->
+        <div id="main-container">
+            <div id="sidebar" class="left">
+				<div id="random">
+					<label class="single-title">猜你喜欢</label>(<a>换一个</a>)</br>
+					<a class="asite">瓦片地图块</a>
+				</div><!--end div random-->
+				<div id="search-div">
+					<form method="get" action=""  target="_blank">
+						<input class="single-title" id="search-btn" type="submit" name="search" value="搜索">(<a>高级搜索</a>)</br>
+						<input class="text-input" type="text" name="search"  size="15" maxlength="255" value="">
+					</form>
+				</div>
+				<div id="latest-posts">
+					<label class="single-title">最近更新</label></br>
+					<ul class="no-list-style">
+						<li><a title="描述">技能图标集</a></li>
+						<li><a title="描述">下雪音效</a></li>
+						<li><a title="描述">可以用到的片头</a></li>
+						<li><a title="描述">游戏齿轮，素材网站</a></li>
+					</ul>
+				</div><!--end div latest-posts-->
+				<div id="tags">
+					<label class="single-title">标签</label></br>
+					<ul class="no-list-style">
+						<li><a title="描述">瓦片地图（20）</a></li>
+						<li><a title="描述">音效（14）</a></li>
+						<li><a title="描述">角色（33）</a></li>
+						<li><a title="描述">动画（40）</a></li>
+					</ul>
+				</div>
+				<div id="archives">
+					<label class="single-title">按时间查看</label></br>
+					<ul class="no-list-style">
+						<li><a title="描述">最近一周</a></li>
+						<li><a title="描述">最近一月</a></li>
+						<li><a title="描述">最近半年</a></li>
+						<li><a title="描述">最近一年</a></li>
+					</ul>
+				</div>
+			</div><!--end div left-content-->
+            <div id="right-content" class="left">
+                <article>
+                    <div class="article-top">
+                        <h2 class="left"><a>公告板</a></h2>
+                        <h5 class="right"><a href="#" title="rss">联系我们</a></h5>
+                        <div class="clear"></div>
+                    </div>
+            		<div class="public-content">
+                        <p>欢迎来到GameGear游戏齿轮，这里是一个共享你有趣的想法，提供游戏制作探讨，存档素材和资源的地方，玩的开心=w=。</p>
+                    </div>
+            	</article>
+            	<article>
+                    <div class="article-top">
+                        <h2 class="left"><a>本周流行</a></h2>
+                        <h5 class="right"><a href="#" title="rss">订阅</a></h5>
+                        <div class="clear"></div>
+                    </div>
+            		<div class="node gray-bg radius-5">
+                        <h5 class="text-center center"><a class="node-title">褐色嗯嗯讷讷呢后面很长</a></h5>
+                        <div class="node-content">
+                            <div class="node-child center">
+                                <a><img src="img/exp.jpg" alt="exp.jbg preview"/></a>
+                            </div>
+                        </div><!--end div node-content-->
+                    </div><!--end div node-->
+                    <div class="clear"></div>
+            	</article>
+            	<article>
+                    <div class="article-top">
+                        <h2 class="left"><a>最新作品</a></h2>
+                        <h5 class="right"><a href="#" title="rss">订阅</a></h5>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="node gray-bg radius-5">
+                        <h5 class="text-center center"><a class="node-title">攻击音效</a></h5>
+                        <div class="node-content">
+                            <div class="node-child center">
+                                <a href="#"><div class="ico-music"></div></a>
+                            </div><!--end child-node-->
+                        </div><!--end div node-content-->
+                    </div><!--end div node-->
+                    <div class="clear"></div>
+            	</article>
+            </div><!--end div right-content-->
+            <div id="topic" class="left">
+                <div id="topic-header">
+                
+                <article>
+                    <div class="article-top">
+                        <h2 class="left"><a href="#">问答</a></h2>
+                        <h5 class="right"><a href="#" title="rss">订阅</a></h5>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="topic-list">
+                        <ul class="no-list-style topic-ul">
+                            <li>
+                                <a>♥&nbsp;</a>10&nbsp;<a><a>U&nbsp;</a>3&nbsp;<a><a>B&nbsp;</a>0&nbsp;<a>瓦片的地图的斜坡是如何制作的？</a>
+                            </li>
+                            <li class="deep-bg">
+                                <a>♥&nbsp;</a>10&nbsp;<a><a>U&nbsp;</a>3&nbsp;<a><a>B&nbsp;</a>0&nbsp;<a>瓦片的地图的斜坡是如何制作的？</a>
+                            </li>
+                            <li>
+                                <a>♥&nbsp;</a>10&nbsp;<a><a>U&nbsp;</a>3&nbsp;<a><a>B&nbsp;</a>0&nbsp;<a>瓦片的地图的斜坡是如何制作的？</a>
+                            </li>
+                            <li  class="deep-bg">
+                                <a>♥&nbsp;</a>10&nbsp;<a><a>U&nbsp;</a>3&nbsp;<a><a>B&nbsp;</a>0&nbsp;<a>瓦片的地图的斜坡是如何制作的？</a>
+                            </li>
+                        </ul>
+                    </div><!--end div topic-list-->
+                </article>
+                </div><!--end topic-header-->
+            </div><!--end div topic-->
+			<div class="clear"></div>
+        </div><!--end main-container-->
+	    <div id="footer" class="center">
+	        <div id="function" class="center">
+	            <a>GameGear</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	            Powered by GameGear &amp; winkidney 2014&copy;
+	        </div>
+	    </div><!--end div footer-->
+	    <div class="clear"></div>
+    </div><!--end boxed-->
+    <div id="menu-bar">
+            <a class="left" href="mailto:winkidney@gmail.com">发邮件</a>
+            <a class="left" href="#">管理</a>
+            <a class="left" ></a><a class="right link">登录</a>
+            <a class="right">试试手气[]~(￣▽￣)~*</a><a class="clear"></a>      
+    </div><!--end menu-bar-->
+    <div class="clear"></div>
+
+    
+    <script type="text/javascript" charset="utf-8" src="js/init.js"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,218 @@
+body,html {
+	background-color:#222222;
+	padding: 0;
+	margin: 0;
+	color: white;
+	font-size: 14px;
+	font-weight: inherit;
+	line-height: 21px;
+	height: 100%;
+}
+
+a{
+	cursor: pointer;
+	color: rgb(238, 136, 135);
+	text-decoration: none;
+    transition: all 0.5s ease 0s;
+}
+.link{
+	color: rgb(238, 136, 135);
+}
+a:hover {
+	color: rgb(255, 170, 174);
+	text-decoration: none;
+    transition: all 0.15s ease 0s;
+}
+.left {
+	float: left;
+	}
+.right {
+	float: right;
+	}
+.clear {
+	clear: both;
+	}
+.hide {
+	display: none;
+	}
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+.text-center{
+    text-align: center;
+}
+.no-list-style{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.single-title{
+	font-size: 1.2em;
+}
+h2{
+    margin: 0 0 20px 5px;
+}
+
+h5{
+    margin: 2px 0;
+}
+.gray-bg{
+    background-color: #333333;
+}
+.deep-bg{
+    background-color: #2E2E2E;
+}
+.radius-5{
+    border-radius: 5px;
+}
+/*#666666*/
+.ico-music{
+    width: 100px;
+    height: 100px;
+    background-image: url("img/music_ico.png");
+}
+
+
+/*menu-bar*/
+#menu-bar {
+	padding: 2px 0px;
+	position: fixed;
+	background-color: #222222;
+	/*border-bottom:solid 1px #666666;*/
+	width: 100%;
+	padding: 0 0;
+	top: 0;
+	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
+	display: none;
+}
+#menu-bar a{
+	padding: 0 5px;
+}
+/*div boxed*/
+#boxed {
+	padding: 0 35px;
+}
+/*logo*/
+#logo{
+	width: 460px;
+}
+	
+/*start nav nav*/
+#nav {
+	height: 40px;
+}
+/*start navmeun*/
+#navmenu {
+	font-size: 1.1em;
+}
+#navmenu>li {
+	float: left;
+	padding-right: 15px;
+}
+.menu-content{
+    display: none;
+    position: absolute;
+    max-width: 200px;
+    overflow: hidden;
+    background: none repeat scroll 0% 0% #000;
+    border: 1px solid #666;
+    }
+.show-menu {
+	font-size: 1.2em;
+}
+.menu-content li{
+    padding: 2px 4px;
+    }
+.menu-content li:hover{
+    background-color: #222222;
+}
+/*end navmenu*/
+/*end nav nav*/
+
+/*main-container*/
+#main-container{
+	width: 100%;
+}
+/*left-content start */
+#sidebar {
+	width: 15%;
+}
+/*left-content end */
+
+/*start div random*/
+#random {
+	width: 100%;
+	}
+/*end div random*/
+/*start search-div*/
+#sidebar>div {
+	margin: 10px 0px;
+	}
+.text-input{
+	width: 90%;
+}
+#search-btn {
+	text-decoration: none;
+	background:none;
+	border:none;
+	color: white;
+	padding: 0;
+}
+/*end search-div*/
+
+/*start latest-posts*/
+#latest-posts a{
+	padding:1px 0;
+}
+/*end latest-posts*/
+/*start right-content*/
+#right-content{
+    width: 50%;
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    }
+/*start article*/
+article {
+    background-color: #202020;
+    padding: 0 20px 20px 20px;
+}
+.article-top{
+    border-bottom: 2px solid #FFF;
+    padding: 0 20px 0 0;
+    margin: 0 0 10px 0;
+    height: 30px;
+}
+/*start node*/
+.node{
+    width: 120px;
+    height: 135px;
+    padding: 8px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    float: left;
+    margin: 0 5px 10px 0;
+}
+
+.node h5{
+    height: 2em;
+    width: 100px;
+    overflow: hidden;
+}
+.node-child{
+    width: 100px;
+    }
+/*end node*/
+/*end article*/
+/*end right-content*/
+/*start topic div*/
+#topic{
+    width: 30%;
+    padding: 20px 20px;
+}
+.topic-ul li{
+    margin-top:5px;
+}
+/*end topic div*/
+/*end main-container*/
+/*end div boxed*/
