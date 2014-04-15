@@ -24,8 +24,14 @@ class Gear(models.Model):
     """User models extending."""
     user = models.OneToOneField(User)
     weibo_token = models.CharField(verbose_name=u'微博token',max_length=50, blank=True)
+    
     gears = models.IntegerField(blank=False)    #积分，发主题,回复主题可以获得
+    #GameArt 部分
     reputation = models.IntegerField(blank=False)   #积分，主题被评分可以获得
+    
+    #Exchange部分
+    e_reputation = models.IntegerField(blank=False, verbose_name=u'E_reputation')
+    
     class Meta:
         verbose_name_plural = u"Gear信息"
         verbose_name = u"Gear信息"
