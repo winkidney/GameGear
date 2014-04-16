@@ -7,7 +7,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from models import Gear
+from UCenter.models import Gear
+from GameGear.models import Post,Art
 
 class GearInline(admin.StackedInline):
     model = Gear
@@ -20,3 +21,5 @@ class GearAdmin(UserAdmin):
 admin.site.unregister(User)
 admin.site.register(User,GearAdmin)
 admin.site.register(Gear)
+admin.site.register(Post)
+admin.site.register(Art)
