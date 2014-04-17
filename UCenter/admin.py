@@ -73,8 +73,9 @@ class GearAdmin(UserAdmin):
     list_filter = ('is_staff',)
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
-        (None, {'fields': ('name', 'email', 'password', 'avatar',)}),
-        (_(u'Personal info'), {'fields': ('created_at', 'updated_at')}),
+        (None, {'fields': ('name', 'nickname', 'email', 'password', 'avatar',)}),
+        (_(u'Personal info'), {'fields': ('created_at', 'updated_at', 'age', 'job')}),
+        (_(u'GearArt'),{'fields' : ('posts', 'own_collections')}),
         #(
         #    'Open token info',
         #    {

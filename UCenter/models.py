@@ -68,7 +68,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     #is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     #private info
-    nick_name = models.CharField(blank=True, max_length=100)
+    nickname = models.CharField(blank=True, max_length=100)
     age = models.IntegerField(blank=False, default=0)
     job = models.CharField(blank=True, max_length=30)
     website = models.URLField(blank=True)
