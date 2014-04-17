@@ -8,7 +8,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
 from UCenter.models import Gear
-from GameGear.models import Post,Art
+from GameArt.models import Post,Art
 
 class GearInline(admin.StackedInline):
     model = Gear
