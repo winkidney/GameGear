@@ -4,7 +4,7 @@
 from django.utils.translation import gettext_lazy as glt
 from django.utils.translation import ugettext as _
 from django.db import models
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 
 #from UCenter.models import Gear
 
@@ -129,7 +129,7 @@ class Collection(models.Model):
     description = models.TextField(verbose_name=u"description")
     content = models.TextField(verbose_name=u'content')
     
-    author = models.ManyToManyField(Gear,verbose_name=_('collection author'))
+    #author = models.ManyToManyField(Gear,verbose_name=_('collection author'))
     
     rating = models.IntegerField(blank=False, verbose_name=u'rating')   #帖子评分
     comments = models.ManyToManyField(PComment, verbose_name=u'comment')  

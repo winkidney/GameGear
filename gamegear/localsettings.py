@@ -7,6 +7,8 @@ import os
 
 PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)),os.pardir).replace('\\', '/')
 
+AUTH_USER_MODEL = 'UCenter.User'
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -133,9 +135,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # xadmin
-    'xadmin',
-    'crispy_forms',
-    'reversion',
+    #'xadmin',
+    #'crispy_forms',
+    #'reversion',
     # My own
     'UCenter',
     'GearArt',

@@ -15,7 +15,7 @@ if os.path.isfile("gamegear/localsettings.py"):
 else:
     os.environ['DJANGO_SETTINGS_MODULE'] = "gamegear.settings"
 
-from django.contrib.auth.models import User
+from UCenter.models import User
 
 def syncdb_with_su(su_name, su_email, su_passwd):
     # sync db

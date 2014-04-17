@@ -5,9 +5,9 @@ from xadmin.layout import Main, TabHolder, Tab, Fieldset, Row, Col, AppendedText
 from xadmin.plugins.inline import Inline
 from xadmin.plugins.batch import BatchChangeAction
 
-from UCenter.models import Gear
-from GameArt.models import License
-from django.contrib.auth.models import User 
+from UCenter.models import User
+from GearArt.models import License
+
 
 class MainDashboard(object):
     widgets = [
@@ -26,7 +26,7 @@ class BaseSetting(object):
 xadmin.site.register(views.BaseAdminView, BaseSetting)
 
 class GlobalSetting(object):
-    global_search_models = [Gear,]
+    global_search_models = [User,]
 
     menu_style = 'accordion'  #'accordion'
 xadmin.site.register(views.CommAdminView, GlobalSetting)
@@ -37,7 +37,7 @@ xadmin.site.register(views.CommAdminView, GlobalSetting)
     
 
 
-class GearAdmin(object):
+class UserAdmin(object):
     list_display = ('user', 'gears', 'reputation')
     list_display_links = ('user',)
 
@@ -50,5 +50,5 @@ class GearAdmin(object):
     
     #inlines = [GearInline]
 #xadmin.site.unregister(User)    
-xadmin.site.register(Gear, GearAdmin)
+#xadmin.site.register(Gear, GearAdmin)
 xadmin.site.register(License)

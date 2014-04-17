@@ -3,10 +3,11 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+import GearArt
 admin.autodiscover()
 
 import xadmin
-import GameArt
+
 xadmin.autodiscover()
 
 # version模块自动注册需要版本控制的 Model
@@ -15,7 +16,7 @@ xversion.register_models()
 
 urlpatterns = patterns('',
     url(r'xadmin/', include(xadmin.site.urls)),
-    url(r'^$',include('GameArt.urls')),
+    url(r'^$',include('GearArt.urls')),
     # Examples:
     # url(r'^$', 'gamegear.views.home', name='home'),
     # url(r'^gamegear/', include('gamegear.foo.urls')),
