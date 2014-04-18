@@ -26,7 +26,7 @@ class Message(models.Model):
        max number for every user is 50.
     """
     
-    message = models.TextField(verbose_name=u'message')
+    message = models.TextField(verbose_name=_(u'message'))
     isread = models.BooleanField(verbose_name=u'isread')
     send_time = models.DateTimeField(auto_now_add=True,verbose_name=_(u'send_time'))
 

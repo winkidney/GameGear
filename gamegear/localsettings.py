@@ -2,13 +2,23 @@
 #coding:utf-8
 #localsettings.py - the setting file of game project
 # winkidney 2014-04-11
-
+from django.utils.translation import gettext_noop as _
 import os
 
 PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)),os.pardir).replace('\\', '/')
 
 AUTH_USER_MODEL = 'UCenter.User'
 
+LANGUAGES = (
+    ('en', _('English')),
+    ('zh-cn', _('Simplified Chinese')),
+    ('zh-hans', _('Simplified Chinese')),
+    ('zh-hant', _('Traditional Chinese')),
+    ('zh-tw', _('Traditional Chinese')),
+)
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'jv91h30ac(-hl=z=sqon&pz)k+zb$b767zq2^za^=ucxa$ye$!'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -93,8 +103,7 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'jv91h30ac(-hl=z=sqon&pz)k+zb$b767zq2^za^=ucxa$ye$!'
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -134,16 +143,18 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admin',
     # xadmin
     #'xadmin',
     #'crispy_forms',
     #'reversion',
+    
+    # Uncomment the next line to enable the admin:
+    
     # My own
     'UCenter',
     'GearArt',
     'GearAnswer',
-    # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

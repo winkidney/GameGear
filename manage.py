@@ -5,6 +5,7 @@ import sys
 if __name__ == "__main__":
     if os.path.isfile("gamegear/localsettings.py"):
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gamegear.localsettings")
+        print 'localsettings'
     else:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gamegear.settings")
 
