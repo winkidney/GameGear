@@ -4,7 +4,7 @@
 #by winkidney 2014
 from django.utils.translation import gettext_lazy as _
 from django.db import models
-
+from UCenter.models import User
 
 class License(models.Model):
     
@@ -17,7 +17,10 @@ class License(models.Model):
     name = models.CharField(max_length=250, verbose_name=_(u'license name'))
     link = models.URLField(verbose_name=_(u'license url'))
     img_url = models.URLField(verbose_name=_(u'license image url'))
-
+    
+    def __unicode__(self):
+        return self.name
+    
 class ArtType(models.Model):
     
     """Type of the art masterpieces"""
@@ -29,15 +32,21 @@ class ArtType(models.Model):
     name = models.CharField(max_length=250, verbose_name=_(u'art type name'))
     display_order = models.IntegerField(verbose_name=_(u'display order'))
     
+    def __unicode__(self):
+        return self.name
+    
 class Tag(models.Model):
     
     """tags of the art masterpieces"""
     
     class Meta:
-        verbose_name_plural = _(u"Tags")
-        verbose_name = _(u"Tag")
+        verbose_name_plural = _(u"tags")
+        verbose_name = _(u"tag")
         
     name = models.CharField(max_length=250, verbose_name=_(u'tag name'))
+    
+    def __unicode__(self):
+        return self.name
     
 class PostType(models.Model):
     
@@ -46,12 +55,15 @@ class PostType(models.Model):
     """
     
     class Meta:
-        verbose_name_plural = _(u"post type")
+        verbose_name_plural = _(u"post types")
         verbose_name = _(u"post type")
         
     name = models.CharField(max_length=250, verbose_name=_(u'post type name'))
     display_order = models.IntegerField(blank=False, verbose_name=_(u'display order'))
-
+    
+    def __unicode__(self):
+        return self.name
+    
 class Art(models.Model):
     
     """Art masterpiece belong a post or a comment.
@@ -67,7 +79,11 @@ class Art(models.Model):
     down_times = models.IntegerField(verbose_name=_(u'download times'))
     tags = models.ManyToManyField(Tag, verbose_name=_(u'tags'))
     type = models.ForeignKey(ArtType, verbose_name=_(u"art type"))
-
+    upload_time = models.DateTimeField(auto_now_add=True, verbose_name=_(u'uploda time'))
+    
+    def __unicode__(self):
+        return self.upload_time
+    
 class PComment(models.Model):
     
     """ Posts'comment of the art masterpiece."""
@@ -75,12 +91,15 @@ class PComment(models.Model):
     class Meta:
         verbose_name_plural = _(u"comments")
         verbose_name = _(u"comment")
-    ownerid = models.CharField(max_length=50,blank=False) #author uid
+        
+    ownerid = models.ForeignKey(User, max_length=50, blank=False, verbose_name=_(u'comment poster')) #author uid
     content = models.TextField(blank=False,verbose_name=_(u'comment content'))
     rating = models.IntegerField(blank=False, verbose_name=_(u'rating'))   #帖子评分
-    arts = models.ManyToManyField(Art, verbose_name=u"art")
     reply_to = models.ForeignKey('self', verbose_name=_(u'reply to'), blank=True)     #父回复
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
     
+    def __unicode__(self):
+        return self.name
     
 class Post(models.Model):
     
@@ -93,7 +112,8 @@ class Post(models.Model):
         
     title = models.CharField(max_length=250, blank=False, verbose_name=_(u'title'))
     
-    authors = models.CharField(max_length=250,)
+    starers = models.ManyToManyField(User, verbose_name=_(u'starer'))
+    
     content = models.TextField(blank=False, verbose_name=_(u'content'))
     rating = models.IntegerField(blank=False, verbose_name=_(u'rating'))   #帖子评分
     
@@ -112,7 +132,10 @@ class Post(models.Model):
     
     #包含的文件
     arts = models.ManyToManyField(Art, verbose_name=_(u"art"))
-
+    
+    def __unicode__(self):
+        return self.title
+    
 class Collection(models.Model):
     
     """tags of the art masterpieces"""
@@ -126,7 +149,8 @@ class Collection(models.Model):
     description = models.TextField(verbose_name=_(u"description"))
     content = models.TextField(verbose_name=_(u'content'))
     
-    #author = models.ManyToManyField(Gear,verbose_name=_('collection author'))
+    starers = models.ManyToManyField(User, verbose_name=_(u'starer'))
+    authorid = models.IntegerField(blank=False, verbose_name=_('collection author'))
     
     rating = models.IntegerField(blank=False, verbose_name=_(u'rating'))   #帖子评分
     comments = models.ManyToManyField(PComment, verbose_name=_(u'comment'))  
@@ -136,7 +160,8 @@ class Collection(models.Model):
     
     star_count = models.IntegerField(verbose_name=_(u'star count'))
     
-         
+    def __unicode__(self):
+        return self.name     
         
 
     
