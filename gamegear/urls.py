@@ -14,7 +14,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     #url(r'xadmin/', include(xadmin.site.urls)),
-    url(r'^$',include('GearArt.urls')),
+    url(r'^GearArt/',include('GearArt.urls')),
     # Examples:
     # url(r'^$', 'gamegear.views.home', name='home'),
     # url(r'^gamegear/', include('gamegear.foo.urls')),

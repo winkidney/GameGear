@@ -1,10 +1,17 @@
 # Django settings for gamegear project.
+from django.utils.translation import gettext_noop as _
+import os
+
+PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)),os.pardir).replace('\\', '/')
+
+#AUTH_USER_MODEL = 'UCenter.User'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+     ('winkidney', 'winkidney@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -83,7 +90,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'sfdsfsdfsdfdsf3452354g!!~~!'
+SECRET_KEY = 'dfdfdsafdsafdsafe343256465gfsg'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

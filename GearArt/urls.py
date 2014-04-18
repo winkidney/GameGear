@@ -7,8 +7,8 @@ import views
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'', views.home),
-    
+    url(r'^$', views.home),
+    url(r'^test/$', views.test),
     # Examples:
     # url(r'^$', 'gamegear.views.home', name='home'),
     # url(r'^gamegear/', include('gamegear.foo.urls')),

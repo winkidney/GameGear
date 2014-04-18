@@ -11,8 +11,8 @@ from django import forms
 from django.contrib.auth.models import Group as DjangoGroup
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from GearArt.models import Post,Art
-from UCenter.models import User
+from GearArt.models import (Post, Art)
+from UCenter.models import (User, Message)
 
 # 新增用户表单
 class UserCreateForm(forms.ModelForm):
@@ -99,5 +99,6 @@ class GearAdmin(UserAdmin):
     
 
 admin.site.register(User, GearAdmin)
+admin.site.register(Message)
 admin.site.register(Post)
 admin.site.register(Art)

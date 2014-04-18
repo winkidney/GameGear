@@ -12,7 +12,7 @@ __version__ = 0.1
 __date__ = '2014-04-14'
 __updated__ = '2014-04-14'
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 
@@ -62,7 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=100, unique=True)
     email = models.EmailField(max_length=100, unique=True)
     avatar = models.URLField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'用户创建时间')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
     updated_at = models.DateTimeField(auto_now=True)
     is_delete = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

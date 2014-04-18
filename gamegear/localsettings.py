@@ -9,16 +9,6 @@ PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)),os.pardi
 
 AUTH_USER_MODEL = 'UCenter.User'
 
-LANGUAGES = (
-    ('en', _('English')),
-    ('zh-cn', _('Simplified Chinese')),
-    ('zh-hans', _('Simplified Chinese')),
-    ('zh-hant', _('Traditional Chinese')),
-    ('zh-tw', _('Traditional Chinese')),
-)
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'jv91h30ac(-hl=z=sqon&pz)k+zb$b767zq2^za^=ucxa$ye$!'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -53,7 +43,7 @@ TIME_ZONE = 'Asia/Shanghai'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'zh-cn'
+LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
@@ -114,17 +104,23 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'gamegear.urls'
+
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'jv91h30ac(-hl=z=sqon&pz)k+zb$b767zq2^za^=ucxa$ye$!'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'gamegear.wsgi.application'
@@ -143,24 +139,34 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
+    
     # xadmin
     #'xadmin',
     #'crispy_forms',
     #'reversion',
     
     # Uncomment the next line to enable the admin:
-    
+    'django.contrib.admin',
     # My own
     'UCenter',
     'GearArt',
     'GearAnswer',
+    
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
+
+
+LANGUAGES = (
+    ('zh-cn', _('Simplified Chinese')),
+    ('en', _('English')),
+    ('zh-hans', _('Simplified Chinese')),
+    ('zh-hant', _('Traditional Chinese')),
+    ('zh-tw', _('Traditional Chinese')),
+)
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
