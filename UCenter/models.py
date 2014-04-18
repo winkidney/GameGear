@@ -27,7 +27,7 @@ class Message(models.Model):
     """
     
     message = models.TextField(verbose_name=_(u'message'))
-    isread = models.BooleanField(verbose_name=u'isread')
+    isread = models.BooleanField(verbose_name=_(u'is read'))
     send_time = models.DateTimeField(auto_now_add=True,verbose_name=_(u'send_time'))
 
 class UserManager(BaseUserManager):
@@ -59,20 +59,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     '''GameGear user table'''
 
-    name = models.CharField(max_length=100, unique=True)
-    email = models.EmailField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True, verbose_name=_(u'user name'))
+    email = models.EmailField(max_length=100, unique=True, _(u'email'))
     avatar = models.URLField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
-    updated_at = models.DateTimeField(auto_now=True)
-    is_delete = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
+    is_deleted = models.BooleanField(default=False, verbose_name=_(u'is deleted'))
+    is_active = models.BooleanField(default=True, verbose_name=_(u'is active'))
     #is_admin = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False, verbose_name=_(u'can login into admin panel'))
     #private info
-    nickname = models.CharField(blank=True, max_length=100)
-    age = models.IntegerField(blank=False, default=0)
-    job = models.CharField(blank=True, max_length=30)
-    website = models.URLField(blank=True)
+    nickname = models.CharField(blank=True, max_length=100, verbose_name=_(u'nickname'))
+    age = models.IntegerField(blank=False, default=0, verbose_name=_(u'age'))
+    job = models.CharField(blank=True, max_length=30, verbose_name=_(u'job'))
+    website = models.URLField(blank=True, verbose_name=_(u'web site'))
     
     
     #GameArt
@@ -82,11 +82,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     #ref_collections = models.ManyToManyField(Collection, verbose_name=_(u'collections'))
     pcomments = models.ManyToManyField(PComment, verbose_name=_(u'comments')) 
 
-    reputation = models.IntegerField(blank=False,default=0)   #积分，主题被评分可以获得
+    reputation = models.IntegerField(blank=False, default=0, verbose_name=_(u'reputation'))   #积分，主题被评分可以获得
     
     #Exchange部分
     e_reputation = models.IntegerField(blank=False,
-                                       verbose_name=u'E_reputation',
+                                       verbose_name=u'e_reputation',
                                        default=0,)
     #questions
     #anwsers
