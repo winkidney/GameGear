@@ -22,8 +22,8 @@ from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, Permi
 
 class Message(models.Model):
     
-    """message from a user to another
-       max number for every user
+    """message from a user to another.
+       max number for every user is 50.
     """
     
     message = models.TextField(verbose_name=u'message')
@@ -56,6 +56,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    
     '''GameGear user table'''
 
     name = models.CharField(max_length=100, unique=True)
@@ -113,49 +114,5 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.name
 
-    def has_perm(self, perm, obj=None):
-        return True
-
-    def has_module_perms(self, app_label):
-        return True
-
-    #@property
-    #def is_staff(self):
-    #    return self.is_admin    
-
-
-
-
-    
-# class Gear(models.Model):
-#     
-#     """User models extending."""
-#     
-#     class Meta:
-#         verbose_name_plural = u"Gear信息"
-#         verbose_name = u"Gear信息"
-#         
-#     user = models.OneToOneField(User)
-#     weibo_token = models.CharField(verbose_name=u'微博token',max_length=50, blank=True)
-#     gears = models.IntegerField(blank=False)    #积分，发主题,回复主题可以获得
-#     messages = models.ManyToManyField(Message,verbose_name=_(u'messages'))
-#     
-#     #private info
-#     age = models.IntegerField()
-#     job = models.CharField(max_length=30)
-#     
-#     #GameArt
-#     posts = models.ManyToManyField(Post, verbose_name=_(u'posts'))
-#     own_collections = models.ManyToManyField(Collection, verbose_name=_(u'collections'))
-#     #ref_collections = models.ManyToManyField(Collection, verbose_name=_(u'collections'))
-#     pcomments = models.ManyToManyField(PComment, verbose_name=_(u'comments')) 
-# 
-#     reputation = models.IntegerField(blank=False)   #积分，主题被评分可以获得
-#     
-#     #Exchange部分
-#     e_reputation = models.IntegerField(blank=False, verbose_name=u'E_reputation')
-#     #questions
-#     #anwsers
-    
     
 

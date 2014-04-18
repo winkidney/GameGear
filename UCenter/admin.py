@@ -82,8 +82,8 @@ class GearAdmin(UserAdmin):
         #        'fields': ('access_token', 'refresh_token', 'expires_in')
         #    }
         #),
-        ('Permissions', {'fields': ('is_delete', 'is_staff', 'is_active')}),
-        ('Important dates', {'fields': ('last_login',)}),
+        (_(u'Permissions'), {'fields': ('is_delete', 'is_staff', 'is_active')}),
+        (_(u'Important dates'), {'fields': ('last_login',)}),
     )
     add_fieldsets = (
         (
