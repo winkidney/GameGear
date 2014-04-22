@@ -153,7 +153,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def get_short_name(self):
-        return self.nickname
+        return self.name
 
     
 

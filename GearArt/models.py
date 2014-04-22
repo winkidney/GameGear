@@ -2,7 +2,7 @@
 #coding:utf-8
 #GameArt/models.py - models of GameGear
 #by winkidney 2014
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from UCenter.models import User
 
@@ -106,7 +106,7 @@ class Post(models.Model):
     """ Posts of the art masterpiece."""
     
     class Meta:
-        verbose_name_plural = _(u"post")
+        verbose_name_plural = _(u"posts")
         verbose_name = _(u"post")
     
         
@@ -119,19 +119,22 @@ class Post(models.Model):
     
     view_times = models.IntegerField(blank=False, verbose_name=_(u'viewed times'))
     rating_times = models.IntegerField(blank=False, verbose_name=_(u'rating times'))
-    masterpiece = models.BooleanField(verbose_name=_(u'masterpiece'))
+    masterpiece = models.BooleanField(default=False, verbose_name=_(u'masterpiece'))
     
     post_time = models.DateTimeField(auto_now_add=True, verbose_name=_(u'post time'))
     modify_time = models.DateTimeField(auto_now=True, verbose_name=_(u'modify time'))
     
     license = models.ManyToManyField(License, verbose_name=_(u'license'))
     tags = models.ManyToManyField(Tag, verbose_name=_(u'tag'))
-    comments = models.ManyToManyField(PComment, verbose_name=_(u'comment'))
+    comments = models.ManyToManyField(PComment, 
+                                      verbose_name=_(u'comment'))
     
-    content_type = models.ForeignKey(PostType, verbose_name=_(u'type'))
+    content_type = models.ForeignKey(PostType, 
+                                     verbose_name=_(u'type'))
     
     #包含的文件
-    arts = models.ManyToManyField(Art, verbose_name=_(u"art"))
+    arts = models.ManyToManyField(Art, 
+                                  verbose_name=_(u"art"))
     
     def __unicode__(self):
         return self.title

@@ -1,0 +1,152 @@
+body,html {
+	background-color:#222222;
+	padding: 0;
+	margin: 0;
+	color: white;
+	font-size: 14px;
+	font-weight: inherit;
+	line-height: 21px;
+	height: 100%;
+}
+
+a{
+	cursor: pointer;
+	color: rgb(238, 136, 135);
+	text-decoration: none;
+    transition: all 0.5s ease 0s;
+}
+.link{
+	color: rgb(238, 136, 135);
+}
+a:hover {
+	color: rgb(255, 170, 174);
+	text-decoration: none;
+    transition: all 0.15s ease 0s;
+}
+.left {
+	float: left;
+	}
+.right {
+	float: right;
+	}
+.clear {
+	clear: both;
+	}
+.hide {
+	display: none;
+	}
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+.text-center{
+    text-align: center;
+}
+.no-list-style{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.single-title{
+	font-size: 1.2em;
+}
+h2{
+    margin: 0 0 20px 5px;
+}
+
+h5{
+    margin: 2px 0;
+}
+.gray-bg{
+    background-color: #333333;
+}
+.deep-bg{
+    background-color: #2E2E2E;
+}
+.radius-5{
+    border-radius: 5px;
+}
+/*#666666*/
+.ico-music{
+    width: 100px;
+    height: 100px;
+    background-image: url("img/music_ico.png");
+}
+
+
+
+/*div boxed*/
+#boxed {
+	width: 100%;
+}
+
+/*header*/
+
+header {
+	padding: 2px 0px;
+	background-color: #222222;
+	/*border-bottom:solid 1px #666666;*/
+	width: 100%;
+	padding: 0 0;
+	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
+}
+header a{
+	padding: 0 5px;
+}
+/*menu-bar-cpoy*/
+#menu-bar {
+	padding: 2px 0px;
+	background-color: #222222;
+	/*border-bottom:solid 1px #666666;*/
+	width: 1140px;
+
+}
+/* end menu-bar-copy */
+/*end header*/
+
+/*div main*/
+
+#main{
+	width: 100%;
+}
+#container{
+	width: 980px;
+}
+#info {
+	padding: 20px 0;
+}
+/*logo*/
+#logo{
+	height: 75px;
+	width: 228px;
+}
+/* end logo*/
+/* start info-detail*/
+#info-detail{
+	height: 75px;
+	width: 720px;
+}
+/* end info-detail*/
+
+
+
+/*end div boxed*/
+
+
+
+/*menu-bar-cpoy*/
+#menu-bar-copy {
+	padding: 2px 0px;
+	position: fixed;
+	background-color: #222222;
+	/*border-bottom:solid 1px #666666;*/
+	width: 100%;
+	padding: 0 0;
+	top: 0;
+	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
+	display: none;
+}
+#menu-bar-copy a{
+	padding: 0 5px;
+}
+/* end menu-bar-copy */
