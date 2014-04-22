@@ -5,7 +5,7 @@
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 
 from django import forms
 from django.contrib.auth.models import Group as DjangoGroup
@@ -74,8 +74,10 @@ class GearAdmin(UserAdmin):
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
         (None, {'fields': ('name', 'nickname', 'email', 'password', 'avatar',)}),
-        (_(u'Personal info'), {'fields': ('created_at', 'updated_at', 'age', 'job')}),
-        (_(u'GearArt'),{'fields' : ('posts', 'own_collections')}),
+        (_(u'Personal info'), {'fields': ('gears', 'created_at', 'updated_at', 'age', 'job' , 'interest_in')}),
+        (_(u'GearArt'),{'fields' : ('reputation',)}),
+        (_(u'GearAnswer'),{'fields' : ('a_reputation',)}),
+        
         #(
         #    'Open token info',
         #    {

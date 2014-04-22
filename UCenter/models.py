@@ -23,6 +23,11 @@ class Message(models.Model):
     """message from a user to another.
        max number for every user is 50.
     """
+    
+    class Meta:
+        verbose_name_plural = _(u"insite message")
+        verbose_name = _(u"insite message")
+        
     title = models.CharField(max_length=40, verbose_name=_(u'title'))
     message = models.TextField(verbose_name=_(u'message'))
     isread = models.BooleanField(verbose_name=_(u'is read'))
@@ -99,10 +104,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     avatar = models.URLField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
+    
     is_delete = models.BooleanField(default=False, verbose_name=_(u'is deleted'))
     is_active = models.BooleanField(default=True, verbose_name=_(u'is active'))
-    #is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False, verbose_name=_(u'can login into admin panel'))
+    
     #private info
     nickname = models.CharField(blank=True, max_length=100, verbose_name=_(u'nickname'))
     age = models.IntegerField(blank=False, default=0, verbose_name=_(u'age'))
@@ -113,15 +119,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     #GameArt
     #posts = models.ManyToManyField(Post, verbose_name=_(u'posts'))
     #own_collections = models.ManyToManyField(Collection, verbose_name=_(u'collections'))
-    
+    gears = models.IntegerField(blank=False, default=0, verbose_name=_(u'gears'))
     #ref_collections = models.ManyToManyField(Collection, verbose_name=_(u'collections'))
     #pcomments = models.ManyToManyField(PComment, verbose_name=_(u'comments')) 
 
     reputation = models.IntegerField(blank=False, default=0, verbose_name=_(u'reputation'))   #积分，主题被评分可以获得
     
-    #Exchange部分
-    e_reputation = models.IntegerField(blank=False,
-                                       verbose_name=_(u'e_reputation'),
+    #Answer部分
+    a_reputation = models.IntegerField(blank=False,
+                                       verbose_name=_(u'a_reputation'),
                                        default=0,)
     #questions
     #anwsers
@@ -147,7 +153,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def get_short_name(self):
-        return self.name
+        return self.nickname
 
     
 
