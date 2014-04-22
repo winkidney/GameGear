@@ -8,6 +8,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 
 from django import forms
+from django.contrib.auth.models import Permission
 from django.contrib.auth.models import Group as DjangoGroup
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
@@ -50,7 +51,11 @@ class UserChangeForm(forms.ModelForm):
     the user, but replaces the password field with admin's
     password hash display field.
     """
-    password = ReadOnlyPasswordHashField()
+    password = ReadOnlyPasswordHashField(label=_(u"Password"),
+        help_text=_(u"Raw passwords are not stored, so there is no way to see "
+                    "this user's password, but you can change the password "
+                    "using <a href=\"password/\">this form</a>.")
+                                         )
 
     class Meta:
         model = User
@@ -84,7 +89,10 @@ class GearAdmin(UserAdmin):
         #        'fields': ('access_token', 'refresh_token', 'expires_in')
         #    }
         #),
-        (_(u'Permissions'), {'fields': ('is_delete', 'is_staff', 'is_active')}),
+        (_(u'Permissions'), {'fields': ('is_delete', 'is_staff', 
+                                        'is_active', 'is_superuser',
+                                        'user_permissions',
+                                        'groups',)}),
         (_(u'Important dates'), {'fields': ('last_login',)}),
     )
     add_fieldsets = (
@@ -97,10 +105,13 @@ class GearAdmin(UserAdmin):
         ),
     )
     ordering = ('created_at',)
-    filter_horizontal = ()
+    filter_horizontal = ('groups', 'user_permissions',)
+
     
 
 admin.site.register(User, GearAdmin)
+admin.site.register(Permission)
+admin.site.unregister(DjangoGroup)
 admin.site.register(Message)
 admin.site.register(Post)
 admin.site.register(Art)
