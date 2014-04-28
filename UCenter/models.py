@@ -42,7 +42,7 @@ class InterTag(models.Model):
     
     class Meta:
         verbose_name_plural = _(u"interest tag")
-        verbose_name = _(u"major type")
+        verbose_name = _(u"interest tag")
         
     name = models.CharField(max_length=30, verbose_name=_(u'interest tag'))
     count = models.IntegerField(default=0, verbose_name=_(u'person count'))
@@ -58,10 +58,10 @@ class MajorType(models.Model):
     """
     
     class Meta:
-        verbose_name_plural = _(u"major type")
-        verbose_name = _(u"major type")
+        verbose_name_plural = _(u"major")
+        verbose_name = _(u"major")
         
-    name = models.CharField(max_length=250, verbose_name=_(u'major type name'))
+    name = models.CharField(max_length=250, db_index=True, verbose_name=_(u'major  name'))
     
     def __unicode__(self):
         return self.name
@@ -110,6 +110,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False, verbose_name=_(u'can login into admin panel'))
     
     #private info
+    decription = models.CharField(max_length=250, verbose_name=_(u'self description'))
     nickname = models.CharField(blank=True, max_length=100, verbose_name=_(u'nickname'))
     age = models.IntegerField(blank=False, default=0, verbose_name=_(u'age'))
     job = models.CharField(blank=True, max_length=30, verbose_name=_(u'job'))

@@ -8,20 +8,28 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from UCenter.models import User
 
-class Type(models.Model):
+
     
-    """Question type and tag type"""
+class Node(models.Model):
     
-    name = models.CharField(max_length=100, blank=False, verbose_name=_(u'type name'))
-    q_count = models.IntegerField(blank=False, verbose_name=_(u'question count'))
+    """Question Node ,the same topic Type"""
+    class Meta:
+        verbose_name_plural = _(u'topic node manager')
+        verbose_name = _(u'topic node manager')
+      
+    name = models.CharField(max_length=100, blank=False, verbose_name=_(u'node name'))
+    node_img = models.CharField(max_length=250, verbose_name=_(u"node image path"))
+    description = models.TextField(verbose_name=_(u'node description'))
+    q_count = models.IntegerField(blank=False, verbose_name=_(u'topic count'))
+
 
 class Tag(models.Model):
     
     """Question tag.Repution is needed for add new tag."""
     
     class Meta:
-        verbose_name_plural = _(u'question tag')
-        verbose_name = _(u'question tag')
+        verbose_name_plural = _(u'question tag manager')
+        verbose_name = _(u'question tag manager')
     
     name = models.CharField(max_length=100, blank=False, verbose_name=_(u'tag name'))
     q_count = models.IntegerField(blank=False, verbose_name=_(u'question count'))
@@ -35,8 +43,8 @@ class Answer(models.Model):
     """Answer for Question"""
     
     class Meta:
-        verbose_name_plural = _(u"question")
-        verbose_name = _(u"question")
+        verbose_name_plural = _(u"answer manager")
+        verbose_name = _(u"answer manager")
         
     content = models.TextField(blank=False, verbose_name=_(u'question content'))
     author = models.ForeignKey(User, blank=False, 
@@ -59,8 +67,8 @@ class Question(models.Model):
     """Question that contains enough info"""
     
     class Meta:
-        verbose_name_plural = _(u"question")
-        verbose_name = _(u"question")
+        verbose_name_plural = _(u"question manager")
+        verbose_name = _(u"question manager")
         
     title = models.CharField(max_length=250, blank=False, 
                              db_index=True,
@@ -78,9 +86,37 @@ class Question(models.Model):
     view_times = models.IntegerField(blank=False, default=0, verbose_name=_(u'view times'))
     
     tags = models.ManyToManyField(Tag, blank=False, verbose_name=_(u'question tags'))
-    type = models.ForeignKey(Type, blank=False, verbose_name=_(u'question type'))
+    Node = models.ForeignKey(Node, blank=False, verbose_name=_(u'question type'))
     
     def __unicode__(self):
         
         return self.title
 
+#settings start
+class Nav(models.Model):
+    
+    """Nav tabs from Tag,The data to generate nav menu"""
+    class Meta:
+        verbose_name_plural = _(u'nav setting')
+        verbose_name = _(u'nav setting')
+    
+    name = models.CharField(max_length=100, verbose_name=_(u'Nav setting'))
+    display_order = models.IntegerField(blank=False, default=0, verbose_name=_(u'display order'))
+    Node = models.ManyToManyField(Node, verbose_name=_(u'nav node'))
+
+class Setting(models.Model):
+    
+    """global settings of the website"""
+    
+    class Meta:
+        verbose_name_plural = _(u"global settings")
+        verbose_name = _(u'global settings')
+        ordering = ['variable']
+        
+    variable = models.CharField(max_length=30, verbose_name=_(u'setting variable'))
+    value = models.CharField(max_length=100, verbose_name=u'setting value')
+
+    def __unicode__(self):
+        return u"%s" % (self.variable)
+
+    
