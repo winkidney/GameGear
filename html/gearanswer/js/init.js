@@ -3,7 +3,9 @@ $(document).ready(function(){
 	$(".show-menu").bind("click",function () {  
 		$('#'+this.name).toggle();
 	});
-    $("#core-tabs").tabs();
+    $("#core-tabs").tabs(
+        { show: { effect: "fadeIn", duration: 800 } }
+    );
 
 });
 

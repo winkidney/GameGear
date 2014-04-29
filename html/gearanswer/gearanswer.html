@@ -4,7 +4,7 @@
 
 <head>
     <title>GearAnswer</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <!--jquery-ui-->
 		<link href="jquery/css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 		<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script-->
@@ -16,9 +16,9 @@
 		<script src="jquery/plugin/prettyPhoto/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 	<!--img box end-->
     <!--player start-->
-        <link rel="stylesheet" href="jquery/plugin/jplayer/css/not.the.skin.css">
+    <link rel="stylesheet" href="jquery/plugin/jplayer/css/not.the.skin.css">
 		<link rel="stylesheet" href="jquery/plugin/jplayer/circle.skin/circle.player.css">
-        <script type="text/javascript" src="jquery/plugin/jplayer/js/jquery.transform2d.js"></script>
+    <script type="text/javascript" src="jquery/plugin/jplayer/js/jquery.transform2d.js"></script>
 		<script type="text/javascript" src="jquery/plugin/jplayer/js/jquery.grab.js"></script>
 		<script type="text/javascript" src="jquery/plugin/jplayer/jquery.jplayer.min.js"></script>
 		<script type="text/javascript" src="jquery/plugin/jplayer/js/mod.csstransforms.min.js"></script>
@@ -37,7 +37,11 @@
                 <a class="left" href="mailto:winkidney@gmail.com">我的账户</a>
                 <a class="left" href="#">提问</a>
                 <a class="left" href="#">访问GameGear</a>
-                <a class="right">试试手气[]~(￣▽￣)~*</a><a class="clear"></a>      
+                <a class="right">试试手气[]~(￣▽￣)~*</a><a class="clear"></a>
+                <form action="#" method="POST" class="right">
+                    <input type="text" placeholder="搜索"/>
+                    <input type="submit" style="display:none"/>
+                </form>
             </div><!--end menu-bar-->
         </header>
         <div id='main' class='center'>
@@ -64,8 +68,8 @@
                             <div id="core-tabs" class="jqtab-kstyle">
                                 <ul>
                                     <li><a href="#tabs-1">程序设计</a></li>
-                                    <li><a href="#tabs-2">美术</a></li>
-                                    <li><a href="#tabs-3">策划</a></li>
+                                    <li><a href="tab2.html">美术</a></li>
+                                    <li><a href="tab2.html">策划</a></li>
                                 </ul>
                                 <div id="tabs-1">
                                     <div class="node-list left">
@@ -140,27 +144,40 @@
                                     </div><!--end div node-detail-->
 
                                     <div class="clear"></div>
-                                </div>
-                                <div id="tabs-2">
-                                    <div class="node-list">节点列表2</div>
-                                    <div class="node-detail">
-                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div id="tabs-3">
-                                    <div class="node-list">节点列表3</div>
-                                    <div class="node-detail">
-                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.
-                                        </p>
-                                    </div>
-                                </div>
+                                </div><!--end tabs-1-->
                             </div><!--end div core-tabs-->
+
+                            <div class="left-box gray-bg topic-box radius-3">
+                                <div class="left-cell gray-text ">
+                                    <strong>
+                                        <a href="#" >GearAnswer</a>
+                                        >
+                                        <a href="#" >Python</a> 
+                                    </strong>
+                                </div><!--end a left-cell-->
+                                <div class="left-cell left-cell-title ">
+                                    <p>BeautifulSoup和lxml库在解析速度上的比较，为了让标题更长，嗯嗯……我特意加点字。</p>
+                                </div><!--end a left-cell-->
+                                <div class="left-cell border-bottom">
+                                    <div id="voteit" class="topic-info">
+                                        <p>
+                                            <a href="#">winkidney</a>
+                                            &nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20
+                                            &nbsp;&nbsp;&nbsp;查看次数&nbsp;50&nbsp;&nbsp;&nbsp;
+                                            <span><a href="#">回复&nbsp;</a>5&nbsp;<a>♥&nbsp;</a>10&nbsp;<a><a>有用&nbsp;</a>3&nbsp;<a><a>无用&nbsp;</a>0&nbsp;</span>
+                                        </p>
+                                    </div>
+                                </div><!--end a left-cell-->
+                            </div><!--end topic-box-->
+                            <div class="left-box gray-bg reply-box  radius-3">
+                                第二个盒子
+                            </div><!--end reply-box-->
+                            
                         </div><!--end div core-left-->
                         
                         <div id="core-sidebar" class="left">
-                            <div class="side-box">
-                                <div class="cell">
+                            <div class="side-box light-black-box-shadow ">
+                                <div class="cell center">
                                     <div class="user-avatar left">
                                         <a href="#">
                                             <img src="img/avatar.png">
@@ -169,19 +186,115 @@
                                     <div class="username left"><a href="#">winkidney</a></div>
                                     <div class="clear"></div>
                                 </div><!--end a cell div-->
-                                <div class="cell">
+                                <div class="cell center text-center gray-text border-bottom ">
                                     <div class="user-info left">
-                                        主题收藏
+                                        <p><a>3</a></p>
+                                        <p>主题收藏</p>
                                     </div>
-                                    <div class="info left">
-                                        财富值
+                                    <div class="user-info border-lr left">
+                                        <p><a>3</a></p>
+                                        <p>我的主题</p>
                                     </div>
-                                    <div class="info left">
-                                        节点收藏
+                                    <div class="user-info left">
+                                        <p><a>3</a></p>
+                                        <p>节点收藏</p>
                                     </div>
+                                    <div class="clear"></div>
+                                </div><!--end a cell div-->
+                                <div class="cell center text-center gray-text">
+                                    <div class="left">
+                                        <p><a>3 条未读消息</a></p>
+                                    </div>
+                                    <div class="right">
+                                        <p><a>200 财富</a></p>
+                                    </div>
+                                    <div class="clear"></div>
                                 </div><!--end a cell div-->
                                 <div class="clear"></div>
                             </div><!--end side-box-->
+
+                            <div class="side-box light-black-box-shadow ">
+                                <div class="cell center gray-text">
+                                    <p><a id="site-statement" href="#">站点公告</a></p>
+                                </div><!--end a cell div-->                                                                
+                                <div class="clear"></div>
+                            </div><!--end side-box-->
+                            
+                            <div class="side-box light-black-box-shadow ">
+                                <div class="cell center border-bottom">
+                                    <div class="left">
+                                        <p><strong>GearAnswer</strong></p>
+                                        <p class="gray-text">GearAnswer是一个独立游戏制作互助社区</p>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div><!--end a cell div-->
+                                <div class="cell center text-center gray-text">
+                                    <div class="">
+                                        <form  id="login-form" action="#" method="post">
+                                            <label>用户名</label>
+                                            <input type="text" name="username" /><br>
+                                            <label>密码：</label>
+                                            <input type="text" name="password" /><br>
+                                            <input id="login-btn" class="clear-btn-style black-gray-btn" type="submit" value="登录"/>
+                                        </form>
+                                    </div>
+                                </div><!--end a cell div-->
+                                <div class=" cell center text-center gray-text">
+                                    <div class="center text-center">
+                                        <p>没有账户？ <a>现在注册</a></p>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div><!--end a cell div-->
+                                <div class="clear"></div>
+                            </div><!--end side-box-->
+
+                            <div class="side-box light-black-box-shadow ">
+                                <div class="cell border-bottom center gray-text">
+                                    <p><strong>今日热议</strong></p>
+                                </div><!--end a cell div-->
+                                <div class="cell center gray-text">
+                                    <ul class="mini-topic no-list-style ">
+                                        <li class="border-bottom">
+                                           <table>
+                                                <td><img src="img/avatar.png"/></td>
+                                                <td><a class="gray-text">nodejs究竟有什么优势呢？nodejs究竟有什么优势呢？</a></td>
+                                            </table>
+                                        </li>
+                                        <li class="border-bottom">
+                                            <table>
+                                                <td><img src="img/avatar.png"/></td>
+                                                <td><a class="gray-text">nodejs究竟有什么优势呢？</a></td>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </div><!--end a cell div-->                                                              
+                                <div class="clear"></div>
+                            </div><!--end side-box-->
+
+                            <div class="side-box light-black-box-shadow ">
+                                <div class="cell node-collection border-bottom center gray-text">
+                                    <p><strong>最热节点</strong></p>
+                                </div><!--end a cell div-->
+                                <div class="cell center gray-text">
+                                   <ul class="sidebar-node-list no-list-style">
+                                        <li class="black-gray-btn radius-3 left"><a>c++</a></li>
+                                   </ul>
+                                </div><!--end a cell div-->                                                              
+                                <div class="clear"></div>
+                            </div><!--end side-box-->
+                            
+                            <div class="side-box light-black-box-shadow ">
+                                <div class="cell border-bottom center gray-text">
+                                    <p><strong>Python</strong></p>
+                                </div><!--end a cell div-->
+                                <div class="cell pread-mini center">
+                                    <p><a href="#">>Python Offical Website</a></p>
+                                    <p><a href="#">>Learning Python</a></p>
+                                    <p><a href="#">>Python科学计算</a></p>
+                                </div><!--end a cell div-->                                                              
+                                <div class="clear"></div>
+                            </div><!--end side-box-->
+                            
                         </div><!--end div core-sidebar-->
                         <div class="clear"></div>
                     </div><!--end div core-content-->
