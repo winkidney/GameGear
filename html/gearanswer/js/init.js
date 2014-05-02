@@ -6,6 +6,6 @@ $(document).ready(function(){
     $("#core-tabs").tabs(
         { show: { effect: "fadeIn", duration: 800 } }
     );
-
+     SyntaxHighlighter.all();
 });
 

@@ -7,6 +7,7 @@ body,html {
 	font-weight: inherit;
 	line-height: 21px;
 	height: 100%;
+    font-family: "Monospace","黑体","宋体";
 }
 p{
 	margin:0;
@@ -98,6 +99,8 @@ h5{
 .black-gray-btn{
     background-color: #111111;
     transition: all 0.5s ease 0s;
+    padding: 2px 5px;
+    margin-right: 5px;
 }
 .black-gray-btn:hover{
     /*background-color: rgb(51, 0, 0);*//*red*/
@@ -118,6 +121,19 @@ h5{
 .pread-mini p{
     margin: 5px 0;
     font-size: 12px;
+}
+.div-read{
+    font-size: 14px;
+    line-height: 24px;
+}
+pre{
+    font-family:"Monospace","Terminal";
+    font-size: 14px;
+    word-wrap: break-word;
+    white-space:pre-wrap;
+}
+.font-11px{
+	font-size: 11.5px;
 }
 /*#666666*/
 .ico-music{
@@ -259,7 +275,7 @@ header a{
 	font-size: 18px;
 }
 .topic-info {
-	font-size: 11px;
+	font-size: 11.5px;
 	overflow: hidden;
 }
 .detail-vote{
@@ -279,12 +295,20 @@ header a{
 }
 .left-cell{
     padding: 5px;
+    margin-bottom: 5px;
 }
 .left-cell-title{
     padding: 20px 5px;
     color: white;
     font-size: 20px;    
     }
+ .comment-info{
+ 	font-size: 11.5px;
+ 	padding: 5px 2px;
+ }
+.left-cell table{
+	width:100%;
+}
 /*end left-box*/
 /*end core-left*/
 /*start core-sidebar*/

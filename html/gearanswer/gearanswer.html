@@ -24,6 +24,12 @@
 		<script type="text/javascript" src="jquery/plugin/jplayer/js/mod.csstransforms.min.js"></script>
 		<script type="text/javascript" src="jquery/plugin/jplayer/js/circle.player.js"></script>
     <!--end player-->
+    <!--start syntax highlight-->
+    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushPython.js"></script>
+    
+    <link href="js/syntaxhighlighter/styles/shCoreEmacs.css" rel="stylesheet" type="text/css" />
+    <!--end syntax highlight-->
     <link rel="stylesheet" type="text/css" href="stack.css">
     <link rel="stylesheet" type="text/css" href="jqtab.css">
 </head>
@@ -168,9 +174,90 @@
                                         </p>
                                     </div>
                                 </div><!--end a left-cell-->
+                                <div class="left-cell  div-read">
+                                    <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                    <p>然后再来一p，这样应该ok</p>
+                                        <pre class="brush: python; toolbar: false;">
+def _get_pages(self, uid):
+    #return page_range from the user&#39;s first page
+    url = self.home_page_url % uid
+    milktea= 0
+    while milktea&lt; RETRY_TIMES: 
+        try:
+            result = self.weibo.opener.open(url, timeout = DEFAULT_TIMEOUT).read()
+            break
+        except socket.timeout as e:
+            milktea+= 1
+            print &quot;[%s][ERROR]:url open error of uid %s @ page number getter, tried %s times!\n Detail: %s&quot; % (time.ctime(), uid, milktea, e)</pre>
+                                    <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                </div><!--end a left-cell-->
                             </div><!--end topic-box-->
+                            
                             <div class="left-box gray-bg reply-box  radius-3">
-                                第二个盒子
+                                <div class="left-cell font-11px border-bottom">
+                                    <strong>
+                                        <span>&nbsp;回复</span>
+                                    </strong>
+                                    <a class="tag right black-gray-btn radius-5" href="#" >Python</a>
+                                    <a class="tag right black-gray-btn radius-5" href="#" >编程</a>
+                                    <span class="right">标签：</span>
+                                </div><!--end a left-cell-->
+                                <div id="comment-23412" class="left-cell border-bottom">
+                                    <table>
+                                        <td>
+                                            <div class="topic-comment-left user-avatar left">
+                                                <a title="winkidney" href="#">
+                                                    <img src="img/avatar.png" alt="winkidney">
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="comment-info border-bottom gray-text">
+                                                <p>
+                                                    <span class="right">采纳为最佳答案&nbsp;&nbsp;<a>√</a></span>
+                                                    <span class="right"><a>这个回复对我有用&nbsp;</a>3&nbsp;</span>
+                                                    <span class="right"><a>这个回复毫无意义&nbsp;</a>0&nbsp;</span>
+                                                    <span class="left">1楼&nbsp;&nbsp;</span>
+                                                    <span class="left"><a href="#">winkidney</a></span>
+                                                    <span class="left">&nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20</span>
+                                                    <p class="clear"></p>
+                                                </p>
+                                            </div>
+                                            <div class="topic-content gray-text">
+                                                <p>嗯……测试一下<a>@GearAnswer</a>，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                                <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                                <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                            </div><!--end div topic-content-->
+                                        </td>
+                                    </table>
+                                </div><!--end a left-cell-->
+                                <div id="comment-23413" class="left-cell border-bottom">
+                                    <table>
+                                        <td>
+                                            <div class="topic-comment-left user-avatar left">
+                                                <a title="winkidney" href="#">
+                                                    <img src="img/avatar.png" alt="winkidney">
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="comment-info border-bottom gray-text">
+                                                <p>
+                                                    <span class="right">采纳为最佳答案&nbsp;&nbsp;<a>√</a></span>
+                                                    <span class="right"><a>这个回复对我有用&nbsp;</a>3&nbsp;</span>
+                                                    <span class="right"><a>这个回复毫无意义&nbsp;</a>0&nbsp;</span>
+                                                    <span class="left">2楼&nbsp;&nbsp;</span>
+                                                    <span class="left"><a href="#">winkidney</a></span>
+                                                    <span class="left">&nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20</span>
+                                                    <p class="clear"></p>
+                                                </p>
+                                            </div>
+                                            <div class="topic-content gray-text">
+                                                <p>1楼的回复毫无意义啊，完全是灌水2333</p>
+                                            </div><!--end div topic-content-->
+                                        </td>
+                                    </table>
+                                </div><!--end a left-cell-->
                             </div><!--end reply-box-->
                             
                         </div><!--end div core-left-->
