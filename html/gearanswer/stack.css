@@ -292,6 +292,7 @@ header a{
 .left-box{
     width: 100%;
     margin: 20px 0;
+    padding: 0 0 10px 0;
 }
 .left-cell{
     padding: 5px;
@@ -306,10 +307,28 @@ header a{
  	font-size: 11.5px;
  	padding: 5px 2px;
  }
-.left-cell table{
-	width:100%;
+.topic-comment-left{
+    width: 72px;
+    }
+.topic-comment-right{
+    width: 743px;
 }
+.nodes-box-left{
+    width: 72px;
+    }
 /*end left-box*/
+/*start comment-text-area*/
+#editor-area{
+    width: 98%;
+    min-height: 300px;
+    background-color: #222;
+    color:white;
+    border: 1px solid #222;
+}
+.edui-label{
+ color: black;
+ } 
+/*end comment-text-area*/
 /*end core-left*/
 /*start core-sidebar*/
 .side-box{
