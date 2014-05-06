@@ -16,10 +16,16 @@ function createEditors(){
     $("#editor-md").pagedownBootstrap();
     UE.getEditor('editor-ue');
     if ($.cookie('editor') == "md"){
+        setTimeout(function(){
+          $("#use-markdown").attr('checked','checked');
+        },10);
         hideUEditor();
     }
     else{
-         hideMDEditor();
+        setTimeout(function(){
+          $("#use-ueditor").attr('checked','checked');
+        },10);
+        hideMDEditor();
     }
         
 }

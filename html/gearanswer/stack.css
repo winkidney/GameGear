@@ -95,9 +95,12 @@ h5{
 .deep-bg{
     background-color: #2E2E2E;
 }
+.gray-bg-link{
+    padding: 2px 5px;
+	border-radius: 1px;
+}
 .gray-bg-link:hover{
 	background-color: #222222;
-	border-radius: 1px;
 }
 .radius-5{
     border-radius: 5px;
@@ -296,7 +299,7 @@ header a{
 }
 .topic-title{
 	overflow: hidden;
-	height:24px;
+	/*height:24px;*/
 	padding: 12px 0 0 0;
 	width: 100%;
 	font-size: 18px;

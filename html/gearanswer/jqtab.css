@@ -3,8 +3,6 @@
 .jqtab-kstyle>ul,
 .jqtab-kstyle>ul li,
 .jqtab-kstyle a{
-    margin: 0;
-    padding: 0;
     background: none;
     border: none;
 }
