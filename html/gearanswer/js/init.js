@@ -1,22 +1,28 @@
 
-function createUEditor() {
-        UE.getEditor('editor-area');
+function showUEditor() {
+        $("#div-ue").show();
     }
-function deleteUEditor() {
-        UE.getEditor('editor-area').destroy();
+function hideUEditor() {
+        $("#div-ue").hide();
     }
-function createMDEditor() {
-    $("#editor-area").markdown({
-            callback: function(e){
-                // Replace selection with some drinks
-                $("#use-ueditor").change(e.showEditor())
-            }
-    });
+function showMDEditor() {
+    $("#div-md").show();
+    $(".wmd-preview").hide();
 }
-function deleteMDEditor() {
+function hideMDEditor() {
+    $("#div-md").hide();
+}
+function createEditors(){
+    $("#editor-md").pagedownBootstrap();
+    UE.getEditor('editor-ue');
+    if ($.cookie('editor') == "md"){
+        hideUEditor();
+    }
+    else{
+         hideMDEditor();
+    }
         
 }
-
 $(document).ready(function(){
     //create menu
 	$(".show-menu").bind("click",function () {  
@@ -25,16 +31,19 @@ $(document).ready(function(){
     $("#core-tabs").tabs(
         { show: { effect: "fadeIn", duration: 800 } }
     );
+    
     $( "#use-markdown" ).change(function(){
-        deleteUEditor();
-        createMDEditor();
+        hideUEditor();
+        showMDEditor();
+        $.cookie('editor', 'md');
     });
     $( "#use-ueditor" ).change(function(){
-        deleteMDEditor();
-        createUEditor();
+        $.cookie('editor', 'ue');
+        hideMDEditor();
+        showUEditor();
     });
     
     SyntaxHighlighter.all();
-    createUEditor();
+    createEditors();
 });
 

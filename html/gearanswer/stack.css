@@ -58,6 +58,15 @@ a:hover,
 .gray-text{
     color: #C6C6C6;
 }
+.padding-5{
+    padding: 5px;
+}
+.margin-5{
+    margin: 5px;
+}
+.no-border{
+    border:none;
+}
 .border-lr{
     border-left: 1px solid #666666;;
     border-right: 1px solid #666666;
@@ -95,6 +104,24 @@ h5{
 }
 .radius-3{
     border-radius: 3px;
+}
+.padding-bottom-5{
+    padding: 0 0 5px 0;
+}
+.white-gray-btn{
+    background-color: white;
+    transition: all 0.5s ease 0s;
+    padding: 2px 5px;
+    margin-right: 5px;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    
+}
+.white-gray-btn:hover{
+    background-color: #EBEBEB; /*gray*/
+    
+    transition: all 0.15s ease 0s;
 }
 .black-gray-btn{
     background-color: #111111;
@@ -318,7 +345,7 @@ header a{
     }
 /*end left-box*/
 /*start comment-text-area*/
-#editor-area{
+#wmd-input-0{
     width: 98%;
     min-height: 300px;
     background-color: #222;
@@ -327,7 +354,16 @@ header a{
 }
 .edui-label{
  color: black;
- } 
+ }
+.md-editor{
+    border: none;
+}
+.submit-comment{
+    padding: 6px 20px;
+}
+/*.md-editor > .md-preview {
+    background-color: #222;
+}*/
 /*end comment-text-area*/
 /*end core-left*/
 /*start core-sidebar*/
