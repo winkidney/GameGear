@@ -37,6 +37,14 @@ function createEditors(){
     $(".wmd-preview").hide();
         
 }
+function md_render(){
+    var converter = new Showdown.converter({ extensions: ['github'] });
+    $(".md-render").each(function(){
+        text =  converter.makeHtml($(this).html());
+        $(this).html(text);
+    });
+    
+}
 $(document).ready(function(){
     //create menu
 	$(".show-menu").bind("click",function () {  
@@ -57,8 +65,10 @@ $(document).ready(function(){
         showUEditor();
         
     });
-
+    md_render();
     SyntaxHighlighter.all();
     createEditors();
+    
+    
 });
 

@@ -30,6 +30,9 @@
     <script src="http://cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <script src="js/markdown-js/markdown.min.js"></script>
+    <script src="js/showdown/compressed/showdown.syntaxhighter.js"></script>
+    <script src="js/showdown/compressed/extensions/github.js"></script>
     <!--end markdown editor-->
     <!--start syntax highlight-->
     <script type="text/javascript" src="js/syntaxhighlighter/scripts/shCore.js"></script>
@@ -199,6 +202,16 @@ def _get_pages(self, uid):
                                     <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
                                     <div class="md-render">
 ###标题
+- 列表项
+- 列表项
+
+```python
+def get_page():
+    print "hello markdown"
+```
+                                    </div>
+                                    <div class="md-render">
+###标题2
 - 列表项
 - 列表项
 
