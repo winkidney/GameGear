@@ -7,7 +7,7 @@ body,html {
 	font-weight: inherit;
 	line-height: 21px;
 	height: 100%;
-    font-family: "Monospace","黑体","宋体";
+    font-family: "Consolas","Monospace","黑体","宋体";
 }
 p{
 	margin:0;
@@ -92,8 +92,30 @@ h5{
 .gray-bg{
     background-color: #333333;
 }
+.white-text{
+	color: white;
+}
 .deep-bg{
     background-color: #2E2E2E;
+}
+.dark-bg{
+	background-color: #222;
+}
+.shadow-light-no-ease{
+	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
+}
+.shadow-light-no-ease:focus,
+.shadow-light-no-ease:hover{
+	box-shadow: 0px 0px 3px 0px rgba(238, 136, 135, 0.7);
+}
+.shadow-light{
+	border: none;
+	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
+	transition: all 0.1s ease 0s;
+}
+.shadow-light:focus{
+	box-shadow: 0px 0px 3px 0px rgba(238, 136, 135, 0.7);
+	transition: all 0.3s ease 0s;
 }
 .gray-bg-link{
     padding: 2px 5px;
@@ -107,6 +129,15 @@ h5{
 }
 .radius-3{
     border-radius: 3px;
+}
+.width-98{
+	width: 98%;
+}
+.block{
+	display: block;
+}
+.width-90{
+	width: 90%;
 }
 .padding-bottom-5{
     padding: 0 0 5px 0;
@@ -153,6 +184,7 @@ h5{
     font-size: 12px;
 }
 .div-read{
+	font-family: "微软雅黑","宋体";
     font-size: 14px;
     line-height: 24px;
 }
@@ -185,7 +217,7 @@ pre{
 
 header {
 	padding: 2px 0px;
-	background-color: #222222;
+	/*background-color: #222222;*/
 	/*border-bottom:solid 1px #666666;*/
 	width: 100%;
 	padding: 0 0;
@@ -355,12 +387,17 @@ header a{
     color:white;
     border: 1px solid #222;
 }
-.edui-label{
+/*fix ueditor text color problem*/
+.edui-label,
+.edui-box{
  color: black;
  }
+/*end ueditor text color fix*/
+/*md editor border fix*/
 .md-editor{
     border: none;
 }
+/*end md editor border fix*/
 .submit-comment{
     padding: 6px 20px;
 }

@@ -1,17 +1,23 @@
 
 function showUEditor() {
-        $("#div-ue").show();
-    }
+    $.cookie('editor', 'ue');
+    $("#div-ue").show();
+}
 function hideUEditor() {
-        $("#div-ue").hide();
-    }
+    $("#div-ue").hide();
+}
 function showMDEditor() {
+    $.cookie('editor', 'md');
     $("#div-md").show();
     $(".wmd-preview").hide();
 }
 function hideMDEditor() {
     $("#div-md").hide();
 }
+/* Create both of the Editors and hide them
+ * depend on the 'editor' value in the cookie.
+ * The 'editor' is 'ue' or 'md'.
+ */
 function createEditors(){
     $("#editor-md").pagedownBootstrap();
     UE.getEditor('editor-ue');
@@ -22,11 +28,13 @@ function createEditors(){
         hideUEditor();
     }
     else{
-        setTimeout(function(){
+    setTimeout(function(){
           $("#use-ueditor").attr('checked','checked');
         },10);
         hideMDEditor();
-    }
+        $.cookie('editor', 'ue');
+    } 
+    $(".wmd-preview").hide();
         
 }
 $(document).ready(function(){
@@ -34,21 +42,22 @@ $(document).ready(function(){
 	$(".show-menu").bind("click",function () {  
 		$('#'+this.name).toggle();
 	});
+    //create tabs
     $("#core-tabs").tabs(
         { show: { effect: "fadeIn", duration: 800 } }
     );
-    
+    //bind editors change
     $( "#use-markdown" ).change(function(){
         hideUEditor();
         showMDEditor();
-        $.cookie('editor', 'md');
+        
     });
     $( "#use-ueditor" ).change(function(){
-        $.cookie('editor', 'ue');
         hideMDEditor();
         showUEditor();
+        
     });
-    
+
     SyntaxHighlighter.all();
     createEditors();
 });
