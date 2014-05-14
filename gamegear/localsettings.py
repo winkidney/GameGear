@@ -4,6 +4,9 @@
 # winkidney 2014-04-11
 from django.utils.translation import gettext_noop as _
 import os
+import django.conf.global_settings as DEFAULT_SETTINGS
+
+#from GearAnswer.context_processors import shared_data
 
 PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)),os.pardir).replace('\\', '/')
 
@@ -76,6 +79,9 @@ STATIC_ROOT = 'static/'
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
+#SITE STATIC
+
+
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -126,7 +132,7 @@ SECRET_KEY = 'jv91h30ac(-hl=z=sqon&pz)k+zb$b767zq2^za^=ucxa$ye$!'
 WSGI_APPLICATION = 'gamegear.wsgi.application'
 
 TEMPLATE_DIRS = (
-    PROJECT_ROOT+'/gamegear/template',
+    PROJECT_ROOT+'/GearAnswer/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -149,7 +155,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # My own
     'UCenter',
-    'GearArt',
+    #'GearArt',
     'GearAnswer',
     
     # Uncomment the next line to enable admin documentation:
@@ -172,6 +178,12 @@ LANGUAGES = (
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+
+
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'GearAnswer.context_processors.shared_data',
+)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

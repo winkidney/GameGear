@@ -3,7 +3,7 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-import GearArt
+import GearAnswer
 admin.autodiscover()
 
 #import xadmin
@@ -14,7 +14,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     #url(r'xadmin/', include(xadmin.site.urls)),
-    url(r'^GearArt/',include('GearArt.urls')),
+    url(r'^answer/',include('GearAnswer.urls')),
     # Examples:
     # url(r'^$', 'gamegear.views.home', name='home'),
     # url(r'^gamegear/', include('gamegear.foo.urls')),

@@ -1,0 +1,66 @@
+/*clear background and border*/
+.jqtab-kstyle,
+.jqtab-kstyle>ul,
+.jqtab-kstyle>ul li,
+.jqtab-kstyle a{
+    background: none;
+    border: none;
+}
+
+.jqtab-kstyle,
+.jqtab-kstyle>ul,
+.jqtab-kstyle>ul li{
+    background-color: #333333;
+    border: none;
+}
+#core-tabs>ul{
+    padding: 5px 5px;
+}
+.jqtab-kstyle > ul li.ui-tabs-active a{
+    color: rgb(255, 170, 174);
+}
+#core-tabs,
+#core-tabs > div{
+    padding: 0;
+    margin: 0;
+}
+/*必须用id选中，id优先级高于类*/
+#core-tabs > ul li a{
+    font-size: 13px;
+    color: rgb(238, 136, 135);
+    border-radius: 3px;
+    border-bottom: 
+}
+#core-tabs > ul li{
+    background: none;
+    border: none;
+}
+#core-tabs>ul li.ui-tabs-active a{
+    background-color: #111111;
+}
+
+/*jquery tab menu style hook*/
+.ui-widget{
+    font-size: 13px;
+}
+.ui-tabs .ui-tabs-nav li a{
+    padding: 5px;
+    border: none;
+}
+.jqtab-kstyle > ul li a:hover{
+    background-color: #111111;
+    color: rgb(255, 170, 174);
+    transition: all 0.15s ease 0s;
+}
+.ui-state-active, .ui-widget-header .ui-state-active{
+    border: none;
+
+}
+.ui-state-default, .ui-widget-header .ui-state-default {
+    border: none;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+

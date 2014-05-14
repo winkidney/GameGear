@@ -21,7 +21,10 @@ class Node(models.Model):
     node_img = models.CharField(max_length=250, verbose_name=_(u"node image path"))
     description = models.TextField(verbose_name=_(u'node description'))
     q_count = models.IntegerField(blank=False, verbose_name=_(u'topic count'))
-
+    
+    def __unicode__(self):
+        
+        return self.name
 
 class Tag(models.Model):
     
