@@ -33,3 +33,20 @@ def node_view(request, *args, **kwargs):
     return render_template(request, 'gearanswer/node.html',
                               locals(),
                               )
+    
+def login_view(request, *args, **kwargs):
+    return HttpResponse("功能建设中")
+
+def logout_view(request, *args, **kwargs):
+    return HttpResponse("功能建设中")
+
+def register_view(request, *args, **kwargs):
+    
+    return render_template(request, 'gearanswer/register.html',
+                              locals(),
+                              )
+def tab_view(request, tab_id, *args, **kwargs):
+    
+    return render_template(request, 'gearanswer/tab.html',
+                              locals(),
+                              )

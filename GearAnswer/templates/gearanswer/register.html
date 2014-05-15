@@ -1,0 +1,42 @@
+{% extends "gearanswer/base.html" %}
+{% block left_box %}
+                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
+                                <div class="left-cell gray-text ">
+                                    <strong>
+                                        <a href="#" >GearAnswer</a>
+                                        > 
+                                        注册
+                                    </strong>
+                                </div><!--end a left-cell-->
+
+                                <div class="left-cell font-11px">
+                                    <form id="reply-to" action="/" method="POST">
+                                        <div class=" padding-bottom-5">
+                                            <input type="hidden" name="topic-id" value="topic-id-1245623"></input>
+                                            <label class="width-8 block">>>>用户名</label>
+                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="username" placeholder="键入您的用户名"></input><br>
+                                            <label class="width-8 block">>>>密码</label>
+                                            <input type="password" class="dark-bg white-text shadow-light width-98" name="password1" placeholder="请保持较高复杂度"></input><br>
+                                            <label class="width-8 block">>>>再次输入密码</label>
+                                            <input type="password" class="dark-bg white-text shadow-light width-98" name="password2" placeholder="确认密码"></input><br>
+                                            <label class="width-8 block">>>>E-Mail</label>
+                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="email" placeholder="输入合法的电子邮箱"></input><br>
+                                            
+                                        </div>
+                                        <input type="submit" class="black-gray-btn no-border radius-3 padding-5-10 margin-t-20" value="注册"/>
+                                    </form>
+                                </div><!--end a left-cell-->
+                                <div class="left-cell font-11px border-bottom">
+                                    <span>帮助：<a href="#">关于社区积分</a></span>
+                                    <span class="right">>>>返回<a href="/">GearAnswer</a></span>
+                                </div><!--end a left-cell-->
+                                
+                            </div><!--end left-box-->
+{% endblock left_box %}
+
+{% block user %}{% endblock %}
+
+{% block site_echo %}{% endblock %}
+{% block hot_post %}{% endblock %}
+{% block new_nodes %}{% endblock %}
+{% block hot_nodes %}{% endblock %} 

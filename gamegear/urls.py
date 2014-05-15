@@ -14,7 +14,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     #url(r'xadmin/', include(xadmin.site.urls)),
-    url(r'^answer/',include('GearAnswer.urls')),
+    
     # Examples:
     # url(r'^$', 'gamegear.views.home', name='home'),
     # url(r'^gamegear/', include('gamegear.foo.urls')),
@@ -24,4 +24,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^',include('GearAnswer.urls')),
 )

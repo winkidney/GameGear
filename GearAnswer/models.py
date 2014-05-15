@@ -21,6 +21,7 @@ class Node(models.Model):
     node_img = models.CharField(max_length=250, verbose_name=_(u"node image path"))
     description = models.TextField(verbose_name=_(u'node description'))
     q_count = models.IntegerField(blank=False, verbose_name=_(u'topic count'))
+    parent = models.ForeignKey('Node', verbose_name=_(u"child-nodes"))
     
     def __unicode__(self):
         
@@ -53,7 +54,7 @@ class Answer(models.Model):
     author = models.ForeignKey(User, blank=False, 
                                db_index=True,
                                verbose_name=_(u'question author'))
-    right = models.BooleanField(default=False, verbose_name=_(u'is right answer'))
+    is_best = models.BooleanField(default=False, verbose_name=_(u'is right answer'))
     useful = models.IntegerField(blank=False, default=0, verbose_name=_(u'useful'))
     stared = models.IntegerField(blank=False, default=0, verbose_name=_(u'stared'))
     useless = models.IntegerField(blank=False, default=0, verbose_name=_(u'useless'))
@@ -105,7 +106,7 @@ class Nav(models.Model):
     
     name = models.CharField(max_length=100, verbose_name=_(u'Nav setting'))
     display_order = models.IntegerField(blank=False, default=0, verbose_name=_(u'display order'))
-    Node = models.ManyToManyField(Node, verbose_name=_(u'nav node'))
+    Nodes = models.ManyToManyField(Node, verbose_name=_(u'nav child-nodes'))
 
 class Setting(models.Model):
     
