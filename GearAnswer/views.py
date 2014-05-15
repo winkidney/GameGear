@@ -14,9 +14,22 @@ def render_template(request, template, data=None):
                               context_instance=RequestContext(request))
     return response
 
-def home(request):
+def home_view(request):
     return render_template(request, 'gearanswer/base.html',
                               locals(),
                               )
-def test(request):
-    return HttpResponse(_(u'fuck'))
+def read_view(request, article_id, *args, **kwargs):
+    
+    return render_template(request, 'gearanswer/read.html',
+                              locals(),
+                              )
+def new_topic_view(request, *args, **kwargs):
+    
+    return render_template(request, 'gearanswer/new_topic.html',
+                              locals(),
+                              )
+def node_view(request, *args, **kwargs):
+    
+    return render_template(request, 'gearanswer/node.html',
+                              locals(),
+                              )

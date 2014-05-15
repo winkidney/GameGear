@@ -5,42 +5,42 @@
 <head>
     <title>GearAnswer</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="shortcut icon" href="{{ static_url }}/answer/img/favicon.ico" />
     <!--jquery-ui-->
-		<link href="jquery/css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+		<link href="{{ static_url }}/answer/jquery/css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 		<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script-->
-		<script src="jquery/js/jquery-1.11.0.min.js"></script>
-		<script src="jquery/plugin/jquery-ui-1.10.3.custom.min.js"></script>
-        <script src="jquery/plugin/jquery.cookie.js"></script>
+		<script src="{{ static_url }}/answer/jquery/js/jquery-1.11.0.min.js"></script>
+		<script src="{{ static_url }}/answer/jquery/plugin/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="{{ static_url }}/answer/jquery/plugin/jquery.cookie.js"></script>
 	<!--juery-ui end-->
 	<!--img box start-->
-		<link rel="stylesheet" href="jquery/plugin/prettyPhoto/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
-		<script src="jquery/plugin/prettyPhoto/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="{{ static_url }}/answer/jquery/plugin/prettyPhoto/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
+		<script src="{{ static_url }}/answer/jquery/plugin/prettyPhoto/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 	<!--img box end-->
     <!--ueditor-->
-    <script type="text/javascript" charset="utf-8" src="js/ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="{{ static_url }}/answer/js/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ static_url }}/answer/js/ueditor/ueditor.all.min.js"> </script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" charset="utf-8" src="js/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <!--script type="text/javascript" charset="utf-8" src="js/ueditor/lang/zh-cn/zh-cn.js"></script-->
     <!--end ueditor-->
     <!--start markdown editor-->
-    <script type="text/javascript" src="js/pagedown-bootstrap/js/jquery.pagedown-bootstrap.combined.min.js"></script>
-    <link href="js/pagedown-bootstrap/css/jquery.pagedown-bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="{{ static_url }}/answer/js/pagedown-bootstrap/js/jquery.pagedown-bootstrap.combined.min.js"></script>
+    <link href="{{ static_url }}/answer/js/pagedown-bootstrap/css/jquery.pagedown-bootstrap.css" rel="stylesheet">
     <script src="http://cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-    <script src="js/showdown/compressed/showdown.syntaxhighter.js"></script>
-    <script src="js/showdown/compressed/extensions/github.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <script src="{{ static_url }}/answer/js/showdown/compressed/showdown.syntaxhighter.js"></script>
+    <script src="{{ static_url }}/answer/js/showdown/compressed/extensions/github.js"></script>
     <!--end markdown editor-->
     <!--start syntax highlight-->
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shCore.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="{{ static_url }}/answer/js/syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="{{ static_url }}/answer/js/syntaxhighlighter/scripts/shBrushPython.js"></script>
     
-    <link href="js/syntaxhighlighter/styles/shCoreEmacs.css" rel="stylesheet" type="text/css" />
+    <link href="{{ static_url }}/answer/js/syntaxhighlighter/styles/shCoreEmacs.css" rel="stylesheet" type="text/css" />
     <!--end syntax highlight-->
-    <link rel="stylesheet" type="text/css" href="stack.css">
-    <link rel="stylesheet" type="text/css" href="jqtab.css">
+    <link rel="stylesheet" type="text/css" href="{{ static_url }}/answer/stack.css">
+    <link rel="stylesheet" type="text/css" href="{{ static_url }}/answer/jqtab.css">
 </head>
 
 <body>
@@ -54,7 +54,7 @@
                 <a class="left" href="#">访问GameGear</a>
                 <a class="right">试试手气[]~(￣▽￣)~*</a><a class="clear"></a>
                 <form action="#" method="POST" class="right">
-                    <input type="text" placeholder="搜索"/>
+                    <input type="text" class="white-text shadow-light black-bg border-none" placeholder="搜索"/>
                     <input type="submit" style="display:none"/>
                 </form>
             </div><!--end menu-bar-->
@@ -64,7 +64,7 @@
                     
                     <div id='info'>
                         <div id='info-warper'>
-                            <div id="logo" class="left"><a><img src="img/logos/gearanswer-red.png"/></a></div>
+                            <div id="logo" class="left"><a><img src="{{ static_url }}/answer/img/logos/gearanswer-red.png"/></a></div>
                             <div id="info-detail" class="right">
                                 <ul id="intro" class="no-list-style">
                                     <li class="black-gray-btn left"><a title="" href="#">社区使用指南</a></li>
@@ -80,6 +80,8 @@
 
                     <div id="core-content">
                         <div id="core-left" class="left">
+
+                        {% block left_box %}
                             <div id="core-tabs" class="jqtab-kstyle light-black-box-shadow">
                                 <ul>
                                     <li><a href="#tabs-1">程序设计</a></li>
@@ -99,7 +101,7 @@
                                                 <div class="topic-post">
                                                     <div class="user-avatar left">
                                                         <a href="#">
-                                                            <img src="img/avatar.png">
+                                                            <img src="{{ static_url }}/answer/img/avatar.png">
                                                         </a>
                                                     </div>
                                                     <div class="detail-center left">
@@ -129,7 +131,7 @@
                                                 <div class="topic-post">
                                                     <div class="user-avatar left">
                                                         <a href="#">
-                                                            <img src="img/avatar.png">
+                                                            <img src="{{ static_url }}/answer/img/avatar.png">
                                                         </a>
                                                     </div>
                                                     <div class="detail-center left">
@@ -162,129 +164,6 @@
                                 </div><!--end tabs-1-->
                             </div><!--end div core-tabs-->
 
-                            <div class="left-box gray-bg topic-box radius-3 light-black-box-shadow ">
-                                <div class="left-cell gray-text ">
-                                    <strong>
-                                        <a href="#" >GearAnswer</a>
-                                        >
-                                        <a href="#" >Python</a> 
-                                    </strong>
-                                </div><!--end a left-cell-->
-                                <div class="left-cell left-cell-title ">
-                                    <p>BeautifulSoup和lxml库在解析速度上的比较，为了让标题更长，嗯嗯……我特意加点字。</p>
-                                </div><!--end a left-cell-->
-                                <div class="left-cell border-bottom">
-                                    <div id="voteit" class="topic-info">
-                                        <p>
-                                            <a href="#">winkidney</a>
-                                            &nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20
-                                            &nbsp;&nbsp;&nbsp;查看次数&nbsp;50&nbsp;&nbsp;&nbsp;
-                                            <span><a href="#">回复&nbsp;</a>5&nbsp;<a>♥&nbsp;</a>10&nbsp;<a><a>有用&nbsp;</a>3&nbsp;<a><a>无用&nbsp;</a>0&nbsp;</span>
-                                        </p>
-                                    </div>
-                                </div><!--end a left-cell-->
-                                <div class="left-cell  div-read">
-                                    <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
-                                    <p>然后再来一p，这样应该ok</p>
-                                        <pre class="brush: python; toolbar: false;">
-def _get_pages(self, uid):
-    #return page_range from the user&#39;s first page
-    url = self.home_page_url % uid
-    milktea= 0
-    while milktea&lt; RETRY_TIMES: 
-        try:
-            result = self.weibo.opener.open(url, timeout = DEFAULT_TIMEOUT).read()
-            break
-        except socket.timeout as e:
-            milktea+= 1
-            print &quot;[%s][ERROR]:url open error of uid %s @ page number getter, tried %s times!\n Detail: %s&quot; % (time.ctime(), uid, milktea, e)</pre>
-                                    <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
-                                    <div class="md-render">
-###标题
-- 列表项
-- 列表项
-
-```python
-def get_page():
-    print "hello markdown"
-```
-                                    </div>
-                                    <div class="md-render">
-###标题2
-- 列表项
-- 列表项
-
-```python
-def get_page():
-    print "hello markdown"
-```
-                                    </div>
-                                </div><!--end a left-cell-->
-                            </div><!--end topic-box-->
-                            
-                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
-                                <div class="left-cell font-11px border-bottom">
-                                    <strong>
-                                        <span>&nbsp;回复</span>
-                                    </strong>
-                                    <a class="tag right black-gray-btn radius-5" href="#" >Python</a>
-                                    <a class="tag right black-gray-btn radius-5" href="#" >编程</a>
-                                    <span class="right">标签：</span>
-                                </div><!--end a left-cell-->
-
-                                <div id="comment-23412" class="left-cell border-bottom">
-                                    <div class="topic-comment-left user-avatar left">
-                                        <a title="winkidney" href="#">
-                                            <img src="img/avatar.png" alt="winkidney">
-                                        </a>
-                                    </div>
-                                    <div class="topic-comment-right left">
-                                        <div class="comment-info border-bottom gray-text">
-                                            <p>
-                                                <span class="right">采纳为最佳答案&nbsp;&nbsp;<a>√</a></span>
-                                                <span class="right"><a>有帮助，谢谢&nbsp;</a>3&nbsp;</span>
-                                                <span class="right"><a>问题无意义&nbsp;</a>0&nbsp;</span>
-                                                <span class="left">1楼&nbsp;&nbsp;</span>
-                                                <span class="left"><a href="#">winkidney</a></span>
-                                                <span class="left">&nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20</span>
-                                                <p class="clear"></p>
-                                            </p>
-                                        </div>
-                                        <div class="topic-content div-read">
-                                            <p>嗯……测试一下@<a>GearAnswer</a>，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
-                                        </div><!--end div topic-content-->
-                                    </div><!--end div topic-comment-right-->
-                                    <div class="clear"></div>
-                                </div><!--end a left-cell-->
-                                
-                                <div id="comment-23413" class="left-cell border-bottom">
-                                    <div class="topic-comment-left user-avatar left">
-                                        <a title="winkidney" href="#">
-                                            <img src="img/avatar.png" alt="winkidney">
-                                        </a>
-                                    </div>
-                                    <div class="topic-comment-right left">
-                                        <div class="comment-info border-bottom gray-text">
-                                            <p>
-                                                <span class="right">采纳为最佳答案&nbsp;&nbsp;<a>√</a></span>
-                                                <span class="right"><a>这个回复对我有用&nbsp;</a>3&nbsp;</span>
-                                                <span class="right"><a>这个回复毫无意义&nbsp;</a>0&nbsp;</span>
-                                                <span class="left">2楼&nbsp;&nbsp;</span>
-                                                <span class="left"><a href="#">winkidney</a></span>
-                                                <span class="left">&nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20</span>
-                                                <p class="clear"></p>
-                                            </p>
-                                        </div>
-                                        <div class="topic-content div-read">
-                                            <p>嗯……测试一下@<a class="qtip" title="这个用户无法查询">GearAnswer</a>，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
-                                            <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
-                                            <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
-                                        </div><!--end div topic-content-->
-                                    </div><!--end div topic-comment-right-->
-                                    <div class="clear"></div>
-                                </div><!--end a left-cell-->
-
-                            </div><!--end reply-box-->
 
                             <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
                                 <div class="left-cell border-bottom">
@@ -299,8 +178,8 @@ def get_page():
                                             <p>游戏策划</p>
                                         </td>
                                         <td class="nodes-box-right">
-                                            <a href="#" title="动作" class="left black-gray-btn radius-5 shadow-light-no-ease">动作游戏</a>
-                                            <a href="#" title="解谜" class="left black-gray-btn radius-5 shadow-light-no-ease">解谜游戏</a>
+                                            <a href="#" title="动作" class="padding-5 left black-gray-btn radius-5 shadow-light-no-ease">动作游戏</a>
+                                            <a href="#" title="解谜" class="padding-5 left black-gray-btn radius-5 shadow-light-no-ease">解谜游戏</a>
                                         </td>
                                     </table>
                                     
@@ -308,54 +187,47 @@ def get_page():
 
                             </div><!--end left-box-->
 
-                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
-                                <div class="left-cell border-bottom">
-                                    <strong>
-                                        <span>&nbsp;发表回复</span>
-                                        <span class="right"><a href="#">&uarr;回顶部</a></span>
-                                    </strong>
-                                </div><!--end a left-cell-->
-
-                                <div class="left-cell font-11px">
-                                    <form id="reply-to" action="/" method="POST">
-                                        <div class="border-bottom padding-bottom-5">
-                                            <input type="hidden" name="topic-id" value="topic-id-1245623"></input>
-                                            <label class="width-8 block">>>>文章标题</label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="标题" placeholder="title"></input><br>
-                                            <label class="width-8 block">>>>节点</label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="标题" placeholder="选择+"></input><br>
-                                            <label class="width-8 block">>>>标签</label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="标题" placeholder="使用英文逗号隔开"></input><br>
-                                            <span>&nbsp;UEditor</span>
-                                            <input id="use-ueditor" type="radio" name="editor" value="ueditor"></input>
-                                            <span>MarkDown</span>
-                                            <input id="use-markdown" type="radio" name="editor" value="markdown"></input><br/>
-                                            <div id="div-ue">
-                                                <textarea  name="comment-ue" style="height:250px;" id="editor-ue"></textarea>
-                                            </div>
-                                            <div id="div-md">
-                                                <textarea  name="comment-md"  class="radius-5" id="editor-md"></textarea>
-                                            </div>
-                                        </div>
-                                        <input type="submit" class="white-gray-btn no-border radius-3 submit-comment" value="提交回复"/>
-                                    </form>
-                                </div><!--end a left-cell-->
-                                <div class="left-cell font-11px border-bottom">
-                                    <span>帮助：<a href="#">使用MarkDown进行写作</a></span>
-                                    <span class="right">>>>返回<a href="/">GearAnswer</a></span>
-                                </div><!--end a left-cell-->
-
-                            </div><!--end left-box-->
-                            
-                            
+                        {% endblock left_box %}
                         </div><!--end div core-left-->
                         
                         <div id="core-sidebar" class="left">
+                        {% block login %}
+                            <div class="side-box light-black-box-shadow ">
+                                <div class="cell center border-bottom">
+                                    <div class="left">
+                                        <p><strong>GearAnswer</strong></p>
+                                        <p class="gray-text">GearAnswer是一个独立游戏制作互助社区</p>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div><!--end a cell div-->
+                                <div class="cell center text-center gray-text">
+                                    <div class="">
+                                        <form  id="login-form" action="#" method="post">
+                                            <label>用户名</label>
+                                            <input type="text" class="dark-bg white-text shadow-light" placeholder="Username" name="username" /><br>
+                                            <label>密码：</label>
+                                            <input type="text" class="dark-bg white-text shadow-light" placeholder="Password" name="password" /><br>
+                                            <input id="login-btn" class="clear-btn-style black-gray-btn shadow-light-no-ease" type="submit" value="登录"/>
+                                        </form>
+                                    </div>
+                                </div><!--end a cell div-->
+                                <div class=" cell center text-center gray-text">
+                                    <div class="center text-center">
+                                        <p>没有账户？ <a href="#">现在注册</a></p>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div><!--end a cell div-->
+                                <div class="clear"></div>
+                            </div><!--end side-box-->
+                        {% endblock %}
+
+
+                        {% block user %}
                             <div class="side-box light-black-box-shadow ">
                                 <div class="cell center">
                                     <div class="user-avatar left">
                                         <a href="#">
-                                            <img src="img/avatar.png">
+                                            <img src="{{ static_url }}/answer/img/avatar.png">
                                         </a>
                                     </div>
                                     <div class="username left"><a href="#">Winkidney</a></div>
@@ -387,42 +259,17 @@ def get_page():
                                 </div><!--end a cell div-->
                                 <div class="clear"></div>
                             </div><!--end side-box-->
-
+                        {% endblock %}
+                        {% block site_echo %}
                             <div class="side-box light-black-box-shadow ">
                                 <div class="cell center gray-text">
                                     <p><a id="site-statement" href="#">站点公告</a></p>
                                 </div><!--end a cell div-->                                                                
                                 <div class="clear"></div>
                             </div><!--end side-box-->
+                        {% endblock %}
                             
-                            <div class="side-box light-black-box-shadow ">
-                                <div class="cell center border-bottom">
-                                    <div class="left">
-                                        <p><strong>GearAnswer</strong></p>
-                                        <p class="gray-text">GearAnswer是一个独立游戏制作互助社区</p>
-                                    </div>
-                                    <div class="clear"></div>
-                                </div><!--end a cell div-->
-                                <div class="cell center text-center gray-text">
-                                    <div class="">
-                                        <form  id="login-form" action="#" method="post">
-                                            <label>用户名</label>
-                                            <input type="text" class="dark-bg white-text shadow-light" placeholder="Username" name="username" /><br>
-                                            <label>密码：</label>
-                                            <input type="text" class="dark-bg white-text shadow-light" placeholder="Password" name="password" /><br>
-                                            <input id="login-btn" class="clear-btn-style black-gray-btn shadow-light-no-ease" type="submit" value="登录"/>
-                                        </form>
-                                    </div>
-                                </div><!--end a cell div-->
-                                <div class=" cell center text-center gray-text">
-                                    <div class="center text-center">
-                                        <p>没有账户？ <a href="#">现在注册</a></p>
-                                    </div>
-                                    <div class="clear"></div>
-                                </div><!--end a cell div-->
-                                <div class="clear"></div>
-                            </div><!--end side-box-->
-
+                        {% block hot_post %}
                             <div class="side-box light-black-box-shadow ">
                                 <div class="cell border-bottom center gray-text">
                                     <p><strong>今日热议</strong></p>
@@ -431,13 +278,13 @@ def get_page():
                                     <ul class="mini-topic no-list-style ">
                                         <li class="border-bottom">
                                            <table>
-                                                <td><img src="img/avatar.png"/></td>
+                                                <td><img src="{{ static_url }}/answer/img/avatar.png"/></td>
                                                 <td><a class="gray-text">nodejs究竟有什么优势呢？nodejs究竟有什么优势呢？</a></td>
                                             </table>
                                         </li>
                                         <li class="border-bottom">
                                             <table>
-                                                <td><img src="img/avatar.png"/></td>
+                                                <td><img src="{{ static_url }}/answer/img/avatar.png"/></td>
                                                 <td><a class="gray-text">nodejs究竟有什么优势呢？</a></td>
                                             </table>
                                         </li>
@@ -445,7 +292,8 @@ def get_page():
                                 </div><!--end a cell div-->                                                              
                                 <div class="clear"></div>
                             </div><!--end side-box-->
-
+                        {% endblock %}
+                        {% block hot_nodes %}
                             <div class="side-box light-black-box-shadow ">
                                 <div class="cell node-collection border-bottom center gray-text">
                                     <p><strong>最热节点</strong></p>
@@ -457,19 +305,8 @@ def get_page():
                                 </div><!--end a cell div-->                                                              
                                 <div class="clear"></div>
                             </div><!--end side-box-->
-                            
-                            <div class="side-box light-black-box-shadow ">
-                                <div class="cell border-bottom center gray-text">
-                                    <p><strong>Python</strong></p>
-                                </div><!--end a cell div-->
-                                <div class="cell pread-mini center">
-                                    <p><a href="#">>Python Offical Website</a></p>
-                                    <p><a href="#">>Learning Python</a></p>
-                                    <p><a href="#">>Python科学计算</a></p>
-                                </div><!--end a cell div-->                                                              
-                                <div class="clear"></div>
-                            </div><!--end side-box-->
-                            
+                        {% endblock %}
+                        {% block right_box_extra %}{% endblock %}
                         </div><!--end div core-sidebar-->
                         <div class="clear"></div>
                     </div><!--end div core-content-->
@@ -477,6 +314,8 @@ def get_page():
                     <div class='clear'></div>
             </div><!--end div container-->
         </div><!--end div main-->
+
+        
         <div id='footer' class="gray-text center deep-bg">
             <div id='footer-container' class="center">
                 <div class="footer-cell">
@@ -508,7 +347,7 @@ def get_page():
     
 
     
-    <script type="text/javascript" charset="utf-8" src="js/init.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ static_url }}/answer/js/init.js"></script>
 </body>
 
 </html>

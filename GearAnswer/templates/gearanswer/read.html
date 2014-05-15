@@ -1,0 +1,184 @@
+{% extends "gearanswer/base.html" %}
+{% block left_box %}
+                            <div class="left-box gray-bg topic-box radius-3 light-black-box-shadow ">
+                                <div class="left-cell gray-text ">
+                                    <strong>
+                                        <a href="#" >GearAnswer</a>
+                                        >
+                                        <a href="#" >Python</a> 
+                                    </strong>
+                                </div><!--end a left-cell-->
+                                <div class="left-cell left-cell-title ">
+                                    <p>BeautifulSoup和lxml库在解析速度上的比较，为了让标题更长，嗯嗯……我特意加点字。</p>
+                                </div><!--end a left-cell-->
+                                
+                                <div class="left-cell border-bottom">
+                                    <div id="voteit" class="topic-info">
+                                        <p>
+                                            <a href="#">winkidney</a>
+                                            &nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20
+                                            &nbsp;&nbsp;&nbsp;查看次数&nbsp;50&nbsp;&nbsp;&nbsp;
+                                            <span><a href="#">回复&nbsp;</a>5&nbsp;<a>♥&nbsp;</a>10&nbsp;<a><a>有用&nbsp;</a>3&nbsp;<a><a>无用&nbsp;</a>0&nbsp;</span>
+                                        </p>
+                                    </div>
+                                </div><!--end a left-cell-->
+                                <div class="left-cell  div-read">
+                                    <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                    <p>然后再来一p，这样应该ok</p>
+                                        <pre class="brush: python; toolbar: false;">
+def _get_pages(self, uid):
+    #return page_range from the user&#39;s first page
+    url = self.home_page_url % uid
+    milktea= 0
+    while milktea&lt; RETRY_TIMES: 
+        try:
+            result = self.weibo.opener.open(url, timeout = DEFAULT_TIMEOUT).read()
+            break
+        except socket.timeout as e:
+            milktea+= 1
+            print &quot;[%s][ERROR]:url open error of uid %s @ page number getter, tried %s times!\n Detail: %s&quot; % (time.ctime(), uid, milktea, e)</pre>
+                                    <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                    <div class="md-render">
+###标题
+- 列表项
+- 列表项
+
+```python
+def get_page():
+    print "hello markdown"
+```
+                                    </div>
+                                    <div class="md-render">
+###标题2
+- 列表项
+- 列表项
+
+```python
+def get_page():
+    print "hello markdown"
+```
+                                    </div>
+                                </div><!--end a left-cell-->
+                            </div><!--end topic-box-->
+
+                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
+                                <div class="left-cell font-11px border-bottom">
+                                    <strong>
+                                        <span>&nbsp;回复</span>
+                                    </strong>
+                                    <a class="tag right black-gray-btn radius-5" href="#" >Python</a>
+                                    <a class="tag right black-gray-btn radius-5" href="#" >编程</a>
+                                    <span class="right">标签：</span>
+                                </div><!--end a left-cell-->
+
+                                <div id="comment-23412" class="left-cell border-bottom">
+                                    <div class="topic-comment-left user-avatar left">
+                                        <a title="winkidney" href="#">
+                                            <img src="{{ static_url }}/answer/img/avatar.png" alt="winkidney">
+                                        </a>
+                                    </div>
+                                    <div class="topic-comment-right left">
+                                        <div class="comment-info border-bottom gray-text">
+                                            <p>
+                                                <span class="right">采纳为最佳答案&nbsp;&nbsp;<a>√</a></span>
+                                                <span class="right"><a>有帮助，谢谢&nbsp;</a>3&nbsp;</span>
+                                                <span class="right"><a>问题无意义&nbsp;</a>0&nbsp;</span>
+                                                <span class="left">1楼&nbsp;&nbsp;</span>
+                                                <span class="left"><a href="#">winkidney</a></span>
+                                                <span class="left">&nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20</span>
+                                                <p class="clear"></p>
+                                            </p>
+                                        </div>
+                                        <div class="topic-content div-read">
+                                            <p>嗯……测试一下@<a>GearAnswer</a>，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                        </div><!--end div topic-content-->
+                                    </div><!--end div topic-comment-right-->
+                                    <div class="clear"></div>
+                                </div><!--end a left-cell-->
+                                
+                                <div id="comment-23413" class="left-cell border-bottom">
+                                    <div class="topic-comment-left user-avatar left">
+                                        <a title="winkidney" href="#">
+                                            <img src="{{ static_url }}/answer/img/avatar.png" alt="winkidney">
+                                        </a>
+                                    </div>
+                                    <div class="topic-comment-right left">
+                                        <div class="comment-info border-bottom gray-text">
+                                            <p>
+                                                <span class="right">采纳为最佳答案&nbsp;&nbsp;<a>√</a></span>
+                                                <span class="right"><a>这个回复对我有用&nbsp;</a>3&nbsp;</span>
+                                                <span class="right"><a>这个回复毫无意义&nbsp;</a>0&nbsp;</span>
+                                                <span class="left">2楼&nbsp;&nbsp;</span>
+                                                <span class="left"><a href="#">winkidney</a></span>
+                                                <span class="left">&nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20</span>
+                                                <p class="clear"></p>
+                                            </p>
+                                        </div>
+                                        <div class="topic-content div-read">
+                                            <p>嗯……测试一下@<a class="qtip" title="这个用户无法查询">GearAnswer</a>，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                            <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                            <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                        </div><!--end div topic-content-->
+                                    </div><!--end div topic-comment-right-->
+                                    <div class="clear"></div>
+                                </div><!--end a left-cell-->
+
+                            </div><!--end reply-box-->
+
+
+                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
+                                <div class="left-cell border-bottom">
+                                    <strong>
+                                        <span>&nbsp;发表回复</span>
+                                        <span class="right"><a href="#">&uarr;回顶部</a></span>
+                                    </strong>
+                                </div><!--end a left-cell-->
+
+                                <div class="left-cell font-11px">
+                                    <form id="reply-to" action="/" method="POST">
+                                        <div class="border-bottom padding-bottom-5">
+                                            <input type="hidden" name="topic-id" value="topic-id-1245623"></input>
+                                            <label class="width-8 block">>>>文章标题</label>
+                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="标题" placeholder="title"></input><br>
+                                            <label class="width-8 block">>>>节点</label>
+                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="标题" placeholder="选择+"></input><br>
+                                            <label class="width-8 block">>>>标签</label>
+                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="标题" placeholder="使用英文逗号隔开"></input><br>
+                                            <span>&nbsp;UEditor</span>
+                                            <input id="use-ueditor" type="radio" name="editor" value="ueditor"></input>
+                                            <span>MarkDown</span>
+                                            <input id="use-markdown" type="radio" name="editor" value="markdown"></input><br/>
+                                            <div id="div-ue">
+                                                <textarea  name="comment-ue" style="height:250px;" id="editor-ue"></textarea>
+                                            </div>
+                                            <div id="div-md">
+                                                <textarea  name="comment-md"  class="shadow-light radius-5" id="editor-md"></textarea>
+                                            </div>
+                                        </div>
+                                        <input type="submit" class="white-gray-btn no-border radius-3 submit-comment" value="提交回复"/>
+                                    </form>
+                                </div><!--end a left-cell-->
+                                <div class="left-cell font-11px border-bottom">
+                                    <span>帮助：<a href="#">使用MarkDown进行写作</a></span>
+                                    <span class="right">>>>返回<a href="/">GearAnswer</a></span>
+                                </div><!--end a left-cell-->
+
+                            </div><!--end left-box-->
+{% endblock left_box %}
+{% block site_echo %}{% endblock %}
+{% block hot_post %}{% endblock %}
+{% block hot_nodes %}{% endblock %}
+{% block right_box_extra %}
+                            <div class="side-box light-black-box-shadow ">
+                                <div class="cell border-bottom center gray-text">
+                                    <p><strong>Python</strong></p>
+                                </div><!--end a cell div-->
+                                <div class="cell pread-mini center">
+                                    <p><a href="#">>Python Offical Website</a></p>
+                                    <p><a href="#">>Learning Python</a></p>
+                                    <p><a href="#">>Python科学计算</a></p>
+                                </div><!--end a cell div-->                                                              
+                                <div class="clear"></div>
+                            </div><!--end side-box-->
+{% endblock right_box_extra %}
+

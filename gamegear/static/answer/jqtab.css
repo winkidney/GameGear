@@ -22,7 +22,6 @@
 #core-tabs,
 #core-tabs > div{
     padding: 0;
-    margin: 0;
 }
 /*必须用id选中，id优先级高于类*/
 #core-tabs > ul li a{

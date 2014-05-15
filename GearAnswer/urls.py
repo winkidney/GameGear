@@ -7,8 +7,10 @@ from  GearAnswer import views
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', views.home),
-    url(r'^test/$', views.test),
+    url(r'^$', views.home_view),
+    url(r'^articles/(\d*?)/$', views.read_view),
+    url(r'^input/$', views.new_topic_view),
+    url(r'^node/(\w*?)/$', views.node_view),
     # Examples:
     # url(r'^$', 'gamegear.views.home', name='home'),
     # url(r'^gamegear/', include('gamegear.foo.urls')),
