@@ -42,59 +42,63 @@ class Tag(models.Model):
         
         return self.name
     
-class Answer(models.Model):
+
     
-    """Answer for Question"""
+class Topic(models.Model):
     
-    class Meta:
-        verbose_name_plural = _(u"answer manager")
-        verbose_name = _(u"answer manager")
-        
-    content = models.TextField(blank=False, verbose_name=_(u'question content'))
-    author = models.ForeignKey(User, blank=False, 
-                               db_index=True,
-                               verbose_name=_(u'question author'))
-    is_best = models.BooleanField(default=False, verbose_name=_(u'is right answer'))
-    useful = models.IntegerField(blank=False, default=0, verbose_name=_(u'useful'))
-    stared = models.IntegerField(blank=False, default=0, verbose_name=_(u'stared'))
-    useless = models.IntegerField(blank=False, default=0, verbose_name=_(u'useless'))
-    
-    create_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
-    updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
-    
-    def __unicode__(self):
-        
-        return self.create_at
-    
-class Question(models.Model):
-    
-    """Question that contains enough info"""
+    """Topic that contains enough info"""
     
     class Meta:
-        verbose_name_plural = _(u"question manager")
-        verbose_name = _(u"question manager")
+        verbose_name_plural = _(u"topic manager")
+        verbose_name = _(u"topic manager")
         
     title = models.CharField(max_length=250, blank=False, 
                              db_index=True,
                              verbose_name=_(u'question title'))
-    content = models.TextField(blank=False, verbose_name=_(u'question content'))
-    author = models.ForeignKey(User, blank=False, verbose_name=_(u'question author'))
-    answer_count = models.IntegerField(blank=False, default=0, verbose_name=_(u'answer count'))
+    content = models.TextField(blank=False, verbose_name=_(u'topic content'))
+    author = models.ForeignKey(User, blank=False, verbose_name=_(u'topic author'))
+    answer_count = models.IntegerField(blank=False, default=0, verbose_name=_(u'reply count'))
     
     create_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
     work_out = models.BooleanField(blank=False, default=False, verbose_name=_(u'if the question worked out'))
     useful = models.IntegerField(blank=False, default=0, verbose_name=_(u'useful'))
-    stared = models.IntegerField(blank=False, default=0, verbose_name=_(u'stared'))
+    stars = models.IntegerField(blank=False, default=0, verbose_name=_(u'stared count'))
     useless = models.IntegerField(blank=False, default=0, verbose_name=_(u'useless'))
     view_times = models.IntegerField(blank=False, default=0, verbose_name=_(u'view times'))
-    
+    #answers = models.ManyToManyField(Answer, blank=True, verbose_name=_(u'response to the topic'))
     tags = models.ManyToManyField(Tag, blank=False, verbose_name=_(u'question tags'))
     Node = models.ForeignKey(Node, blank=False, verbose_name=_(u'question type'))
     
     def __unicode__(self):
         
         return self.title
+    
+class Reply(models.Model):
+    
+    """Answer for Question"""
+    
+    class Meta:
+        verbose_name_plural = _(u"reply manager")
+        verbose_name = _(u"reply manager")
+        
+    content = models.TextField(blank=False, verbose_name=_(u'reply content'))
+    author = models.ForeignKey(User, blank=False, 
+                               db_index=True,
+                               verbose_name=_(u'reply author'))
+    is_best = models.BooleanField(default=False, verbose_name=_(u'is right answer'))
+    useful = models.IntegerField(blank=False, default=0, verbose_name=_(u'useful'))
+    
+    useless = models.IntegerField(blank=False, default=0, verbose_name=_(u'useless'))
+    
+    topic = models.ForeignKey(Topic)
+    
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
+    
+    def __unicode__(self):
+        
+        return self.id
 
 #settings start
 class Nav(models.Model):
@@ -107,7 +111,10 @@ class Nav(models.Model):
     name = models.CharField(max_length=100, verbose_name=_(u'Nav setting'))
     display_order = models.IntegerField(blank=False, default=0, verbose_name=_(u'display order'))
     Nodes = models.ManyToManyField(Node, verbose_name=_(u'nav child-nodes'))
-
+    
+    def __unicode__(self):
+        return self.name
+    
 class Setting(models.Model):
     
     """global settings of the website"""

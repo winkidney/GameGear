@@ -51,8 +51,11 @@
                 <a class="left" href="#">首页</a>
                 <a class="left" href="">我的账户</a>
                 <a class="left" href="#">收藏夹</a>
-                <a class="left link">登录</a>
+            {% if logined %}
                 <a class="left link">登出</a>
+            {% else %}
+                <a class="left link">登录</a>
+            {% endif %}
                 <a class="right">试试手气[]~(￣▽￣)~*</a><a class="clear"></a>
                 <form action="#" method="POST" class="right">
                     <input type="text" class="white-text shadow-light black-bg border-none" placeholder="搜索"/>
@@ -192,6 +195,7 @@
                         </div><!--end div core-left-->
                         
                         <div id="core-sidebar" class="left">
+                    {% if not logined %}
                         {% block login %}
                             <div class="side-box light-black-box-shadow ">
                                 <div class="cell center border-bottom">
@@ -221,7 +225,7 @@
                                 <div class="clear"></div>
                             </div><!--end side-box-->
                         {% endblock %}
-
+                    {% else %}
 
                         {% block user %}
                             <div class="side-box light-black-box-shadow ">
@@ -261,6 +265,9 @@
                                 <div class="clear"></div>
                             </div><!--end side-box-->
                         {% endblock %}
+
+                    {% endif %}
+                    
                         {% block site_echo %}
                             <div class="side-box light-black-box-shadow ">
                                 <div class="cell center gray-text">

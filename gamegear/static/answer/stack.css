@@ -55,6 +55,9 @@ a:hover,
 .text-center{
     text-align: center;
 }
+.error{
+    color: red;
+}
 .gray-text{
     color: #C6C6C6;
 }
@@ -67,6 +70,9 @@ a:hover,
 .margin-5{
     margin: 5px;
 }
+.margin-l-10{
+    margin-left: 10px;
+    }
 .margin-t-20{
     margin-top: 20px;
     }

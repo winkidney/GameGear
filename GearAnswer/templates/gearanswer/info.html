@@ -1,0 +1,42 @@
+{% extends "gearanswer/base.html" %}
+{% block left_box %}
+                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
+                                <div class="left-cell gray-text ">
+                                    <strong>
+                                        <a href="#" >GearAnswer</a>
+                                        > 
+                                        提示
+                                    </strong>
+                                </div><!--end a left-cell-->
+                            {% autoescape off %}
+                                <div class="left-cell  ccenter">
+                                    <p><strong>{{ info.title }}</strong></p>
+                                    <p>{{ info.content }}</p>
+ 
+                                </div><!--end a left-cell-->
+                            {% endautoescape %}
+                            
+                                <div class="left-cell font-11px border-bottom">
+                                    <span>帮助：<a href="#">关于社区积分</a></span>
+                                    <span class="right">>>>返回<a href="/">GearAnswer</a></span>
+                                </div><!--end a left-cell-->
+                            
+                            </div><!--end left-box-->
+                        {% if info.redirect_url %}
+                            <script language="javascript" type="text/javascript">
+                                setInterval("redirect()", 2000);
+                                function redirect()
+                                {
+                                    location.href = '{{ info.redirect_url }}';
+                                }
+                            </script>
+                        {% endif %}
+{% endblock left_box %}
+
+{% block user %}{% endblock %}
+
+{% block site_echo %}{% endblock %}
+{% block hot_post %}{% endblock %}
+{% block new_nodes %}{% endblock %}
+{% block hot_nodes %}{% endblock %} 
+ 

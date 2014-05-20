@@ -30,4 +30,4 @@ def syncdb_with_su(su_name, su_email, su_passwd):
 if __name__ == '__main__':
     if os.path.isfile('gamegear.db'):
         os.remove('gamegear.db')
-    syncdb_with_su('admin', 'admin@admin.com','123456')
+    syncdb_with_su('admin', 'admin@admin.com','admin')

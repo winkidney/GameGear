@@ -65,7 +65,9 @@ class MajorType(models.Model):
     
     def __unicode__(self):
         return self.name
-    
+
+
+   
 class UserManager(BaseUserManager):
 
     def create_user(self, name, email, password=None):
