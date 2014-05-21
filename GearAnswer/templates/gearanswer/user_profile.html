@@ -1,0 +1,38 @@
+{% extends "gearanswer/base.html" %}
+{% block left_box %}
+                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
+                                <div class="left-cell gray-text ">
+                                    <strong>
+                                        <a href="#" >GearAnswer</a>
+                                        > 
+                                        注册
+                                    </strong>
+                                </div><!--end a left-cell-->
+
+                                <div class="left-cell font-11px">
+                                    
+                                        <div class=" padding-bottom-5">
+                                            <img class="user-avatar" src="{{ static_url }}/answer/img/avatar.png">
+                                            <label class="width-8 block gray-text">用户名<span class="error margin-l-10">{% if register_form.errors %}{{ register_form.errors.username }}{% endif %}</span></label>
+                                            <label class="dark-bg white-text shadow-light width-98" name="username">>>>阿毛</label><br>
+                                            <label class="width-8 block gray-text">积分<span class="error margin-l-10">{% if register_form.errors %}{{ register_form.errors.username }}{% endif %}</span></label>
+                                            <label class="dark-bg white-text shadow-light width-98" name="username">>>>20</label><br>
+                                        </div>
+                                </div><!--end a left-cell-->
+                                <div class="left-cell font-11px">
+                                        <a href="#">编辑个人资料</a>
+                                </div><!--end a left-cell-->
+                                <div class="left-cell font-11px border-bottom">
+                                    <span>帮助：<a href="#">关于社区积分</a></span>
+                                    <span class="right">>>>返回<a href="/">GearAnswer</a></span>
+                                </div><!--end a left-cell-->
+                                
+                            </div><!--end left-box-->
+{% endblock left_box %}
+
+{% block user %}{% endblock %}
+
+{% block site_echo %}{% endblock %}
+{% block hot_post %}{% endblock %}
+{% block new_nodes %}{% endblock %}
+{% block hot_nodes %}{% endblock %} 

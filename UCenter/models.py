@@ -114,7 +114,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     #private info
     decription = models.CharField(max_length=250, verbose_name=_(u'self description'))
-    nickname = models.CharField(blank=True, max_length=100, verbose_name=_(u'nickname'))
+    #nickname = models.CharField(blank=True, max_length=100, verbose_name=_(u'nickname'))
     age = models.IntegerField(blank=False, default=0, verbose_name=_(u'age'))
     job = models.CharField(blank=True, max_length=30, verbose_name=_(u'job'))
     website = models.URLField(blank=True, verbose_name=_(u'web site'))

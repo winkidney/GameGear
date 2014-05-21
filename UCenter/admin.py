@@ -77,7 +77,7 @@ class GearAdmin(UserAdmin):
     list_filter = ('is_staff',)
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
-        (None, {'fields': ('name', 'nickname', 'email', 'password', 'avatar',)}),
+        (None, {'fields': ('name', 'email', 'password', 'avatar',)}),
         (_(u'Personal info'), {'fields': ('gears', 'created_at', 'updated_at', 'age', 'job' , 'interest_in')}),
         (_(u'GearArt'),{'fields' : ('reputation',)}),
         (_(u'GearAnswer'),{'fields' : ('a_reputation',)}),

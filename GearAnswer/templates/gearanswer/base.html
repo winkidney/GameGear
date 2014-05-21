@@ -48,7 +48,7 @@
     <div id="boxed">
         <header>
             <div id="menu-bar" class='center'>
-                <a class="left" href="#">首页</a>
+                <a class="left" href="{{ answer_url }}">首页</a>
                 <a class="left" href="">我的账户</a>
                 <a class="left" href="#">收藏夹</a>
             {% if logined %}
@@ -210,9 +210,9 @@
                                         <form  id="login-form" action="{{ answer_url }}login/" method="post">
                                             {% csrf_token %}
                                             <label>用户名:</label>
-                                            <input type="text" class="dark-bg white-text shadow-light" placeholder="Username" name="username" required maxlength="250" /><br>
+                                            <input type="text" class="dark-bg white-text shadow-light font-11px" placeholder="您的注册用户名" name="username" required maxlength="250" /><br>
                                             <label>密码 ：</label>
-                                            <input type="text" class="dark-bg white-text shadow-light" placeholder="Password" name="password" required maxlength="20"/><br>
+                                            <input type="text" class="dark-bg white-text shadow-light font-11px" placeholder="您的用户密码" name="password" required maxlength="20"/><br>
                                             <input id="login-btn" class="clear-btn-style black-gray-btn shadow-light-no-ease" type="submit" value="登录"/>
                                         </form>
                                     </div>

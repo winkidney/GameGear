@@ -149,12 +149,13 @@ def set_useful_view(request, *args, **kwargs):
 
 def user_profile_view(request, *args, **kwargs):
     
-    return render_template(request, 'gearanswer/user_prifile.html',
+    return render_template(request, 'gearanswer/user_profile.html',
                               locals(),
                               )
+    
 def user_profile_edit_view(request, *args, **kwargs):
     
-    return render_template(request, 'gearanswer/user_prifile.html',
+    return render_template(request, 'gearanswer/user_profile.html',
                               locals(),
                               )
 def messages_view(request, *args, **kwargs):
