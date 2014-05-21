@@ -6,11 +6,13 @@ from GearAnswer.apis import logined
 
 def shared_data(request, *args, **kwagrs):
     data = {'static_url': settings.STATIC_URL,
+            'answer_url' : '/',
             }
     if logined(request):
         data['logined'] = True
     else:
         data['logined'] = False
+        
     
     return data
 

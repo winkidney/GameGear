@@ -52,9 +52,9 @@
                 <a class="left" href="">我的账户</a>
                 <a class="left" href="#">收藏夹</a>
             {% if logined %}
-                <a class="left link">登出</a>
+                <a href="{{ answer_url }}logout/" class="left link">登出</a>
             {% else %}
-                <a class="left link">登录</a>
+                <a href="{{ answer_url }}login/" class="left link">登录</a>
             {% endif %}
                 <a class="right">试试手气[]~(￣▽￣)~*</a><a class="clear"></a>
                 <form action="#" method="POST" class="right">
@@ -207,11 +207,12 @@
                                 </div><!--end a cell div-->
                                 <div class="cell center text-center gray-text">
                                     <div class="">
-                                        <form  id="login-form" action="#" method="post">
+                                        <form  id="login-form" action="{{ answer_url }}login/" method="post">
+                                            {% csrf_token %}
                                             <label>用户名:</label>
-                                            <input type="text" class="dark-bg white-text shadow-light" placeholder="Username" name="username" /><br>
+                                            <input type="text" class="dark-bg white-text shadow-light" placeholder="Username" name="username" required maxlength="250" /><br>
                                             <label>密码 ：</label>
-                                            <input type="text" class="dark-bg white-text shadow-light" placeholder="Password" name="password" /><br>
+                                            <input type="text" class="dark-bg white-text shadow-light" placeholder="Password" name="password" required maxlength="20"/><br>
                                             <input id="login-btn" class="clear-btn-style black-gray-btn shadow-light-no-ease" type="submit" value="登录"/>
                                         </form>
                                     </div>

@@ -10,7 +10,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth import (authenticate, login, logout)
 
 from UCenter.models import User
-from GearAnswer.forms import RegisterForm
+from GearAnswer.forms import RegisterForm,LoginForm
 from GearAnswer.apis import render_template,Info,user_exist,logined
 
 ROOT_URL = '/'
@@ -26,10 +26,58 @@ def tab_view(request, tab_id, *args, **kwargs):
                               )
     
 def login_view(request, *args, **kwargs):
-    return HttpResponse("功能建设中")
+    if logined(request):
+        title = _(u"You have already logined!")
+        content = _(u'Maybe you want to: <a href="%slogout/">Logout</a> or go back to <a href="%s">Home</a>' % (ROOT_URL,ROOT_URL))
+        info = Info(title, content)
+        
+
+    else:
+        if request.method == 'POST':
+            login_form = LoginForm(request.POST)
+            if login_form.is_valid():
+                user = authenticate(username=login_form.cleaned_data.get('username'), 
+                                    password=login_form.cleaned_data.get('password'))
+                if user and user.is_active:
+                        login(request, user)
+                        title = _(u"Login successed!")
+                        content = _(u'Maybe you want to:<a href="%sgear/%s/edit/">Edit your profile</a> or go back to <a href="%s">Home</a>' \
+                                    % (ROOT_URL, user.id, ROOT_URL))
+                        info = Info(title, content)
+                        
+                        return render_template(request, 'gearanswer/info.html',
+                                        locals(),
+                                       )   
+                else:
+                    login_form.errors['username'] = _(u'Username and the password does not match!')
+                    
+            return render_template(request, 'gearanswer/login.html', 
+                                   locals())
+                
+        elif request.method == 'GET':
+            return render_template(request, 'gearanswer/login.html', 
+                                   locals())
+            
+                   
+
 
 def logout_view(request, *args, **kwargs):
-    return HttpResponse("功能建设中")
+    if logined(request):
+        logout(request)
+        title = _(u"Logout Successed!")
+        content = _(u"Now you will be rediected to home page.")
+        redirect_url = ROOT_URL
+      
+        info = Info(title, content, redirect_url)
+    else:
+        title = _(u"You have not logined!")
+        content = _(u'<a href="%sregister/">Join us now!</a> or <a href="%slogin/">Signin now!</a>' % (ROOT_URL,ROOT_URL))
+      
+        info = Info(title, content)
+    
+    return render_template(request, 'gearanswer/info.html',
+                                        locals(),
+                                        )
 
 def register_view(request, *args, **kwargs):
     
@@ -43,8 +91,8 @@ def register_view(request, *args, **kwargs):
                                     password=register_form.cleaned_data.get('password1'))
                 login(request, user)
                 
-                title = "Register Success!"
-                content = "Just enjoy it.Now you will be rediect to home page."
+                title = _(u"Register Successed!")
+                content = _(u"Just enjoy it.Now you will be rediected to home page.")
                 redirect_url = ROOT_URL
                 
                 info = Info(title, content, redirect_url)
@@ -58,8 +106,8 @@ def register_view(request, *args, **kwargs):
             
     elif request.method == 'GET':
         if logined(request):
-            title = "You have logined!"
-            content = '<a href="%slogout/">Logout</a> first, Please!' % ROOT_URL
+            title = _(u"You have logined!")
+            content = _(u'<a href="%slogout/">Logout</a> first, Please!' % ROOT_URL)
                 
             info = Info(title, content)
             return render_template(request, 'gearanswer/info.html',

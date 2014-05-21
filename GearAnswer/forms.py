@@ -7,10 +7,12 @@ from django.utils.translation import ugettext_lazy as _
 
 from UCenter.models import User
 from GearAnswer.apis import user_exist,email_exist
+from django.contrib.auth import authenticate
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=250, required=True)
-
+    password = forms.CharField(max_length=20, required=True)
+    
 
 
 class RegisterForm(forms.Form):
