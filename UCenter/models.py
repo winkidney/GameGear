@@ -4,7 +4,7 @@
 UCenter.models -- shortdesc
 @author:     winkidney
 @contact:    winkidney@gmail.com
-@deffield    updated: Updated
+@deffield    updated: 2014
 '''
 
 __all__ = []
@@ -104,6 +104,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=100, unique=True, verbose_name=_(u'user name'))
     email = models.EmailField(max_length=100, unique=True, verbose_name=_(u'email'))
     avatar = models.URLField(blank=True)
+    
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
     
@@ -119,12 +120,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     website = models.URLField(blank=True, verbose_name=_(u'web site'))
     interest_in = models.ManyToManyField(InterTag, verbose_name=_(u'interest tag'))
     
-    #GameArt
-    #posts = models.ManyToManyField(Post, verbose_name=_(u'posts'))
-    #own_collections = models.ManyToManyField(Collection, verbose_name=_(u'collections'))
+
     gears = models.IntegerField(blank=False, default=0, verbose_name=_(u'gears'))
-    #ref_collections = models.ManyToManyField(Collection, verbose_name=_(u'collections'))
-    #pcomments = models.ManyToManyField(PComment, verbose_name=_(u'comments')) 
+ 
 
     reputation = models.IntegerField(blank=False, default=0, verbose_name=_(u'reputation'))   #积分，主题被评分可以获得
     
@@ -132,8 +130,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     a_reputation = models.IntegerField(blank=False,
                                        verbose_name=_(u'a_reputation'),
                                        default=0,)
-    #questions
-    #anwsers
     
     #token for Oauth
     #weibo_token = models.CharField(verbose_name=u'微博token',max_length=100, blank=True)

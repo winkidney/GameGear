@@ -9,9 +9,10 @@ from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.contrib.auth import (authenticate, login, logout)
 
-from UCenter.models import User
+from UCenter.apis import user_exist,logined
 from GearAnswer.forms import RegisterForm,LoginForm
-from GearAnswer.apis import render_template,Info,user_exist,logined
+from GearAnswer.apis import render_template,Info
+
 
 ROOT_URL = '/'
 
@@ -30,8 +31,9 @@ def login_view(request, *args, **kwargs):
         title = _(u"You have already logined!")
         content = _(u'Maybe you want to: <a href="%slogout/">Logout</a> or go back to <a href="%s">Home</a>' % (ROOT_URL,ROOT_URL))
         info = Info(title, content)
-        
-
+        return render_template(request, 'gearanswer/info.html',
+                                        locals(),
+                                       )
     else:
         if request.method == 'POST':
             login_form = LoginForm(request.POST)

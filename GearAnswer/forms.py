@@ -4,10 +4,10 @@
  
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-
-from UCenter.models import User
-from GearAnswer.apis import user_exist,email_exist
 from django.contrib.auth import authenticate
+
+from UCenter.apis import create_user
+from UCenter.apis import user_exist,email_exist
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=250, required=True)
@@ -40,9 +40,7 @@ class RegisterForm(forms.Form):
     
     def save_user(self):
         # Save the provided password in hashed format
-        user = User()
-        user.name = self.cleaned_data.get('username')
-        user.set_password(self.cleaned_data["password1"])
-        user.email = self.cleaned_data.get('email')
-        user.save()
-        return user
+        create_user(self.cleaned_data.get('username'),
+                    self.cleaned_data["password1"],
+                    self.cleaned_data.get('email')
+                    )

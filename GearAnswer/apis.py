@@ -19,28 +19,5 @@ class Info(object):
         self.content = content
         self.redirect_url = redirect_url
 
-def get_user(request):
-    """get a request and return a user obj"""
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    return authenticate(username=username, password=password)
 
-def user_exist(username):
-    try:
-        User.objects.get(name=username)
-        return True
-    except:
-        return False
 
-def logined(request):
-    if request.user.is_authenticated():
-            return True
-    else:
-            return False
-        
-def email_exist(email):
-    try:
-        User.objects.get(email=email)
-        return True
-    except:
-        return False
