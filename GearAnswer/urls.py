@@ -27,6 +27,8 @@ urlpatterns = patterns('',
     
     url(r'^articles/(\d*?)/$', views.read_view),
     
+    url(r'^test/$', views.test_view),
+    
     
     
     

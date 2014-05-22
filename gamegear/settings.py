@@ -1,14 +1,20 @@
-# Django settings for gamegear project.
+#!/usr/bin/env python
+#coding:utf-8
+#localsettings.py - the setting file of game project
+# winkidney 2014-04-11
 from django.utils.translation import gettext_noop as _
 import os
+import django.conf.global_settings as DEFAULT_SETTINGS
+
+#from GearAnswer.context_processors import shared_data
 
 PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)),os.pardir).replace('\\', '/')
 
-#AUTH_USER_MODEL = 'UCenter.User'
+AUTH_USER_MODEL = 'UCenter.User'
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
 
 ADMINS = (
      ('winkidney', 'winkidney@gmail.com'),
@@ -19,7 +25,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(PROJECT_ROOT, 'gamegear.db'),                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -36,7 +42,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Shanghai'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -68,14 +74,18 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = 'static/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
+#SITE STATIC
+
+
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    PROJECT_ROOT+'/gamegear/static/',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -89,32 +99,40 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'dfdfdsafdsafdsafe343256465gfsg'
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
+    
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'gamegear.urls'
 
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'jv91h30ac(-hl=z=sqon&pz)k+zb$b767zq2^za^=ucxa$ye$!'
+
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'gamegear.wsgi.application'
 
 TEMPLATE_DIRS = (
+    PROJECT_ROOT+'/GearAnswer/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -127,19 +145,45 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # xadmin
+    #'xadmin',
+    #'crispy_forms',
+    #'reversion',
+    
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
+    # My own
+    'UCenter',
+    #'GearArt',
+    'GearAnswer',
+    
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
+
+
+LANGUAGES = (
+    ('zh-cn', _('Simplified Chinese')),
+    ('en', _('English')),
+    ('zh-hans', _('Simplified Chinese')),
+    ('zh-hant', _('Traditional Chinese')),
+    ('zh-tw', _('Traditional Chinese')),
+)
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+
+
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'GearAnswer.context_processors.shared_data',
+)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

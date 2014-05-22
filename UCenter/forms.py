@@ -9,11 +9,6 @@ class UserProfileForm(froms.Form):
     avatar = forms.URLField(required=False)
     username = forms.CharField(max_length=250, required=True)
     decription = forms.CharField(max_length=250, required=False)
-    job = forms.CharField(max_length=30, required=False)
     website = forms.URLField(required=False)
-    interest_in = forms.CharField(required=False)
+    interests = forms.CharField(required=False)
 
-def user_info_list(id):
-    
-    
-    [filed_name,field_value]

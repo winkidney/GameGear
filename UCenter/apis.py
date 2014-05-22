@@ -1,7 +1,7 @@
 #coding:utf-8
 #UCenter/apis.py - context processors of the GearAnswer
 #ver 0.1 - by winkidney - 2014.05.13
-
+from django.db import models
 from UCenter.models import User
 
 def create_user(username, password, email):
@@ -29,7 +29,7 @@ def email_exist(email):
     try:
         User.objects.get(email=email)
         return True
-    except:
+    except models.Model.DoesNotExist:
         return False
     
 def get_user(request):

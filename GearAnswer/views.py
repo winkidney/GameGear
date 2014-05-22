@@ -11,11 +11,14 @@ from django.contrib.auth import (authenticate, login, logout)
 
 from UCenter.apis import user_exist,logined
 from GearAnswer.forms import RegisterForm,LoginForm
-from GearAnswer.apis import render_template,Info
+from GearAnswer.apis import render_template,Info,get_uinfo
 
 
 ROOT_URL = '/'
 
+def test_view(request):
+    print request.LANGUAGE_CODE
+    return HttpResponse(_(u"You have already logined!"))
 def home_view(request):
     return render_template(request, 'gearanswer/base.html',
                               locals(),
@@ -147,8 +150,11 @@ def set_useful_view(request, *args, **kwargs):
     
     return HttpResponse('set useless success')
 
-def user_profile_view(request, *args, **kwargs):
+def user_profile_view(request, uid, *args, **kwargs):
     
+    uinfo_dict = get_uinfo(uid)
+    if not uinfo_dict:
+        raise Http404
     return render_template(request, 'gearanswer/user_profile.html',
                               locals(),
                               )
