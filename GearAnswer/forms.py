@@ -5,9 +5,17 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import authenticate
+from django.forms.util import ErrorList
+import uuid
 
 from UCenter.apis import create_user
 from UCenter.apis import user_exist,email_exist
+
+class CleanErrorList(ErrorList):
+    def __unicode__(self):
+        if not self:
+            return u''
+        return u'%s' % ''.join('%s' % e for e in self)
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=250, required=True)
@@ -44,3 +52,28 @@ class RegisterForm(forms.Form):
                     self.cleaned_data["password1"],
                     self.cleaned_data.get('email')
                     )
+        
+class UserProfileForm(forms.Form):
+    avatar = forms.ImageField(required=False)
+    #username = forms.CharField(max_length=250, required=True)
+    description = forms.CharField(max_length=250, required=False)
+    website = forms.URLField(required=False)
+    goodat = forms.CharField()
+    interests = forms.CharField(required=False)
+    
+    def save_data(self, user, request):
+        
+        image = self.cleaned_data.get('avatar')
+        
+        if image:
+            if user.avatar:
+                user.avatar.delete()
+            file_ext = image.name.split('.')[1]
+            user.avatar.save('%s.%s' % (uuid.uuid1(), file_ext), 
+                         image)
+        user.description = self.cleaned_data.get('description')
+        user.website = self.cleaned_data.get('website')
+        user.good_at = self.cleaned_data.get('goodat')
+        user.interests = self.cleaned_data.get('interests')
+        user.save()
+        

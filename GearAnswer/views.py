@@ -5,12 +5,14 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.core.exceptions import PermissionDenied
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.contrib.auth import (authenticate, login, logout)
 
+from UCenter.models import User
 from UCenter.apis import user_exist,logined
-from GearAnswer.forms import RegisterForm,LoginForm
+from GearAnswer.forms import RegisterForm,LoginForm,UserProfileForm,CleanErrorList
 from GearAnswer.apis import render_template,Info,get_uinfo
 
 
@@ -39,14 +41,14 @@ def login_view(request, *args, **kwargs):
                                        )
     else:
         if request.method == 'POST':
-            login_form = LoginForm(request.POST)
+            login_form = LoginForm(request.POST, )
             if login_form.is_valid():
                 user = authenticate(username=login_form.cleaned_data.get('username'), 
                                     password=login_form.cleaned_data.get('password'))
                 if user and user.is_active:
                         login(request, user)
                         title = _(u"Login successed!")
-                        content = _(u'Maybe you want to:<a href="%sgear/%s/edit/">Edit your profile</a> or go back to <a href="%s">Home</a>' \
+                        content = _(u'Maybe you want to:<a href="%sgear/%s/profile/edit/">Edit your profile</a> or go back to <a href="%s">Home</a>' \
                                     % (ROOT_URL, user.id, ROOT_URL))
                         info = Info(title, content)
                         
@@ -159,9 +161,26 @@ def user_profile_view(request, uid, *args, **kwargs):
                               locals(),
                               )
     
-def user_profile_edit_view(request, *args, **kwargs):
-    
-    return render_template(request, 'gearanswer/user_profile.html',
+@login_required(login_url=ROOT_URL+'login/')
+def user_profile_edit_view(request, uid, *args, **kwargs):
+    uinfo_dict = get_uinfo(uid)
+    if not uinfo_dict:
+        raise Http404
+    if request.user.id != int(uid):
+            raise PermissionDenied
+    if request.method == 'GET':
+        pass
+    elif request.method == 'POST':
+        user_profile_form = UserProfileForm(request.POST, request.FILES, error_class=CleanErrorList)
+        if user_profile_form.is_valid():
+            user = User.objects.get(id=uid)
+            user_profile_form.save_data(user, request)
+            info = Info(_(u'You have successfully change your profile!'),
+                        _(u'Now you will be rediected to edit page.'),request.path)
+            return render_template(request, 'gearanswer/info.html',
+                                        locals(),
+                                        )
+    return render_template(request, 'gearanswer/edit_user_profile.html',
                               locals(),
                               )
 def messages_view(request, *args, **kwargs):

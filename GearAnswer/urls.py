@@ -21,9 +21,9 @@ urlpatterns = patterns('',
     url(r'^setbest/(\d)/$', views.set_best_view),
     url(r'^setuseless/(\d)/$', views.set_useless_view),
     url(r'^setuseful/(\d)/$', views.set_useful_view),
-    url(r'^gear/(\d)/$', views.user_profile_view),
-    url(r'^gear/(\d)/edit/$', views.user_profile_edit_view),    
-    url(r'^gear/(\d)/messages/$', views.messages_view),
+    url(r'^gear/(\d)/profile/$', views.user_profile_view),
+    url(r'^gear/(\d)/profile/edit/$', views.user_profile_edit_view),    
+    url(r'^gear/(\d)/profile/messages/$', views.messages_view),
     
     url(r'^articles/(\d*?)/$', views.read_view),
     

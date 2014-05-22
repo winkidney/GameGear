@@ -14,6 +14,7 @@ __updated__ = '2014-04-14'
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from django.forms import widgets
 
 
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
@@ -103,7 +104,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         
     name = models.CharField(max_length=100, unique=True, verbose_name=_(u'user name'))
     email = models.EmailField(max_length=100, unique=True, verbose_name=_(u'email'))
-    avatar = models.URLField(blank=True)
+    avatar = models.ImageField(upload_to='avatars/%Y/%m/', verbose_name=_(u'avatar'))
     
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
@@ -113,12 +114,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False, verbose_name=_(u'can login into admin panel'))
     
     #private info
-    decription = models.CharField(max_length=250, verbose_name=_(u'self description'))
+    description = models.TextField(blank=True, verbose_name=_(u'self description'))
     #nickname = models.CharField(blank=True, max_length=100, verbose_name=_(u'nickname'))
     #age = models.IntegerField(blank=False, default=0, verbose_name=_(u'age'))
-    good_at = models.CharField(blank=True, max_length=250, verbose_name=_(u'job'))
+    good_at = models.CharField(blank=True, max_length=250, verbose_name=_(u'good at'))
     website = models.URLField(blank=True, verbose_name=_(u'website'))
-    interests = models.CharField(max_length=250, verbose_name=_(u'interests'))
+    interests = models.CharField(blank=True, max_length=250, verbose_name=_(u'interests'))
     
 
     gears = models.IntegerField(blank=False, default=0, verbose_name=_(u'gears'))
@@ -153,6 +154,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.name
+    
+    def delete_avatar(self):
+        self.avatar.delete()
 
     
 

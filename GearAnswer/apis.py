@@ -30,19 +30,36 @@ def get_uinfo(uid):
         user = User.objects.get(id=uid)
     except ObjectDoesNotExist:
         return None
-    user_info_dict = {'avatar' : user.avatar,
+    if user.avatar:
+        avatar_url = user.avatar.url
+    else:
+        avatar_url = None
+    user_info_dict = {'avatar' : avatar_url,
                       'detail' : (
                       (_(u'Uid'), user.id),
                       
                       (_(u'Username'), user.name),
                       (_(u'Email'), user.email),
-                      (_(u'Self description'), user.decription),
+                      (_(u'Self description'), user.description),
                       (_(u'Good at'), user.good_at),
                       (_(u'Interests'), user.interests),
                       (_(u'Website'), user.website),
                       (_(u'Gears'), user.gears),
                       (_(u'Reputation'), user.reputation),
+                      (_(u'Created at'), user.created_at),
                       ),
+                      'detail_dict' : {
+                      'uid': user.id,
+                      'username' : user.name,
+                      'email' : user.email,
+                      'description' : user.description,
+                      'good_at' : user.good_at,
+                      'interests' : user.interests,
+                      'website' : user.website,
+                      'gears' : user.gears,
+                      'reputation' : user.reputation,
+                      'create_at' : user.created_at,
+                      },
                       'id': int(uid),
                       }
     return user_info_dict

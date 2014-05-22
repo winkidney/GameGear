@@ -5,7 +5,7 @@
                                     <strong>
                                         <a href="#" >GearAnswer</a>
                                         > 
-                                        注册
+                                        浏览用户信息
                                     </strong>
                                 </div><!--end a left-cell-->
 
@@ -27,7 +27,7 @@
                                 </div><!--end a left-cell-->
                                 {% if logined and cuser.id == uinfo_dict.id %}
                                 <div class="left-cell font-11px">
-                                        <a href="{{ answer_url }}gear/{{ uinfo_dict.id }}/edit/">编辑个人资料</a>
+                                        <a href="{{ answer_url }}gear/{{ uinfo_dict.id }}/profile/edit/">编辑个人资料</a>
                                 </div><!--end a left-cell-->
                                 {% endif %}
                                 <div class="left-cell font-11px border-bottom">
@@ -37,8 +37,6 @@
                                 
                             </div><!--end left-box-->
 {% endblock left_box %}
-
-{% block user %}{% endblock %}
 
 {% block site_echo %}{% endblock %}
 {% block hot_post %}{% endblock %}

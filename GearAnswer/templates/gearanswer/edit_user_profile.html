@@ -1,0 +1,65 @@
+{% extends "gearanswer/base.html" %}
+{% block left_box %}
+                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
+                                <div class="left-cell gray-text ">
+                                    <strong>
+                                        <a href="#" >GearAnswer</a>
+                                        > 
+                                        修改个人信息
+                                    </strong>
+                                </div><!--end a left-cell-->
+
+                                <div class="left-cell font-11px">
+                                    <form id="reply-to" action="" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class=" padding-bottom-5">
+                                            <label class="width-8 block" >[头像]<span class="error margin-l-10">{% if user_profile_form.errors.avatar %}{{ user_profile_form.errors.avatar }}{% endif %}</span></label>
+                                        {% if uinfo_dict.avatar %}
+                                            <img class="user-avatar" src="{{ uinfo_dict.avatar }}"><br>
+                                        {% else %}
+                                            <img class="user-avatar" src="{{ static_url }}/answer/img/avatar.png"><br>
+                                        {% endif %}
+                                            <span>修改头像：</span>
+                                            <input id="id_avatar" name="avatar" type="file">
+                                        {% if user_profile_form.errors %}
+                                            <label class="width-8 block" >[用户名]<span class="error margin-l-10">{% if user_profile_form.errors.username %}{{ user_profile_form.errors.username }}{% endif %}</span></label>
+                                            <label class="dark-bg white-text shadow-light width-98">{{ uinfo_dict.detail_dict.username }}</label><br> 
+                                            <label class="width-8 block" >[个人简介]<span class="error margin-l-10">{% if user_profile_form.errors.description %}{{ user_profile_form.errors.description }}{% endif %}</span></label>
+                                            <textarea maxlength=250 class="dark-bg white-text shadow-light width-98" name="description" placeholder="您的个人简介，不能超过250个字符哦">{{ user_profile_form.cleaned_data.description }}</textarea><br>
+                                            <label class="width-8 block" >[主页]<span class="error margin-l-10">{% if user_profile_form.errors.website %}{{ user_profile_form.errors.website }}{% endif %}</span></label>
+                                            <input maxlength=250 value="{{ user_profile_form.cleaned_data.website }}" class="dark-bg white-text shadow-light width-98" name="website" placeholder="个人主页，项目主页"></input><br>
+                                            <label class="width-8 block" >[擅长的领域]<span class="error margin-l-10">{% if user_profile_form.errors.goodat %}{{ user_profile_form.errors.goodat }}{% endif %}</span></label>
+                                            <input maxlength=250 value="{{ user_profile_form.cleaned_data.goodat }}" class="dark-bg white-text shadow-light width-98" name="goodat" placeholder="填写擅长的领域方便大家交流"></input><br>
+                                            <label class="width-8 block" >[感兴趣的领域]<span class="error margin-l-10">{% if user_profile_form.errors.interests %}{{ user_profile_form.errors.interests }}{% endif %}</span></label>
+                                            <input maxlength=250 value="{{ user_profile_form.cleaned_data.interests }}"  class="dark-bg white-text shadow-light width-98" name="interests" placeholder="填写兴趣让大家更容易了解你"></input><br>
+                                        {% else %}
+                                            <label class="width-8 block" >[用户名]</label>
+                                            <label class="dark-bg white-text shadow-light width-98">{{ uinfo_dict.detail_dict.username }}</label><br> 
+                                            <label class="width-8 block" >[个人简介]</label>
+                                            <textarea maxlength=250 class="dark-bg white-text shadow-light width-98" name="description" placeholder="您的个人简介,介绍你的项目，联系方式等等=w=">{{ uinfo_dict.detail_dict.description }}</textarea><br>
+                                            <label class="width-8 block" >[主页]</label>
+                                            <input maxlength=250 value="{{ uinfo_dict.detail_dict.website }}" class="dark-bg white-text shadow-light width-98" name="website" placeholder="个人主页，项目主页"></input><br>
+                                            <label class="width-8 block" >[擅长的领域]</label>
+                                            <input maxlength=250 value="{{ uinfo_dict.detail_dict.good_at }}" class="dark-bg white-text shadow-light width-98" name="goodat" placeholder="填写擅长的领域方便大家交流"></input><br>
+                                            <label class="width-8 block" >[感兴趣的领域]</label>
+                                            <input maxlength=250 value="{{ uinfo_dict.detail_dict.interests }}"  class="dark-bg white-text shadow-light width-98" name="interests" placeholder="填写兴趣让大家更容易了解你"></input><br>
+                                        {% endif %}
+                                        </div>
+                                        <input type="submit" class="black-gray-btn no-border radius-3 padding-5-10 margin-t-20 shadow-light" value="保存修改"/>
+                                        <a href="{{ answer_url }}" class="black-gray-btn no-border radius-3 padding-5-10 margin-t-20 shadow-light">放弃修改并返回</a>
+                                    </form>
+                                </div><!--end a left-cell-->
+
+                                <div class="left-cell font-11px border-bottom">
+                                    <span>帮助：<a href="#">关于社区积分</a></span>
+                                    <span class="right">>>>返回<a href="{{ answer_url }}">GearAnswer</a></span>
+                                </div><!--end a left-cell-->
+                                
+                            </div><!--end left-box-->
+{% endblock left_box %}
+
+
+{% block site_echo %}{% endblock %}
+{% block hot_post %}{% endblock %}
+{% block new_nodes %}{% endblock %}
+{% block hot_nodes %}{% endblock %} 
