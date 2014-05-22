@@ -10,13 +10,40 @@
                                 </div><!--end a left-cell-->
 
                                 <div class="left-cell font-11px">
-                                    
-                                        <div class=" padding-bottom-5">
+                                        <div class="">
                                         {% if uinfo_dict.avatar %}
                                             <img class="user-avatar" src="{{ uinfo_dict.avatar }}">
                                         {% else %}
                                             <img class="user-avatar" src="{{ static_url }}/answer/img/avatar.png">
                                         {% endif %}
+                                        </div>
+                                        <div class=" ">
+                                            <span><strong>&gt;&gt;{{ uinfo_dict.detail_dict.username }}</strong></span>
+                                            <span>&gt;&gt;于 {{ uinfo_dict.detail_dict.create_at }} 加入GeamGear </span>
+                                            <span>&gt;&gt;获得声望 : {{ uinfo_dict.detail_dict.reputation }} </span>
+                                        </div>
+                                        <div class="clear"></div>
+                                </div><!--end a left-cell-->
+                                {% if logined and cuser.id == uinfo_dict.id %}
+                                <div class="left-cell font-11px border-bottom">
+                                        <a href="{{ answer_url }}gear/{{ uinfo_dict.id }}/profile/edit/">编辑个人资料</a>
+                                </div><!--end a left-cell-->
+                                {% endif %}
+                                
+                            </div><!--end left-box-->
+                            
+                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
+                                <div class="left-cell gray-text ">
+                                    <strong>
+                                        <a href="#" >GearAnswer</a>
+                                        > 
+                                        详细信息
+                                    </strong>
+                                </div><!--end a left-cell-->
+
+                                <div class="left-cell font-11px">
+                                    
+                                        <div class=" padding-bottom-5">
                                         {% for kv in uinfo_dict.detail %}
                                             {% if kv.1 %}
                                             <label class="width-8 block gray-text"><strong>[{{ kv.0 }}]</strong></label>
@@ -25,11 +52,6 @@
                                         {% endfor %}
                                         </div>
                                 </div><!--end a left-cell-->
-                                {% if logined and cuser.id == uinfo_dict.id %}
-                                <div class="left-cell font-11px">
-                                        <a href="{{ answer_url }}gear/{{ uinfo_dict.id }}/profile/edit/">编辑个人资料</a>
-                                </div><!--end a left-cell-->
-                                {% endif %}
                                 <div class="left-cell font-11px border-bottom">
                                     <span>帮助：<a href="#">关于社区积分</a></span>
                                     <span class="right">>>>返回<a href="/">GearAnswer</a></span>

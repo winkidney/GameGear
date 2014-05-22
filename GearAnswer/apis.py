@@ -46,7 +46,6 @@ def get_uinfo(uid):
                       (_(u'Website'), user.website),
                       (_(u'Gears'), user.gears),
                       (_(u'Reputation'), user.reputation),
-                      (_(u'Created at'), user.created_at),
                       ),
                       'detail_dict' : {
                       'uid': user.id,

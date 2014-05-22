@@ -19,8 +19,7 @@
                                         {% else %}
                                             <img class="user-avatar" src="{{ static_url }}/answer/img/avatar.png"><br>
                                         {% endif %}
-                                            <span>修改头像：</span>
-                                            <input id="id_avatar" name="avatar" type="file">
+                                            <span>修改头像：</span><input id="id_avatar" name="avatar" type="file">
                                         {% if user_profile_form.errors %}
                                             <label class="width-8 block" >[用户名]<span class="error margin-l-10">{% if user_profile_form.errors.username %}{{ user_profile_form.errors.username }}{% endif %}</span></label>
                                             <label class="dark-bg white-text shadow-light width-98">{{ uinfo_dict.detail_dict.username }}</label><br> 
@@ -46,7 +45,7 @@
                                         {% endif %}
                                         </div>
                                         <input type="submit" class="black-gray-btn no-border radius-3 padding-5-10 margin-t-20 shadow-light" value="保存修改"/>
-                                        <a href="{{ answer_url }}" class="black-gray-btn no-border radius-3 padding-5-10 margin-t-20 shadow-light">放弃修改并返回</a>
+                                        <a href="{{ answer_url }}gear/{{ uinfo_dict.id }}/profile/" class="black-gray-btn no-border radius-3 padding-5-10 margin-t-20 shadow-light">放弃修改并返回</a>
                                     </form>
                                 </div><!--end a left-cell-->
 

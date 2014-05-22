@@ -157,6 +157,10 @@ h5{
 .width-90{
 	width: 90%;
 }
+
+.width-75{
+    width: 75%
+}
 .padding-bottom-5{
     padding: 0 0 5px 0;
 }
