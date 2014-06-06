@@ -11,6 +11,8 @@ import uuid
 from UCenter.apis import create_user
 from UCenter.apis import user_exist,email_exist
 
+from GearAnswer.apis import update_avatar,update_node
+
 class CleanErrorList(ErrorList):
     def __unicode__(self):
         if not self:
@@ -52,8 +54,18 @@ class RegisterForm(forms.Form):
                     self.cleaned_data["password1"],
                     self.cleaned_data.get('email')
                     )
+        
 class NewTopicForm(forms.Form):
-    pass
+    """Because of the auto-tag function,
+       the tag field now does not exist.
+    """
+    title = forms.CharField(required=True, max_length=250)
+    editor = forms.ChoiceField(required=True)
+    content_md = forms.CharField(required=False)
+    content_ue = forms.CharField(required=False)
+    #tag = forms.CharField(required=False)
+    
+
 
         
 class UserProfileForm(forms.Form):

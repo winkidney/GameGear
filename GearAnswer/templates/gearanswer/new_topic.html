@@ -13,20 +13,21 @@
                                 <div class="left-cell font-11px">
                                     <form id="reply-to" action="/" method="POST">
                                         <div class="border-bottom padding-bottom-5">
-                                            <input type="hidden" name="topic-id" value="topic-id-1245623"></input>
+                                            {% csrf_token %}
                                             <label class="width-8 block">>>>文章标题</label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="标题" placeholder="title"></input><br>
-                                            <label class="width-8 block">>>>标签</label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="标题" placeholder="使用英文逗号隔开"></input><br>
+                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="title" placeholder="title"></input><br>
+                                            <!--label class="width-8 block">>>>标签</label>
+                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="tag" placeholder="使用英文逗号隔开"></input><br-->
+                                            <label class="width-8 block">>>>正文</label>
                                             <span>&nbsp;UEditor</span>
                                             <input id="use-ueditor" type="radio" name="editor" value="ueditor"></input>
                                             <span>MarkDown</span>
                                             <input id="use-markdown" type="radio" name="editor" value="markdown"></input><br/>
                                             <div id="div-ue">
-                                                <textarea  name="comment-ue" style="height:250px;" id="editor-ue"></textarea>
+                                                <textarea  name="content_ue" style="height:250px;" id="editor-ue"></textarea>
                                             </div>
                                             <div id="div-md">
-                                                <textarea  name="comment-md"  class="shadow-light radius-5" id="editor-md"></textarea>
+                                                <textarea  name="content_md"  class="shadow-light radius-5" id="editor-md"></textarea>
                                             </div>
                                         </div>
                                         <input type="submit" class="white-gray-btn no-border radius-3 submit-comment" value="提交回复"/>
@@ -56,3 +57,6 @@
 {% block hot_post %}{% endblock %}
 {% block new_nodes %}{% endblock %}
 {% block hot_nodes %}{% endblock %}
+{% block extra_js %}
+    <script type="text/javascript" charset="utf-8" src="{{ static_url }}/answer/js/editor.js"></script>
+{% endblock %}

@@ -13,6 +13,7 @@ def create_user(username, password, email):
     return user
 
 def user_exist(username):
+    "check if a user exists by its name."
     try:
         User.objects.get(name=username)
         return True
@@ -30,6 +31,14 @@ def email_exist(email):
         User.objects.get(email=email)
         return True
     except models.Model.DoesNotExist:
+        return False
+    
+def uid_exist(uid):
+    "check if a user exists by its user id."
+    try:
+        User.objects.get(id=uid)
+        return True
+    except:
         return False
     
 def get_user(request):

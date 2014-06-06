@@ -9,11 +9,13 @@ from django.core.exceptions import PermissionDenied
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.contrib.auth import (authenticate, login, logout)
+from django.db import transaction
 
 from UCenter.models import User
 from UCenter.apis import user_exist,logined
-from GearAnswer.forms import RegisterForm,LoginForm,UserProfileForm,CleanErrorList
-from GearAnswer.apis import render_template,Info,get_uinfo
+from GearAnswer.forms import (RegisterForm,LoginForm,UserProfileForm,
+                              CleanErrorList,NewTopicForm)
+from GearAnswer.apis import render_template,Info,get_uinfo,update_topic
 
 
 ROOT_URL = '/'
@@ -130,8 +132,11 @@ def node_view(request, *args, **kwargs):
                               locals(),
                               )
         
-
+@transaction.commit_on_success
 def new_topic_view(request, *args, **kwargs):
+    if request.method == "POST":
+        
+        update_topic(title, content, node, uid)
     
     return render_template(request, 'gearanswer/new_topic.html',
                               locals(),

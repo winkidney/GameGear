@@ -6,8 +6,8 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import  ObjectDoesNotExist
 from UCenter.models import User
-
 
     
 class Node(models.Model):
@@ -17,15 +17,16 @@ class Node(models.Model):
         verbose_name_plural = _(u'topic node manager')
         verbose_name = _(u'topic node manager')
       
-    name = models.CharField(max_length=100, blank=False, verbose_name=_(u'node name'))
-    node_img = models.CharField(max_length=250, verbose_name=_(u"node image path"))
+    name = models.CharField(unique=True, max_length=100, blank=False, verbose_name=_(u'node name'))
+    avatar = models.ImageField(upload_to='nodes/', verbose_name=_(u'node avatar'))
     description = models.TextField(verbose_name=_(u'node description'))
-    q_count = models.IntegerField(blank=False, verbose_name=_(u'topic count'))
-    parent = models.ForeignKey('Node', verbose_name=_(u"child-nodes"))
+    q_count = models.IntegerField(default=0, blank=False, verbose_name=_(u'topic count'))
+    parent = models.ForeignKey('Node', default=0, blank=False, verbose_name=_(u"parent-node"))
     
     def __unicode__(self):
         
         return self.name
+
 
 class Tag(models.Model):
     
@@ -67,8 +68,8 @@ class Topic(models.Model):
     useless = models.IntegerField(blank=False, default=0, verbose_name=_(u'useless'))
     view_times = models.IntegerField(blank=False, default=0, verbose_name=_(u'view times'))
     #answers = models.ManyToManyField(Answer, blank=True, verbose_name=_(u'response to the topic'))
-    tags = models.ManyToManyField(Tag, blank=False, verbose_name=_(u'question tags'))
-    Node = models.ForeignKey(Node, blank=False, verbose_name=_(u'question type'))
+    tags = models.ManyToManyField(Tag, blank=False, verbose_name=_(u'topic tags'))
+    Node = models.ForeignKey(Node, blank=False, verbose_name=_(u'topic node'))
     
     def __unicode__(self):
         

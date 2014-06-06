@@ -16,6 +16,11 @@ else:
     os.environ['DJANGO_SETTINGS_MODULE'] = "gamegear.settings"
 
 from UCenter.models import User
+from GearAnswer.apis import update_node
+
+def add_default_node():
+    update_node('none', 
+                'system default node, if your node has no parent node ,set it to this node')
 
 def syncdb_with_su(su_name, su_email, su_passwd):
     # sync db
@@ -31,3 +36,4 @@ if __name__ == '__main__':
     if os.path.isfile('gamegear.db'):
         os.remove('gamegear.db')
     syncdb_with_su('admin', 'admin@admin.com','admin')
+    add_default_node()

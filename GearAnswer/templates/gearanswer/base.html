@@ -370,7 +370,9 @@
     
 
     
-    <script type="text/javascript" charset="utf-8" src="{{ static_url }}/answer/js/init.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ static_url }}/answer/js/lib.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ static_url }}/answer/js/render.js"></script>
+    {% block extra_js %}{% endblock %}
 </body>
 
 </html>
