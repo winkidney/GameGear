@@ -14,11 +14,13 @@ from django.db import transaction
 from UCenter.models import User
 from UCenter.apis import user_exist,logined
 from GearAnswer.forms import (RegisterForm,LoginForm,UserProfileForm,
-                              CleanErrorList,NewTopicForm)
-from GearAnswer.apis import render_template,Info,get_uinfo,update_topic
+                              clean_err_form,NewTopicForm)
+from GearAnswer.apis import render_template,Info,get_uinfo,update_topic,get_node
 
 
 ROOT_URL = '/'
+
+
 
 def test_view(request):
     print request.LANGUAGE_CODE
@@ -131,13 +133,41 @@ def node_view(request, *args, **kwargs):
     return render_template(request, 'gearanswer/node.html',
                               locals(),
                               )
-        
+
+@login_required(login_url=ROOT_URL+'login/')      
 @transaction.commit_on_success
-def new_topic_view(request, *args, **kwargs):
+def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
     if request.method == "POST":
-        
-        update_topic(title, content, node, uid)
-    
+        topic_form = clean_err_form(NewTopicForm, 
+                                    request.POST, 
+                                    )
+        if topic_form.is_valid():
+            editor = topic_form.cleaned_data.get('editor')
+            if editor == 'ue':
+                topic_content = topic_form.cleaned_data.get('content_ue')
+            elif editor == 'md':
+                topic_content = topic_form.cleaned_data.get('content_md')
+            else:
+                raise PermissionDenied
+            if new_topic:
+                topic = update_topic(topic_form.cleaned_data.get('title'),
+                         editor,
+                         topic_content, 
+                         node_name, 
+                         request.user.id, 
+                         )
+            
+                title = _(u"Topic published!")
+                content = _(u"Now you will be rediected to your topic page.")
+                redirect_url = topic.get_abs_url()
+                    
+                info = Info(title, content, redirect_url)
+                return render_template(request, 'gearanswer/info.html',
+                                            locals(),
+                                            )
+            
+    elif request.method == "GET":
+        pass
     return render_template(request, 'gearanswer/new_topic.html',
                               locals(),
                               )
@@ -176,7 +206,9 @@ def user_profile_edit_view(request, uid, *args, **kwargs):
     if request.method == 'GET':
         pass
     elif request.method == 'POST':
-        user_profile_form = UserProfileForm(request.POST, request.FILES, error_class=CleanErrorList)
+        user_profile_form = clean_err_form(UserProfileForm, 
+                                           request.POST, 
+                                           request.FILES)
         if user_profile_form.is_valid():
             user = User.objects.get(id=uid)
             user_profile_form.save_data(user, request)

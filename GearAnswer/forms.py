@@ -12,12 +12,16 @@ from UCenter.apis import create_user
 from UCenter.apis import user_exist,email_exist
 
 from GearAnswer.apis import update_avatar,update_node
+from GearAnswer.models import EDITOR_TYPES
 
 class CleanErrorList(ErrorList):
     def __unicode__(self):
         if not self:
             return u''
         return u'%s' % ''.join('%s' % e for e in self)
+    
+def clean_err_form(form_obj, *args, **kwargs):
+    return form_obj(*args, error_class=CleanErrorList, **kwargs)
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=250, required=True)
@@ -60,7 +64,7 @@ class NewTopicForm(forms.Form):
        the tag field now does not exist.
     """
     title = forms.CharField(required=True, max_length=250)
-    editor = forms.ChoiceField(required=True)
+    editor = forms.ChoiceField(required=True,choices=EDITOR_TYPES)
     content_md = forms.CharField(required=False)
     content_ue = forms.CharField(required=False)
     #tag = forms.CharField(required=False)

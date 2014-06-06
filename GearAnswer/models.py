@@ -9,6 +9,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import  ObjectDoesNotExist
 from UCenter.models import User
 
+EDITOR_TYPES = (
+    ('md', _(u'markdown editor')),
+    ('ue', _(u'ueditor')),
+)
     
 class Node(models.Model):
     
@@ -57,6 +61,11 @@ class Topic(models.Model):
                              db_index=True,
                              verbose_name=_(u'question title'))
     content = models.TextField(blank=False, verbose_name=_(u'topic content'))
+    editor = models.CharField(max_length=5,
+                              blank=False,
+                              default='md',
+                              choices=EDITOR_TYPES,verbose_name=_(u'topic type')
+                              )
     author = models.ForeignKey(User, blank=False, verbose_name=_(u'topic author'))
     answer_count = models.IntegerField(blank=False, default=0, verbose_name=_(u'reply count'))
     
@@ -69,7 +78,10 @@ class Topic(models.Model):
     view_times = models.IntegerField(blank=False, default=0, verbose_name=_(u'view times'))
     #answers = models.ManyToManyField(Answer, blank=True, verbose_name=_(u'response to the topic'))
     tags = models.ManyToManyField(Tag, blank=False, verbose_name=_(u'topic tags'))
-    Node = models.ForeignKey(Node, blank=False, verbose_name=_(u'topic node'))
+    node = models.ForeignKey(Node, blank=False, verbose_name=_(u'topic node'))
+    
+    def get_abs_url(self):
+        return """/articles/%s/""" % self.id
     
     def __unicode__(self):
         

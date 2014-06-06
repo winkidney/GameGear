@@ -10,7 +10,7 @@ import logging
 
 from UCenter.models import User
 from GearAnswer.models import Topic,Node
-
+from UCenter.apis import get_user_by_id
 def get_node(node_name):
     "Get a Node object by its name,return Node instance if successfully done,False if failed"
     try:
@@ -19,6 +19,15 @@ def get_node(node_name):
         logging.warn("Node object [%s] does not existed!" % node_name)
         return False
     return node
+
+def get_topic(topic_id):
+    "Get a Topic object by its id,return Node instance if successfully done,False if failed"
+    try:
+        topic = Topic.objects.get(id=topic_id)
+    except ObjectDoesNotExist:
+        logging.warn("Topic object [%s] does not existed!" % topic_id)
+        return False
+    return topic
 
 def update_avatar(avatar, avatar_file):
     """ avatar is a models.ImageField instance,
@@ -59,16 +68,24 @@ def update_node(name, description, node_avatar=None, pnode=None, avatar=None):
     
     
     
-def update_topic(title, content, node, uid):    #to do
+def update_topic(title, editor, content, node_name, uid, topic_id=None):    #to do
     """ create_topic(unicode title, unicode topic, unicode node, int uid)
-        return True if success, an error will be raised if fail by detail.
+        Update a topic while create a new topic if the topic_id is given.
+        return Topic instance if success, an error will be raised if fail by detail.
     """
-    topic = Topic()
-    topic.author = User.objects.get(id=uid)
+    if topic_id:
+        topic = get_topic(topic_id)
+    else:
+        topic = None
+    if not topic:
+        topic = Topic()
+    topic.author = get_user_by_id(uid)
     topic.title = title
-    topic.conent = content
+    topic.editor = editor
+    topic.content = content
+    topic.node = get_node(node_name)
     topic.save()
-    return True
+    return topic
 
 def render_template(request, template, data=None):
     "Wrapper around render_to_response that fills in context_instance for you."
@@ -83,6 +100,10 @@ class Info(object):
         self.title = title
         self.content = content
         self.redirect_url = redirect_url
+def is_topic_owner(request, topic_id):    
+    if request.id == get_topic.author.id:
+        return True
+    return False
 
 def get_uinfo(uid):
     """get user info by request object,

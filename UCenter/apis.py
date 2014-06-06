@@ -19,6 +19,12 @@ def user_exist(username):
         return True
     except:
         return False
+    
+def get_user_by_id(uid):
+    try:
+        return User.objects.get(id=uid) 
+    except:
+        return False
 
 def logined(request):
     if request.user.is_authenticated():
