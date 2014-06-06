@@ -1,6 +1,7 @@
 #coding:utf-8
 #GearAnswer/apis.py - api collections of the site.
 #ver 0.1 - by winkidney - 2014.05.13
+
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _

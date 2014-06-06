@@ -52,6 +52,9 @@ class RegisterForm(forms.Form):
                     self.cleaned_data["password1"],
                     self.cleaned_data.get('email')
                     )
+class NewTopicForm(forms.Form):
+    pass
+
         
 class UserProfileForm(forms.Form):
     avatar = forms.ImageField(required=False)

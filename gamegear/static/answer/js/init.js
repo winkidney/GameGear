@@ -17,26 +17,30 @@ function hideMDEditor() {
 /* Create both of the Editors and hide them
  * depend on the 'editor' value in the cookie.
  * The 'editor' is 'ue' or 'md'.
+ * The default editor is markdown editor.
  */
 function createEditors(){
+    // create editors and display one according to cookie
     $("#editor-md").pagedownBootstrap();
     UE.getEditor('editor-ue');
+
     if ($.cookie('editor') == "md"){
         setTimeout(function(){
-          $("#use-markdown").attr('checked','checked');
-        },10);
-        hideUEditor();
-    }
-    else{
-    setTimeout(function(){
           $("#use-ueditor").attr('checked','checked');
         },10);
         hideMDEditor();
         $.cookie('editor', 'ue');
+    }
+    else{
+        setTimeout(function(){
+          $("#use-markdown").attr('checked','checked');
+        },10);
+        hideUEditor();
     } 
     $(".wmd-preview").hide();
         
 }
+// Rendering all the elements contains md-render class.
 function md_render(){
     var converter = new Showdown.converter({ extensions: ['github'] });
     $(".md-render").each(function(){
