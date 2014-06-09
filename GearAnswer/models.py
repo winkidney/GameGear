@@ -60,14 +60,14 @@ class Topic(models.Model):
     title = models.CharField(max_length=250, blank=False, 
                              db_index=True,
                              verbose_name=_(u'question title'))
-    content = models.TextField(blank=False, verbose_name=_(u'topic content'))
+    content = models.TextField(blank=True, verbose_name=_(u'topic content'))
     editor = models.CharField(max_length=5,
                               blank=False,
                               default='md',
                               choices=EDITOR_TYPES,verbose_name=_(u'topic type')
                               )
     author = models.ForeignKey(User, blank=False, verbose_name=_(u'topic author'))
-    answer_count = models.IntegerField(blank=False, default=0, verbose_name=_(u'reply count'))
+    reply_count = models.IntegerField(blank=False, default=0, verbose_name=_(u'reply count'))
     
     create_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
@@ -77,7 +77,7 @@ class Topic(models.Model):
     useless = models.IntegerField(blank=False, default=0, verbose_name=_(u'useless'))
     view_times = models.IntegerField(blank=False, default=0, verbose_name=_(u'view times'))
     #answers = models.ManyToManyField(Answer, blank=True, verbose_name=_(u'response to the topic'))
-    tags = models.ManyToManyField(Tag, blank=False, verbose_name=_(u'topic tags'))
+    tags = models.ManyToManyField(Tag, blank=True, verbose_name=_(u'topic tags'))
     node = models.ForeignKey(Node, blank=False, verbose_name=_(u'topic node'))
     
     def get_abs_url(self):

@@ -16,8 +16,7 @@ urlpatterns = patterns('',
     url(r'^register/$', views.register_view),
     
     url(r'^node/(\w*?)/$', views.node_view),
-    url(r'^(\w*?)/input/$', views.update_topic_view),
-    url(r'^reply/$', views.reply_view),
+    url(r'^node/(\w*?)/input/$', views.update_topic_view),
     url(r'^setbest/(\d)/$', views.set_best_view),
     url(r'^setuseless/(\d)/$', views.set_useless_view),
     url(r'^setuseful/(\d)/$', views.set_useful_view),
@@ -26,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^gear/(\d)/profile/messages/$', views.messages_view),
     
     url(r'^articles/(\d*?)/$', views.read_view),
+    url(r'^articles/(\d*?)/reply/$', views.reply_view),
     
     url(r'^test/$', views.test_view),
     

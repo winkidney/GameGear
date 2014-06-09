@@ -11,6 +11,7 @@ import logging
 from UCenter.models import User
 from GearAnswer.models import Topic,Node
 from UCenter.apis import get_user_by_id
+
 def get_node(node_name):
     "Get a Node object by its name,return Node instance if successfully done,False if failed"
     try:

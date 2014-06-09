@@ -15,7 +15,8 @@ from UCenter.models import User
 from UCenter.apis import user_exist,logined
 from GearAnswer.forms import (RegisterForm,LoginForm,UserProfileForm,
                               clean_err_form,NewTopicForm)
-from GearAnswer.apis import render_template,Info,get_uinfo,update_topic,get_node
+from GearAnswer.apis import (render_template,Info,get_uinfo,update_topic,
+                             get_node,get_topic,)
 
 
 ROOT_URL = '/'
@@ -128,8 +129,9 @@ def register_view(request, *args, **kwargs):
                                   locals(),
                                   )
     
-def node_view(request, *args, **kwargs):
-    
+def node_view(request, node_name, *args, **kwargs):
+    if not get_node(node_name):
+        raise Http404
     return render_template(request, 'gearanswer/node.html',
                               locals(),
                               )
@@ -137,7 +139,10 @@ def node_view(request, *args, **kwargs):
 @login_required(login_url=ROOT_URL+'login/')      
 @transaction.commit_on_success
 def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
+    if not get_node(node_name):
+        raise Http404
     if request.method == "POST":
+        #new topic processing
         topic_form = clean_err_form(NewTopicForm, 
                                     request.POST, 
                                     )
@@ -227,7 +232,9 @@ def messages_view(request, *args, **kwargs):
                               )  
     
 def read_view(request, article_id, *args, **kwargs):
-    
+    topic = get_topic(article_id)
+    if not topic:
+        raise Http404
     return render_template(request, 'gearanswer/read.html',
                               locals(),
                               )

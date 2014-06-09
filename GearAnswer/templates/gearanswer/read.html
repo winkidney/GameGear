@@ -3,62 +3,38 @@
                             <div class="left-box gray-bg topic-box radius-3 light-black-box-shadow ">
                                 <div class="left-cell gray-text ">
                                     <strong>
-                                        <a href="#" >GearAnswer</a>
+                                        <a href="#" >GameGear</a>
                                         >
-                                        <a href="#" >Python</a> 
+                                        <a href="#" >{{ topic.node.name }}</a> 
                                     </strong>
                                 </div><!--end a left-cell-->
                                 <div class="left-cell left-cell-title ">
-                                    <p>BeautifulSoup和lxml库在解析速度上的比较，为了让标题更长，嗯嗯……我特意加点字。</p>
+                                    <p class="">{{ topic.title }}</p>
                                 </div><!--end a left-cell-->
                                 
                                 <div class="left-cell border-bottom">
                                     <div id="voteit" class="topic-info">
                                         <p>
-                                            <a href="#">winkidney</a>
-                                            &nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20
-                                            &nbsp;&nbsp;&nbsp;查看次数&nbsp;50&nbsp;&nbsp;&nbsp;
-                                            <span><a href="#">回复&nbsp;</a>5&nbsp;<a>♥&nbsp;</a>10&nbsp;<a><a>有用&nbsp;</a>3&nbsp;<a><a>无用&nbsp;</a>0&nbsp;</span>
+                                            <a href="#">{{ topic.author.name }}</a>
+                                            &nbsp;&nbsp;&nbsp;发表于 {{ topic.create_at }}
+                                            &nbsp;&nbsp;&nbsp;查看次数&nbsp;{{ topic.viewed_times }}&nbsp;&nbsp;&nbsp;
+                                            <span><a href="#">回复&nbsp;</a>{{ topic.reply_count }}&nbsp;<a>♥&nbsp;</a>{{ topic.stars }}&nbsp;<a>
+                                                <a>有用&nbsp;</a>{{ topic.useful }}&nbsp;<a><a>无用&nbsp;</a>{{ topic.useless }}&nbsp;
+                                            </span>
                                         </p>
                                     </div>
                                 </div><!--end a left-cell-->
+                                {% if topic.content %}
                                 <div class="left-cell  div-read">
-                                    <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
-                                    <p>然后再来一p，这样应该ok</p>
-                                        <pre class="brush: python; toolbar: false;">
-def _get_pages(self, uid):
-    #return page_range from the user&#39;s first page
-    url = self.home_page_url % uid
-    milktea= 0
-    while milktea&lt; RETRY_TIMES: 
-        try:
-            result = self.weibo.opener.open(url, timeout = DEFAULT_TIMEOUT).read()
-            break
-        except socket.timeout as e:
-            milktea+= 1
-            print &quot;[%s][ERROR]:url open error of uid %s @ page number getter, tried %s times!\n Detail: %s&quot; % (time.ctime(), uid, milktea, e)</pre>
-                                    <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                    {% if topic.editor == 'md' %}
                                     <div class="md-render">
-###标题
-- 列表项
-- 列表项
-
-```python
-def get_page():
-    print "hello markdown"
-```
+{{ topic.content }}
                                     </div>
-                                    <div class="md-render">
-###标题2
-- 列表项
-- 列表项
-
-```python
-def get_page():
-    print "hello markdown"
-```
-                                    </div>
+                                    {% else %}
+                                        {{ topic.content }}
+                                    {% endif %}
                                 </div><!--end a left-cell-->
+                                {% endif %}
                             </div><!--end topic-box-->
 
                             <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
@@ -66,8 +42,8 @@ def get_page():
                                     <strong>
                                         <span>&nbsp;回复</span>
                                     </strong>
-                                    <a class="tag right black-gray-btn radius-5" href="#" >Python</a>
-                                    <a class="tag right black-gray-btn radius-5" href="#" >编程</a>
+                                    <a class="tag right black-gray-btn radius-5 padding-5" href="#" >Python</a>
+                                    <a class="tag right black-gray-btn radius-5 padding-5" href="#" >编程</a>
                                     <span class="right">标签：</span>
                                 </div><!--end a left-cell-->
 
@@ -116,8 +92,6 @@ def get_page():
                                         </div>
                                         <div class="topic-content div-read">
                                             <p>嗯……测试一下@<a class="qtip" title="这个用户无法查询">GearAnswer</a>，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
-                                            <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
-                                            <p>嗯……测试一下普通文字的间距，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
                                         </div><!--end div topic-content-->
                                     </div><!--end div topic-comment-right-->
                                     <div class="clear"></div>
@@ -182,4 +156,6 @@ def get_page():
                                 <div class="clear"></div>
                             </div><!--end side-box-->
 {% endblock right_box_extra %}
-
+{% block extra_js %}
+    <script type="text/javascript" charset="utf-8" src="{{ static_url }}/answer/js/editor.js"></script>
+{% endblock %}
