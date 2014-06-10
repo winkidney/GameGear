@@ -39,20 +39,31 @@
                                 {% endif %}
                             </div><!--end topic-box-->
 
+                        {% if replys %}
+                        
                             <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
+
                                 <div class="left-cell font-11px border-bottom">
                                     <strong>
                                         <span>&nbsp;回复</span>
                                     </strong>
-                                    <a class="tag right black-gray-btn radius-5 padding-5" href="#" >Python</a>
-                                    <a class="tag right black-gray-btn radius-5 padding-5" href="#" >编程</a>
+                                {% if topic.tags.exists %}
+                                    {% for tag in topic.tags.all %}
+                                        <a class="tag right black-gray-btn radius-5 padding-5" href="{{ tag.get_abs_url }}" >{{ tag.name }}</a>
+                                    {% endfor %}
                                     <span class="right">标签：</span>
+                                {% endif %}
                                 </div><!--end a left-cell-->
 
+                            {% for reply in replys %}
                                 <div id="comment-23412" class="left-cell border-bottom">
                                     <div class="topic-comment-left user-avatar left">
-                                        <a title="winkidney" href="#">
-                                            <img src="{{ static_url }}/answer/img/avatar.png" alt="winkidney">
+                                        <a title="{{ reply.author.name }}" href="#">
+                                            {% if reply.author.avatar %}
+                                            <img src="{{ reply.author.avatar.url }}" alt="{{ reply.author.name }}">
+                                            {% else %}
+                                            <img src="{{ static_url }}/answer/img/avatar.png" alt="{{ reply.author.name }}">
+                                            {% endif %}
                                         </a>
                                     </div>
                                     <div class="topic-comment-right left">
@@ -68,38 +79,17 @@
                                             </p>
                                         </div>
                                         <div class="topic-content div-read">
-                                            <p>嗯……测试一下@<a>GearAnswer</a>，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
+                                        {% autoescape off %}
+                                            {{ reply.content }}
+                                        {% endautoescape %}
                                         </div><!--end div topic-content-->
                                     </div><!--end div topic-comment-right-->
                                     <div class="clear"></div>
                                 </div><!--end a left-cell-->
-                                
-                                <div id="comment-23413" class="left-cell border-bottom">
-                                    <div class="topic-comment-left user-avatar left">
-                                        <a title="winkidney" href="#">
-                                            <img src="{{ static_url }}/answer/img/avatar.png" alt="winkidney">
-                                        </a>
-                                    </div>
-                                    <div class="topic-comment-right left">
-                                        <div class="comment-info border-bottom gray-text">
-                                            <p>
-                                                <span class="right">采纳为最佳答案&nbsp;&nbsp;<a>√</a></span>
-                                                <span class="right"><a>这个回复对我有用&nbsp;</a>3&nbsp;</span>
-                                                <span class="right"><a>这个回复毫无意义&nbsp;</a>0&nbsp;</span>
-                                                <span class="left">2楼&nbsp;&nbsp;</span>
-                                                <span class="left"><a href="#">winkidney</a></span>
-                                                <span class="left">&nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20</span>
-                                                <p class="clear"></p>
-                                            </p>
-                                        </div>
-                                        <div class="topic-content div-read">
-                                            <p>嗯……测试一下@<a class="qtip" title="这个用户无法查询">GearAnswer</a>，这种形式就ok了，传入一个url，传入一个异常处理函数，传入一个失败后的处理函数，可以节省很多重复代码而且可以很方便的修改。</p>
-                                        </div><!--end div topic-content-->
-                                    </div><!--end div topic-comment-right-->
-                                    <div class="clear"></div>
-                                </div><!--end a left-cell-->
+                            {% endfor %}
 
                             </div><!--end reply-box-->
+                        {% endif %}
 
 
                             <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">

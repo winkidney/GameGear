@@ -16,7 +16,8 @@ from UCenter.apis import user_exist,logined
 from GearAnswer.forms import (RegisterForm,LoginForm,UserProfileForm,
                               clean_err_form,NewTopicForm)
 from GearAnswer.apis import (render_template,Info,get_uinfo,update_topic,
-                             get_node,get_topic,)
+                             get_node,get_topic,get_replys,
+                             )
 
 
 ROOT_URL = '/'
@@ -234,7 +235,9 @@ def messages_view(request, *args, **kwargs):
                               )  
     
 def read_view(request, article_id, *args, **kwargs):
+    article_id = int(article_id)
     topic = get_topic(article_id)
+    replys = get_replys(article_id)
     if not topic:
         raise Http404
     return render_template(request, 'gearanswer/read.html',

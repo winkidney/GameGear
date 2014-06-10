@@ -43,6 +43,10 @@ class Tag(models.Model):
     name = models.CharField(max_length=100, blank=False, verbose_name=_(u'tag name'))
     q_count = models.IntegerField(blank=False, verbose_name=_(u'question count'))
     
+    
+    def get_abs_url(self):
+        return """/tags/%s/""" % self.name
+    
     def __unicode__(self):
         
         return self.name

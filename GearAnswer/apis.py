@@ -10,7 +10,7 @@ from django.core.exceptions import  ObjectDoesNotExist
 import logging
 
 from UCenter.models import User
-from GearAnswer.models import Topic,Node
+from GearAnswer.models import Topic,Node,Reply
 from UCenter.apis import get_user_by_id
 
 def remove_xss_tags(html):
@@ -34,6 +34,15 @@ def get_topic(topic_id):
         logging.warn("Topic object [%s] does not existed!" % topic_id)
         return False
     return topic
+
+def get_replys(topic_id):
+    """ Get a topic's reply by topic id.
+        Return a list contains query result.
+        if topic id is not a int , raise a type error.
+    """
+    if not isinstance(topic_id, int):
+        raise TypeError,"Local var topic id %s is not a int instance" % topic_id
+    return Reply.objects.filter(topic_id=1)
 
 def update_avatar(avatar, avatar_file):
     """ avatar is a models.ImageField instance,
