@@ -25,6 +25,7 @@
                                     </div>
                                 </div><!--end a left-cell-->
                                 {% if topic.content %}
+                                {% autoescape off %}
                                 <div class="left-cell  div-read">
                                     {% if topic.editor == 'md' %}
                                     <div class="md-render">
@@ -34,6 +35,7 @@
                                         {{ topic.content }}
                                     {% endif %}
                                 </div><!--end a left-cell-->
+                                {% endautoescape %}
                                 {% endif %}
                             </div><!--end topic-box-->
 

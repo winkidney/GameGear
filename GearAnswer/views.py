@@ -24,14 +24,14 @@ ROOT_URL = '/'
 
 
 def test_view(request):
-    print request.LANGUAGE_CODE
+    #todo
     return HttpResponse(_(u"You have already logined!"))
 def home_view(request):
     return render_template(request, 'gearanswer/base.html',
                               locals(),
                               )
 def tab_view(request, tab_id, *args, **kwargs):
-    
+    #todo
     return render_template(request, 'gearanswer/tab.html',
                               locals(),
                               )
@@ -130,11 +130,13 @@ def register_view(request, *args, **kwargs):
                                   )
     
 def node_view(request, node_name, *args, **kwargs):
+    #todo
     if not get_node(node_name):
         raise Http404
     return render_template(request, 'gearanswer/node.html',
                               locals(),
                               )
+
 
 @login_required(login_url=ROOT_URL+'login/')      
 @transaction.commit_on_success
@@ -178,22 +180,22 @@ def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
                               )
 
 def reply_view(request, *args, **kwargs):
-    
+    #todo
     return HttpResponse('reply success')
 
 def set_best_view(request, *args, **kwargs):
+    #todo
     return HttpResponse('set best success')
 
 def set_useless_view(request, *args, **kwargs):
-    
+    #todo
     return HttpResponse('set useful success')
 
 def set_useful_view(request, *args, **kwargs):
-    
+    #todo
     return HttpResponse('set useless success')
 
 def user_profile_view(request, uid, *args, **kwargs):
-    
     uinfo_dict = get_uinfo(uid)
     if not uinfo_dict:
         raise Http404
@@ -226,7 +228,7 @@ def user_profile_edit_view(request, uid, *args, **kwargs):
                               locals(),
                               )
 def messages_view(request, *args, **kwargs):
-    
+    #todo
     return render_template(request, 'gearanswer/messages.html',
                               locals(),
                               )  

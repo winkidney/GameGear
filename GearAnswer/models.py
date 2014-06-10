@@ -18,8 +18,8 @@ class Node(models.Model):
     
     """Question Node ,the same topic Type"""
     class Meta:
-        verbose_name_plural = _(u'topic node manager')
-        verbose_name = _(u'topic node manager')
+        verbose_name_plural = _(u'topic node')
+        verbose_name = _(u'topic node ')
       
     name = models.CharField(unique=True, max_length=100, blank=False, verbose_name=_(u'node name'))
     avatar = models.ImageField(upload_to='nodes/', verbose_name=_(u'node avatar'))
@@ -54,8 +54,8 @@ class Topic(models.Model):
     """Topic that contains enough info"""
     
     class Meta:
-        verbose_name_plural = _(u"topic manager")
-        verbose_name = _(u"topic manager")
+        verbose_name_plural = _(u"topics")
+        verbose_name = _(u"topic")
         
     title = models.CharField(max_length=250, blank=False, 
                              db_index=True,
@@ -92,26 +92,30 @@ class Reply(models.Model):
     """Answer for Question"""
     
     class Meta:
-        verbose_name_plural = _(u"reply manager")
-        verbose_name = _(u"reply manager")
-        
+        verbose_name_plural = _(u"replys")
+        verbose_name = _(u"reply")
+    
+    editor = models.CharField(max_length=5,
+                              blank=False,
+                              default='md',
+                              choices=EDITOR_TYPES,verbose_name=_(u'editor')
+                              )    
     content = models.TextField(blank=False, verbose_name=_(u'reply content'))
     author = models.ForeignKey(User, blank=False, 
                                db_index=True,
                                verbose_name=_(u'reply author'))
     is_best = models.BooleanField(default=False, verbose_name=_(u'is right answer'))
     useful = models.IntegerField(blank=False, default=0, verbose_name=_(u'useful'))
-    
     useless = models.IntegerField(blank=False, default=0, verbose_name=_(u'useless'))
     
-    topic = models.ForeignKey(Topic)
+    topic = models.ForeignKey(Topic,blank=False,verbose_name=_(u'topic'))
     
     create_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
     
     def __unicode__(self):
         
-        return self.id
+        return u'%s - %s' %(self.id, self.topic.title)
 
 #settings start
 class Nav(models.Model):

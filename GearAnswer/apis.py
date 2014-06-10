@@ -2,6 +2,7 @@
 #GearAnswer/apis.py - api collections of the site.
 #ver 0.1 - by winkidney - 2014.05.13
 
+from django.utils.html import remove_tags
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
@@ -11,6 +12,10 @@ import logging
 from UCenter.models import User
 from GearAnswer.models import Topic,Node
 from UCenter.apis import get_user_by_id
+
+def remove_xss_tags(html):
+    """"escape the specified html tags from user's content"""
+    return remove_tags(html, 'script html body')
 
 def get_node(node_name):
     "Get a Node object by its name,return Node instance if successfully done,False if failed"
@@ -83,7 +88,7 @@ def update_topic(title, editor, content, node_name, uid, topic_id=None):    #to 
     topic.author = get_user_by_id(uid)
     topic.title = title
     topic.editor = editor
-    topic.content = content
+    topic.content = remove_xss_tags(content)
     topic.node = get_node(node_name)
     topic.save()
     return topic
@@ -146,5 +151,6 @@ def get_uinfo(uid):
                       'id': int(uid),
                       }
     return user_info_dict
-    
+
+  
 

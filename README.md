@@ -12,9 +12,9 @@ Now building.
 > Views Porcessing.  -  10% done.
 
 > register and login/logout - done    
-> user profile - processing - done
-> new topic view - done
-> new node api - done.
-> edit topic view - todo
+> user profile - processing - done    
+> new topic view - done    
+> new node api - done    
+> edit topic view - todo    
 > read view - 50% done
 
