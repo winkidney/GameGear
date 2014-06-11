@@ -42,8 +42,18 @@ def get_replys(topic_id):
     """
     if not isinstance(topic_id, int):
         raise TypeError,"Local var topic id %s is not a int instance" % topic_id
-    return Reply.objects.filter(topic_id=1)
+    return Reply.objects.filter(topic_id=topic_id)
 
+def get_reply(reply_id):
+    "Get a reply by its id.Return None if not exists."
+    try:
+        reply = Reply.objects.get(id=reply_id)
+    except ObjectDoesNotExist:
+        logging.warn("Reply object [%s] does not existed!" % reply_id)
+        return None
+    return reply
+    
+    
 def update_avatar(avatar, avatar_file):
     """ avatar is a models.ImageField instance,
         avatar_file is the file object from html form's file-input-filed.
@@ -102,6 +112,24 @@ def update_topic(title, editor, content, node_name, uid, topic_id=None):    #to 
     topic.save()
     return topic
 
+def update_reply(content, article_id, uid, reply_id=None):
+    """ Create or update a reply.
+        update_reply(unicode content,int article_id, int uid, int reply_id)
+        If reply id does not exist,the function will create a new one.
+    """
+    if isinstance(article_id, int):
+        raise TypeError, "article_id %s is not a int object" % article_id
+    if reply_id:
+        if isinstance(reply_id, int):
+            raise TypeError, "reply_id %s is not a int object" % article_id
+        reply = get_reply(reply_id)
+    else:
+        reply = Reply(content=content,
+                      topic=Topic.objects.get(id=article_id),
+                      author=User.objects.get(id=uid)
+                      )
+        reply.save()
+    
 def render_template(request, template, data=None):
     "Wrapper around render_to_response that fills in context_instance for you."
     response = render_to_response(template, data,

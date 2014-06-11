@@ -14,9 +14,10 @@ from django.db import transaction
 from UCenter.models import User
 from UCenter.apis import user_exist,logined
 from GearAnswer.forms import (RegisterForm,LoginForm,UserProfileForm,
-                              clean_err_form,NewTopicForm)
+                              clean_err_form,NewTopicForm,
+                              ReplyFrom)
 from GearAnswer.apis import (render_template,Info,get_uinfo,update_topic,
-                             get_node,get_topic,get_replys,
+                             get_node,get_topic,get_replys,update_reply,
                              )
 
 
@@ -179,10 +180,30 @@ def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
     return render_template(request, 'gearanswer/new_topic.html',
                               locals(),
                               )
-
-def reply_view(request, *args, **kwargs):
-    #todo
-    return HttpResponse('reply success')
+@login_required(login_url=ROOT_URL+'login/')
+@transaction.commit_on_success
+def reply_view(request, article_id, *args, **kwargs):
+    #to be change
+    topic = get_topic(article_id)
+    if not topic:
+        raise Http404
+    if request.method == 'POST':
+        reply_form = clean_err_form(ReplyFrom, request.POST)
+        if reply_form.is_valid() and reply_form.check_value():
+            rfd = reply_form.cleaned_data.get
+            if rfd('editor') == 'md':
+                content = rfd('comment_md')
+            elif rfd('editor') == 'ue':
+                content = rfd('comment_ue')
+            else:
+                raise ValueError, "editor type is required!"
+            update_reply(content,
+                         article_id, 
+                         request.user.id, 
+                         )
+            return HttpResponse('reply success')
+        else:
+            HttpResponse('error')
 
 def set_best_view(request, *args, **kwargs):
     #todo
@@ -238,6 +259,7 @@ def read_view(request, article_id, *args, **kwargs):
     article_id = int(article_id)
     topic = get_topic(article_id)
     replys = get_replys(article_id)
+    reply_count = len(replys)
     if not topic:
         raise Http404
     return render_template(request, 'gearanswer/read.html',

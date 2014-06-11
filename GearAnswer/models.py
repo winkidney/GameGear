@@ -98,6 +98,8 @@ class Reply(models.Model):
     class Meta:
         verbose_name_plural = _(u"replys")
         verbose_name = _(u"reply")
+        get_latest_by = "-create_at"
+        ordering = ['create_at']
     
     editor = models.CharField(max_length=5,
                               blank=False,

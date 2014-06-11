@@ -17,16 +17,16 @@
                                         <p>
                                             <a href="#">{{ topic.author.name }}</a>
                                             &nbsp;&nbsp;&nbsp;发表于 {{ topic.create_at }}
-                                            &nbsp;&nbsp;&nbsp;查看次数&nbsp;{{ topic.viewed_times }}&nbsp;&nbsp;&nbsp;
-                                            <span><a href="#">回复&nbsp;</a>{{ topic.reply_count }}&nbsp;<a>♥&nbsp;</a>{{ topic.stars }}&nbsp;<a>
-                                                <a>有用&nbsp;</a>{{ topic.useful }}&nbsp;<a><a>无用&nbsp;</a>{{ topic.useless }}&nbsp;
+                                            &nbsp;&nbsp;&nbsp;点击&nbsp;{{ topic.view_times }}&nbsp;&nbsp;&nbsp;
+                                            <span><a href="#">回复&nbsp;</a>{{ topic.reply_count }}&nbsp;<a>收藏&nbsp;</a>{{ topic.stars }}&nbsp;<a>
+                                                <a>感谢&nbsp;</a>{{ topic.useful }}&nbsp;<a><a>无用&nbsp;</a>{{ topic.useless }}&nbsp;
                                             </span>
                                         </p>
                                     </div>
                                 </div><!--end a left-cell-->
                                 {% if topic.content %}
                                 {% autoescape off %}
-                                <div class="left-cell  div-read">
+                                <div class="left-cell deep-bg border-bottom div-read">
                                     {% if topic.editor == 'md' %}
                                     <div class="md-render">
 {{ topic.content }}
@@ -37,6 +37,7 @@
                                 </div><!--end a left-cell-->
                                 {% endautoescape %}
                                 {% endif %}
+                                
                             </div><!--end topic-box-->
 
                         {% if replys %}
@@ -45,7 +46,7 @@
 
                                 <div class="left-cell font-11px border-bottom">
                                     <strong>
-                                        <span>&nbsp;回复</span>
+                                        <span>{{ reply_count }}&nbsp;回复</span>
                                     </strong>
                                 {% if topic.tags.exists %}
                                     {% for tag in topic.tags.all %}
@@ -56,7 +57,7 @@
                                 </div><!--end a left-cell-->
 
                             {% for reply in replys %}
-                                <div id="comment-23412" class="left-cell border-bottom">
+                                <div id="comment_{{ reply.id }}" class="left-cell border-bottom">
                                     <div class="topic-comment-left user-avatar left">
                                         <a title="{{ reply.author.name }}" href="#">
                                             {% if reply.author.avatar %}
@@ -66,21 +67,27 @@
                                             {% endif %}
                                         </a>
                                     </div>
-                                    <div class="topic-comment-right left">
-                                        <div class="comment-info border-bottom gray-text">
+                                    <div class="topic-comment-right left" id="comment-{{ reply.id }}">
+                                        <div  class="comment-info border-bottom gray-text">
                                             <p>
-                                                <span class="right">采纳为最佳答案&nbsp;&nbsp;<a>√</a></span>
-                                                <span class="right"><a>有帮助，谢谢&nbsp;</a>3&nbsp;</span>
-                                                <span class="right"><a>问题无意义&nbsp;</a>0&nbsp;</span>
-                                                <span class="left">1楼&nbsp;&nbsp;</span>
-                                                <span class="left"><a href="#">winkidney</a></span>
-                                                <span class="left">&nbsp;&nbsp;&nbsp;发表于 2014-04-12 12:20</span>
+                                                <span class="right">采纳为最佳答案&nbsp;&nbsp;<a href="">{% if not reply.best %}√{% endif %}</a></span>
+                                                <span class="right"><a href="">感谢回复者&nbsp;</a>{{ reply.useful }}&nbsp;</span>
+                                                <span class="right"><a href="">问题无意义&nbsp;</a>{{ reply.useless }}&nbsp;</span>
+                                                <span class="left">{{ forloop.counter }}楼&nbsp;&nbsp;</span>
+                                                <span class="left"><a href="#">{{ reply.author.name }}</a></span>
+                                                <span class="left">&nbsp;&nbsp;&nbsp;发表于 {{ reply.create_at }}</span>
                                                 <p class="clear"></p>
                                             </p>
                                         </div>
                                         <div class="topic-content div-read">
                                         {% autoescape off %}
-                                            {{ reply.content }}
+                                            {% if reply.editor == 'md' %}
+                                            <div class="md-render">
+{{ reply.content }}
+                                            </div>
+                                            {% else %}
+                                                {{ reply.content }}
+                                            {% endif %}
                                         {% endautoescape %}
                                         </div><!--end div topic-content-->
                                     </div><!--end div topic-comment-right-->
@@ -98,27 +105,24 @@
                                         <span>&nbsp;发表回复</span>
                                         <span class="right"><a href="#">&uarr;回顶部</a></span>
                                     </strong>
+                                    
                                 </div><!--end a left-cell-->
 
                                 <div class="left-cell font-11px">
-                                    <form id="reply-to" action="/" method="POST">
+                                    <form id="reply-to" action="reply/" method="POST">
                                         <div class="border-bottom padding-bottom-5">
-                                            <input type="hidden" name="topic-id" value="topic-id-1245623"></input>
-                                            <label class="width-8 block">>>>文章标题</label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="标题" placeholder="title"></input><br>
-                                            <label class="width-8 block">>>>节点</label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="标题" placeholder="选择+"></input><br>
-                                            <label class="width-8 block">>>>标签</label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="标题" placeholder="使用英文逗号隔开"></input><br>
+                                            {% csrf_token %}
+                                            <input id="reply_to" type="hidden" name="reply_to" value=""></input>
                                             <span>&nbsp;UEditor</span>
-                                            <input id="use-ueditor" type="radio" name="editor" value="ueditor"></input>
+                                            <input id="use-ueditor" type="radio" name="editor" value="ue"></input>
                                             <span>MarkDown</span>
-                                            <input id="use-markdown" type="radio" name="editor" value="markdown"></input><br/>
+                                            <input id="use-markdown" type="radio" name="editor" value="md"></input><br/>
+                                            <span class="right">帮助：<a href="#">MarkDown编辑器常见问题</a></span>
                                             <div id="div-ue">
-                                                <textarea  name="comment-ue" style="height:250px;" id="editor-ue"></textarea>
+                                                <textarea  name="comment_ue" style="height:250px;" id="editor-ue"></textarea>
                                             </div>
                                             <div id="div-md">
-                                                <textarea  name="comment-md"  class="shadow-light radius-5" id="editor-md"></textarea>
+                                                <textarea  name="comment_md"  class="shadow-light radius-5" id="editor-md"></textarea>
                                             </div>
                                         </div>
                                         <input type="submit" class="white-gray-btn no-border radius-3 submit-comment" value="提交回复"/>

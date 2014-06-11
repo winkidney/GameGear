@@ -81,7 +81,7 @@ class UserProfileForm(forms.Form):
     interests = forms.CharField(required=False)
     
     def save_data(self, user, request):
-        
+        #to change , use a api function to do the save job
         image = self.cleaned_data.get('avatar')
         
         if image:
@@ -96,3 +96,29 @@ class UserProfileForm(forms.Form):
         user.interests = self.cleaned_data.get('interests')
         user.save()
         
+class ReplyFrom(forms.Form):
+    "You must run check_value method to ensure the data is valid"
+    
+    reply_to = forms.CharField(required=False, max_length=10)
+    editor = forms.ChoiceField(required=True,choices=EDITOR_TYPES)
+    comment_md = forms.CharField(required=False)
+    comment_ue = forms.CharField(required=False)
+    
+    def check_value(self):
+        if self.cleaned_data.get('comment_%s' \
+                                 % self.cleaned_data.get('editor')):
+            return True
+        return False
+
+
+
+
+
+
+
+
+
+
+
+
+

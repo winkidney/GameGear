@@ -80,7 +80,7 @@
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
 
-, toolbars: [["fullscreen","source","undo","redo","insertunorderedlist","insertorderedlist","link","unlink","searchreplace","preview","insertimage","pagebreak","music","emotion","insertvideo","attachment","anchor","spechars","blockquote","insertcode","bold","italic","underline","fontborder","strikethrough","forecolor","backcolor","superscript","subscript","fontsize","inserttable","deletetable","mergeright","mergedown","splittorows","splittocols","mergecells","splittocells","charts","scrawl"]]
+, toolbars: [["bold","italic","insertunorderedlist","insertorderedlist","insertimage","scrawl","emotion","attachment","insertcode","source","undo","redo"]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
 //        ,labelMap:{
 //            'anchor':'', 'undo':''

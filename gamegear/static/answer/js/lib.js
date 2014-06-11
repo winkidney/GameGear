@@ -2,7 +2,7 @@
 function showUEditor() {
     $.cookie('editor',
          'ue',
-         {expires : 10}
+         {expires : 10 , path: '/'}
         );
     $("#div-ue").show();
 }
@@ -12,7 +12,7 @@ function hideUEditor() {
 function showMDEditor() {
      $.cookie('editor',
          'md',
-         {expires : 10}
+         {expires : 10 , path: '/'}
         );
     $("#div-md").show();
     $(".wmd-preview").hide();
@@ -30,19 +30,19 @@ function createEditors(){
     $("#editor-md").pagedownBootstrap();
     UE.getEditor('editor-ue');
 
-    if ($.cookie('editor') == "ue"){
-        setTimeout(function(){
-          $("#use-ueditor").attr('checked','checked');
-        },10);
-        hideMDEditor();
-        showUEditor();
-    }
-    else{
+    if ($.cookie('editor') == "md"){
         setTimeout(function(){
           $("#use-markdown").attr('checked','checked');
         },10);
         hideUEditor();
         showMDEditor();
+    }
+    else{
+        setTimeout(function(){
+          $("#use-ueditor").attr('checked','checked');
+        },10);
+        hideMDEditor();
+        showUEditor();
     } 
     $(".wmd-preview").hide();
         
