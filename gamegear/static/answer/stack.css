@@ -294,7 +294,7 @@ header a{
 /*start core-content*/
 #core-left{
     width: 73%;
-    min-height: 800px;
+    min-height: 600px;
 }
 #core-sidebar{
     width: 25%;
@@ -335,6 +335,7 @@ header a{
 .node-detail{
 	color: #C6C6C6;
 	width: 100%;
+    margin-bottom: 15px;
 }
 .topic-post{
 	border-bottom:solid 1px #666666;

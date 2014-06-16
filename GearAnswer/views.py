@@ -185,6 +185,9 @@ def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
 @transaction.commit_on_success
 def reply_view(request, article_id, *args, **kwargs):
     #to be change
+    if request.method == 'GET':
+        redirect_url = '/'.join(request.path.split('/')[:-2])
+        return HttpResponseRedirect(redirect_url)
     topic = get_topic(article_id)
     if not topic:
         raise Http404
@@ -198,9 +201,10 @@ def reply_view(request, article_id, *args, **kwargs):
                 content = rfd('comment_ue')
             else:
                 raise ValueError, "editor type is required!"
-            update_reply(content,
-                         article_id, 
-                         request.user.id, 
+            update_reply(rfd('editor'),
+                         content,
+                         int(article_id),
+                         int(request.user.id,) 
                          )
             return HttpResponse('reply success')
         else:

@@ -63,6 +63,8 @@ def update_avatar(avatar, avatar_file):
         [avatar_file] is the file object from html form's file-input-filed.
         If successfully updated, return True.
     """
+    #if not isinstance(avatar_file, ImageFile):
+    #    raise ValueError, 'avatar_file %s is not a InMemoryFile instance!' % avatar_file
     if avatar_file:     
         if avatar:
             avatar.delete()
@@ -98,8 +100,7 @@ def update_user(uid, avatar_file, profile_dict):
     user = get_user_by_id(uid)
     
     
-    #if not isinstance(avatar_file, ImageFile):
-    #    raise ValueError, 'avatar_file %s is not a InMemoryFile instance!' % avatar_file
+   
     for item in profile_dict.items():
         if item[0] != u'avatar':
             user.__setattr__(item[0], item[1])

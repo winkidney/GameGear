@@ -68,7 +68,7 @@
                     
                     <div id='info'>
                         <div id='info-warper'>
-                            <div id="logo" class="left"><a><img src="{{ static_url }}/answer/img/logos/gearanswer-red.png"/></a></div>
+                            <div id="logo" class="left"><a href="{{ answer_url }}"><img src="{{ static_url }}/answer/img/logos/gamegear.png"/></a></div>
                             <div id="info-detail" class="right">
                                 <ul id="intro" class="no-list-style">
                                     <li class="black-gray-btn left"><a title="" href="#">社区使用指南</a></li>
@@ -210,10 +210,10 @@
                                         <form  id="login-form" action="{{ answer_url }}login/" method="post">
                                             {% csrf_token %}
                                             <label>用户名:</label>
-                                            <input type="text" class="dark-bg white-text shadow-light font-11px" placeholder="" name="username" required maxlength="250" /><br>
+                                            <input type="text" class="clear-btn-style black-bg white-text   font-11px" placeholder="" name="username" required maxlength="250" /><br>
                                             <label>密码 ：</label>
-                                            <input type="password" class="dark-bg white-text shadow-light font-11px" placeholder="" name="password" required maxlength="20"/><br>
-                                            <input id="login-btn" class="clear-btn-style black-gray-btn shadow-light-no-ease" type="submit" value="登录"/>
+                                            <input type="password" class="black-bg white-text  clear-btn-style font-11px" placeholder="" name="password" required maxlength="20"/><br>
+                                            <input id="login-btn" class="clear-btn-style black-gray-btn shadow-light" type="submit" value="登录"/>
                                         </form>
                                     </div>
                                 </div><!--end a cell div-->
@@ -232,7 +232,7 @@
                             <div class="side-box light-black-box-shadow ">
                                 <div class="cell center">
                                     <div class="user-avatar left">
-                                        <a href="{{ answer_url }}gear/{{ current_user.id }}/profile/">
+                                        <a href="{{ answer_url }}gear/{{ current_user.id }}/profile/edit/">
                                         {% if current_user.avatar %}
                                             <img src="{{ current_user.avatar }}"/>
                                         {% else %}
@@ -240,7 +240,7 @@
                                         {% endif %}
                                         </a>
                                     </div>
-                                    <div class="username left"><a href="#">{{ current_user.username }}</a></div>
+                                    <div class="username left"><a href="{{ answer_url }}gear/{{ current_user.id }}/profile/">{{ current_user.username }}</a></div>
                                     <div class="clear"></div>
                                 </div><!--end a cell div-->
                                 <div class="cell center text-center gray-text border-bottom ">
