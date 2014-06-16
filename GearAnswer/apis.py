@@ -134,7 +134,12 @@ def update_node(name, description, node_avatar=None, pnode=None, avatar=None):
     node.save()
     return True
     
-    
+def update_view_times(topic):
+    if not isinstance(topic, Topic):
+        raise TypeError, "argument topic [%s] must be a Topic instance!" % topic
+    topic.view_times = topic.view_times + 1
+    topic.save()
+        
     
 def update_topic(title, editor, content, node_name, uid, topic_id=None):    #to do
     """ create_topic(unicode title, unicode topic, unicode node, int uid)
@@ -155,12 +160,13 @@ def update_topic(title, editor, content, node_name, uid, topic_id=None):    #to 
     topic.save()
     return topic
 
+
 def update_reply(editor, content, article_id, uid, reply_id=None):
     """ Create or update a reply.
         update_reply(unicode content,int article_id, int uid, int reply_id)
         If reply id does not exist,the function will create a new one.
     """
-    #tofix
+    #todo : add modify function
     if not isinstance(article_id, int):
         raise TypeError, "article_id %s is not a int object" % article_id
     if reply_id:

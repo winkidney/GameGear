@@ -3,7 +3,7 @@
                             <div class="left-box gray-bg topic-box radius-3 light-black-box-shadow ">
                                 <div class="left-cell gray-text ">
                                     <strong>
-                                        <a href="{{ answer_url }}" >GameGear</a>
+                                        <a href="{{ answer_url }}" >{{ site_name }}</a>
                                         &gt;
                                         <a href="{{ answer_url }}node/{{ topic.node.name }}/" >{{ topic.node.name }}</a> 
                                     </strong>
@@ -15,11 +15,11 @@
                                 <div class="left-cell border-bottom">
                                     <div id="voteit" class="topic-info">
                                         <p>
-                                            <a href="#">{{ topic.author.name }}</a>
+                                            <a href="{{ answer_url }}gear/{{ topic.author.id }}/profile/">{{ topic.author.name }}</a>
                                             <span>&nbsp;&nbsp;&nbsp;发表于 {{ topic.create_at }}</span>
                                             <span>&nbsp;&nbsp;&nbsp;点击&nbsp;{{ topic.view_times }}&nbsp;&nbsp;&nbsp;</span>
                                             <span>
-                                                <a href="#reply-topic">回复&nbsp;</a>{{ topic.reply_count }}&nbsp;
+                                                <a href="#reply-topic">回复&nbsp;</a>{{ reply_count }}&nbsp;
                                                 <a>收藏&nbsp;</a>{{ topic.stars }}&nbsp;
                                                 <a>感谢&nbsp;</a>{{ topic.useful }}&nbsp;
                                                 <a>无用&nbsp;</a>{{ topic.useless }}&nbsp;
@@ -65,7 +65,7 @@
                             {% for reply in replys %}
                                 <div id="comment_{{ reply.id }}" class="left-cell border-bottom">
                                     <div class="topic-comment-left user-avatar left">
-                                        <a title="{{ reply.author.name }}" href="#">
+                                        <a title="{{ reply.author.name }}" href="{{ answer_url }}gear/{{ reply.author.id }}/profile/">
                                             {% if reply.author.avatar %}
                                             <img src="{{ reply.author.avatar.url }}" alt="{{ reply.author.name }}">
                                             {% else %}
@@ -82,7 +82,7 @@
                                                 <span class="right"><a href="">感谢回复者&nbsp;</a>{{ reply.useful }}&nbsp;</span>
                                                 <span class="right"><a href="">问题无意义&nbsp;</a>{{ reply.useless }}&nbsp;</span>
                                                 <span class="left">{{ forloop.counter }}楼&nbsp;&nbsp;</span>
-                                                <span class="left"><a href="#">{{ reply.author.name }}</a></span>
+                                                <span class="left"><a href="{{ answer_url }}gear/{{ reply.author.id }}/profile/">{{ reply.author.name }}</a></span>
                                                 <span class="left">&nbsp;&nbsp;&nbsp;发表于 {{ reply.create_at }}</span>
                                                 <p class="clear"></p>
                                             </p>
@@ -143,7 +143,7 @@
 
                             </div><!--end left-box-->
 {% endblock left_box %}
-{% block site_echo %}{% endblock %}
+
 {% block hot_post %}{% endblock %}
 {% block new_nodes %}{% endblock %}
 {% block hot_nodes %}{% endblock %}

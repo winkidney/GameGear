@@ -1,9 +1,10 @@
 {% extends "gearanswer/base.html" %}
+{% block title %}修改用户信息 | {{ site_name }}{% endblock %}
 {% block left_box %}
                             <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
                                 <div class="left-cell gray-text ">
                                     <strong>
-                                        <a href="#" >GearAnswer</a>
+                                        <a href="{{ answer_url }}" >{{ site_name }}</a>
                                         &gt; 
                                         修改个人信息
                                     </strong>
@@ -51,7 +52,7 @@
 
                                 <div class="left-cell font-11px border-bottom">
                                     <span>帮助：<a href="#">关于社区积分</a></span>
-                                    <span class="right">>>>返回<a href="{{ answer_url }}">GearAnswer</a></span>
+                                    <span class="right">&gt;&gt;&gt;<a href="{{ answer_url }}">{{ site_name }}</a></span>
                                 </div><!--end a left-cell-->
                                 
                             </div><!--end left-box-->

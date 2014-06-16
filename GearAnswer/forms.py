@@ -65,6 +65,8 @@ class NewTopicForm(forms.Form):
     """
     title = forms.CharField(required=True, max_length=250)
     editor = forms.ChoiceField(required=True,choices=EDITOR_TYPES)
+    #todo : add user tag edit function
+    tags = forms.CharField(required=False,)
     content_md = forms.CharField(required=False)
     content_ue = forms.CharField(required=False)
     #tag = forms.CharField(required=False)

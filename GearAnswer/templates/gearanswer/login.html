@@ -1,10 +1,11 @@
 {% extends "gearanswer/base.html" %}
+{% block title %}登录 | {{ site_name }}{% endblock %}
 {% block left_box %}
                             <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
                                 <div class="left-cell gray-text ">
                                     <strong>
-                                        <a href="#" >GearAnswer</a>
-                                        > 
+                                        <a href="{{ answer_url }}" >{{ site_name }}</a>
+                                        &gt; 
                                         登录
                                     </strong>
                                 </div><!--end a left-cell-->
@@ -13,9 +14,9 @@
                                     <form id="reply-to" action="" method="POST">
                                         <div class=" padding-bottom-5">
                                             {% csrf_token %}
-                                            <label class="width-8 block">>>>用户名<span class="error margin-l-10">{% if login_form.errors.username %}{{ login_form.errors.username }}{% endif %}</span></label>
+                                            <label class="width-8 block">&gt;&gt;&gt;<span class="error margin-l-10">{% if login_form.errors.username %}{{ login_form.errors.username }}{% endif %}</span></label>
                                             <input value="{{ login_form.cleaned_data.username }}" required type="text" class="dark-bg white-text shadow-light width-98" name="username" placeholder="键入您的用户名" maxlength="250"></input><br>
-                                            <label class="width-8 block">>>>密码<span class="error margin-l-10">{% if login_form.errors.password %}{{ login_form.errors.password }}{% endif %}</span></label>
+                                            <label class="width-8 block">&gt;&gt;&gt;密码<span class="error margin-l-10">{% if login_form.errors.password %}{{ login_form.errors.password }}{% endif %}</span></label>
                                             <input required type="password" class="dark-bg white-text shadow-light width-98" name="password" placeholder="键入您的密码" maxlength="20"></input><br>
                                         </div>
                                         <input type="submit" class="black-gray-btn no-border radius-3 padding-5-10 margin-t-20 shadow-light" value="现在登录"/>
@@ -23,7 +24,7 @@
                                 </div><!--end a left-cell-->
                                 <div class="left-cell font-11px border-bottom">
                                     <span>帮助：<a href="#">关于社区积分</a></span>
-                                    <span class="right">>>>返回<a href="/">GearAnswer</a></span>
+                                    <span class="right">&gt;&gt;&gt;<a href="{{ answer_url }}">{{ site_name }}</a></span>
                                 </div><!--end a left-cell-->
                                 
                             </div><!--end left-box-->

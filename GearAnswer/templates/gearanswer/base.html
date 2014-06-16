@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cn" lang="cn">
 
 <head>
-    <title>GameGear| 游戏齿轮 - 独立游戏制作者们的社区</title>
+    <title>{% block title %}GameGear| 游戏齿轮 - 独立游戏制作者们的社区{% endblock %}</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" href="{{ static_url }}/answer/img/favicon.ico" />
     <!--jquery-ui-->
@@ -56,7 +56,7 @@
             {% else %}
                 <a href="{{ answer_url }}login/" class="left link">登录</a>
             {% endif %}
-                <a href="#" class="right">试试手气[]~(￣▽￣)~*</a><a class="clear"></a>
+                <a href="{{ answer_url }}random/" class="right">试试手气[]~(￣▽￣)~*</a><a class="clear"></a>
                 <form action="{{ answer_url }}search/" method="GET" class="right">
                     <input type="text" class="white-text shadow-light black-bg border-none" placeholder="搜索"/>
                     <input type="submit" style="display:none"/>
@@ -71,11 +71,14 @@
                             <div id="logo" class="left"><a href="{{ answer_url }}"><img src="{{ static_url }}/answer/img/logos/gamegear.png"/></a></div>
                             <div id="info-detail" class="right">
                                 <ul id="intro" class="no-list-style">
-                                    <li class="black-gray-btn left"><a title="" href="#">社区使用指南</a></li>
-                                    <li class="black-gray-btn left"><a title="" href="#">GearArt</a></li>
-                                    <li class="black-gray-btn left"><a title="" href="#">GearProjects</a></li>
-                                    <li class="black-gray-btn left"><a title="" href="#">回答问题</a></li>
-                                    <li class="black-gray-btn right"><a title="" href="#">发表主题</a></li>
+                                    <li class="black-gray-btn left"><a title="" href="{{ guide_url }}">社区使用指南</a></li>
+                                    <li class="black-gray-btn left"><a title="" href="{{ art_url }}">GearArt</a></li>
+                                    <li class="black-gray-btn left"><a title="" href="{{ projects_url }}">GearProjects</a></li>
+                                    {% if not logined %}
+                                    <li class="black-gray-btn left"><a title="" href="{{ answer_url }}register/">加入社区</a></li>
+                                    {% else %}
+                                    <li class="black-gray-btn left"><a title="" href="{{ answer_url }}input/">发表主题</a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div><!--end div info-warper-->

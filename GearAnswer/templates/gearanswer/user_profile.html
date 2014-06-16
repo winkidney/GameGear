@@ -1,9 +1,10 @@
 {% extends "gearanswer/base.html" %}
+{% block title %}浏览用户信息 | {{ site_name }}{% endblock %}
 {% block left_box %}
                             <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
                                 <div class="left-cell gray-text ">
                                     <strong>
-                                        <a href="{{ answer_url }}" >GearAnswer</a>
+                                        <a href="{{ answer_url }}" >{{ site_name }}</a>
                                         &gt;
                                         浏览用户信息
                                     </strong>
@@ -18,9 +19,9 @@
                                         {% endif %}
                                         </div>
                                         <div class=" ">
-                                            <span><strong>&gt;&gt;{{ uinfo_dict.username }}</strong></span>
-                                            <span>&gt;&gt;于 {{ uinfo_dict.create_at }} 加入GeamGear </span>
-                                            <span>&gt;&gt;获得声望 : {{ uinfo_dict.reputation }} </span>
+                                            <span><strong>&gt;{{ uinfo_dict.username }}</strong></span><br>
+                                            <span>&gt;于 {{ uinfo_dict.create_at }} 加入GeamGear </span><br>
+                                            <span>&gt;获得声望 : {{ uinfo_dict.gears }} </span><br>
                                         </div>
                                         <div class="clear"></div>
                                 </div><!--end a left-cell-->
@@ -35,8 +36,6 @@
                             <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
                                 <div class="left-cell gray-text ">
                                     <strong>
-                                        <a href="#" >GearAnswer</a>
-                                        &gt; 
                                         详细信息
                                     </strong>
                                 </div><!--end a left-cell-->
@@ -54,7 +53,7 @@
                                 </div><!--end a left-cell-->
                                 <div class="left-cell font-11px border-bottom">
                                     <span>帮助：<a href="#">关于社区积分</a></span>
-                                    <span class="right">>>>返回<a href="/">GearAnswer</a></span>
+                                    <span class="right">&gt;&gt;&gt;返回<a href="{{ answer_url }}">{{ site_name }}</a></span>
                                 </div><!--end a left-cell-->
                                 
                             </div><!--end left-box-->

@@ -18,7 +18,8 @@ from GearAnswer.forms import (RegisterForm,LoginForm,UserProfileForm,
                               ReplyFrom)
 from GearAnswer.apis import (render_template,Info,get_uinfo,update_topic,
                              get_node,get_topic,get_replys,update_reply,
-                             update_user,
+                             update_user,update_view_times,
+                             
                              )
 
 
@@ -40,6 +41,7 @@ def tab_view(request, tab_id, *args, **kwargs):
                               )
     
 def login_view(request, *args, **kwargs):
+    
     if logined(request):
         title = _(u"You have already logined!")
         content = _(u'Maybe you want to: <a href="%slogout/">Logout</a> or go back to <a href="%s">Home</a>' % (ROOT_URL,ROOT_URL))
@@ -134,6 +136,10 @@ def register_view(request, *args, **kwargs):
     
 def node_view(request, node_name, *args, **kwargs):
     #todo
+    current_node = get_node(node_name)
+    if not current_node:
+        raise Http404
+    
     if not get_node(node_name):
         raise Http404
     return render_template(request, 'gearanswer/node.html',
@@ -144,7 +150,8 @@ def node_view(request, node_name, *args, **kwargs):
 @login_required(login_url=ROOT_URL+'login/')      
 @transaction.commit_on_success
 def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
-    if not get_node(node_name):
+    current_node = get_node(node_name)
+    if not current_node:
         raise Http404
     if request.method == "POST":
         #new topic processing
@@ -184,13 +191,11 @@ def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
 @login_required(login_url=ROOT_URL+'login/')
 @transaction.commit_on_success
 def reply_view(request, article_id, *args, **kwargs):
-    #to be change
-    if request.method == 'GET':
-        redirect_url = '/'.join(request.path.split('/')[:-2])
-        return HttpResponseRedirect(redirect_url)
+    #to be fixed
     topic = get_topic(article_id)
     if not topic:
         raise Http404
+    
     if request.method == 'POST':
         reply_form = clean_err_form(ReplyFrom, request.POST)
         if reply_form.is_valid() and reply_form.check_value():
@@ -206,9 +211,23 @@ def reply_view(request, article_id, *args, **kwargs):
                          int(article_id),
                          int(request.user.id,) 
                          )
-            return HttpResponse('reply success')
+                    
+            info = Info(_(u"Reply published!"), 
+                        _(u"Now you will be redirected to topic page!"), 
+                        topic.get_abs_url())
+            return render_template(request, 'gearanswer/info.html',
+                                            locals(),
+                                            )
         else:
-            HttpResponse('error')
+            info = Info(_(u"Reply cannot be null!"), 
+                        _(u"Now you will be redirected to topic page!"), 
+                        topic.get_abs_url())
+            return render_template(request, 'gearanswer/info.html',
+                                            locals(),
+                                            )
+    #if the method is GET or other case. user will be rediected to read page.
+    redirect_url = topic.get_abs_url()
+    return HttpResponseRedirect(redirect_url)
 
 def set_best_view(request, *args, **kwargs):
     #todo
@@ -223,6 +242,7 @@ def set_useful_view(request, *args, **kwargs):
     return HttpResponse('set useless success')
 
 def user_profile_view(request, uid, *args, **kwargs):
+    
     uinfo_dict = get_uinfo(uid)
     if not uinfo_dict:
         raise Http404
@@ -272,6 +292,7 @@ def read_view(request, article_id, *args, **kwargs):
     reply_count = len(replys)
     if not topic:
         raise Http404
+    update_view_times(topic)
     return render_template(request, 'gearanswer/read.html',
                               locals(),
                               )

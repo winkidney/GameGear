@@ -3,10 +3,10 @@
                             <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
                                 <div class="left-cell gray-text ">
                                     <strong>
-                                        <a href="#" >GearAnswer</a>
-                                        >
-                                        <a href="#" >Python</a>
-                                        > 发表新主题
+                                        <a href="{{ answer_url }}" >{{ site_name }}</a>
+                                        &gt;
+                                        <a href="{{ answer_url }}node/{{ node_name }}/" >{{ current_node.name }}</a>
+                                        &gt; 发表新主题
                                     </strong>
                                 </div><!--end a left-cell-->
 
@@ -14,11 +14,11 @@
                                     <form id="reply-to" action="" method="POST">
                                         <div class="border-bottom padding-bottom-5">
                                             {% csrf_token %}
-                                            <label class="width-8 block">>>>文章标题</label>
+                                            <label class="width-8 block">&gt;&gt;&gt;文章标题</label>
                                             <input type="text" class="dark-bg white-text shadow-light width-98" name="title" placeholder="title"></input><br>
                                             <!--label class="width-8 block">>>>标签</label>
                                             <input type="text" class="dark-bg white-text shadow-light width-98" name="tag" placeholder="使用英文逗号隔开"></input><br-->
-                                            <label class="width-8 block">>>>正文</label>
+                                            <label class="width-8 block">&gt;&gt;&gt;正文</label>
                                             <span>&nbsp;UEditor</span>
                                             <input id="use-ueditor" type="radio" name="editor" value="ue"></input>
                                             <span>MarkDown</span>
@@ -34,8 +34,8 @@
                                     </form>
                                 </div><!--end a left-cell-->
                                 <div class="left-cell font-11px border-bottom">
-                                    <span>帮助：<a href="#">使用MarkDown进行写作</a></span>
-                                    <span class="right">>>>返回<a href="/">GearAnswer</a></span>
+                                    <span>帮助：<a href="{{ md_help }}">使用MarkDown进行写作</a></span>
+                                    <span class="right">&gt;&gt;&gt;<a href="{{ answer_url }}">{{ site_name }}</a></span>
                                 </div><!--end a left-cell-->
                                 
                                 <div class="left-cell  border-bottom gray-text">
