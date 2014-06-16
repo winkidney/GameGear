@@ -55,7 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         
     name = models.CharField(max_length=100, unique=True, verbose_name=_(u'username'))
     email = models.EmailField(max_length=100, unique=True, verbose_name=_(u'email'))
-    avatar = models.ImageField(upload_to='avatars/%Y/%m/', verbose_name=_(u'avatar'))
+    avatar = models.ImageField(blank=True, upload_to='avatars/%Y/%m/', verbose_name=_(u'avatar'))
     
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))

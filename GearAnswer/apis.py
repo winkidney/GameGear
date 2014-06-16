@@ -7,7 +7,9 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.core.exceptions import  ObjectDoesNotExist
+from django.core.files.images import ImageFile
 import logging
+import uuid
 
 from UCenter.models import User
 from GearAnswer.models import Topic,Node,Reply,UserProfile
@@ -60,15 +62,15 @@ def update_avatar(avatar, avatar_file):
         avatar_file is the file object from html form's file-input-filed.
         If successfully updated, return True.
     """
-    image = avatar_file
-    if image:
-        if avatar:
-            avatar.delete()
-        file_ext = image.name.split('.')[1]
-        avatar.save('%s.%s' % (uuid.uuid1(), file_ext), 
-                             image)
-        return True
-    raise ValueError, 'avatar_file %s is not a InMemoryFile instance!' % image
+    if isinstance(avatar_file, ImageFile):
+        raise ValueError, 'avatar_file %s is not a InMemoryFile instance!' % avatar_file
+    if avatar:
+        avatar.delete()
+    file_ext = avatar_file.name.split('.')[1]
+    avatar.save('%s.%s' % (uuid.uuid1(), file_ext), 
+                             avatar_file)
+    return True
+    
 
 def create_user(username, password, email):
     
@@ -83,29 +85,35 @@ def create_user(username, password, email):
     return user,profile
     
 
-def update_user(uid, profile_dict):
+def update_user(uid, avatar_file, profile_dict):
     """ Update a user profile by all the editable attributes.
         update_user()
     """
-    #tofix
+    #to test
     if not isinstance(profile_dict, dict):
         raise TypeError, "Profile dict [%s] is not a instance of dict!" % profile_dict
     if not isinstance(uid, int):
         raise TypeError, "uid [%s] must be an int instance!" % uid
     user = get_user_by_id(uid)
-    image = profile_dict.get('avatar')
     
-    if image:
+    #update avatar
+    #if not isinstance(avatar_file, ImageFile):
+    #    raise ValueError, 'avatar_file %s is not a InMemoryFile instance!' % avatar_file
+    for item in profile_dict.items():
+        if item[0] != u'avatar':
+            user.__setattr__(item[0], item[1])
+        
+    if avatar_file:        
         if user.avatar:
             user.avatar.delete()
-        file_ext = image.name.split('.')[1]
+        file_ext = avatar_file.name.split('.')[1]
         user.avatar.save('%s.%s' % (uuid.uuid1(), file_ext), 
-                         image)
-    del profile_dict['avatar']
-    for item in profile_dict.items():
-        user.__setattr__(item[0], item[1])
+                                 avatar_file)
+    
+    
+    
     user.save()
-    pass
+    return user
 
 def update_node(name, description, node_avatar=None, pnode=None, avatar=None):
     """ update_node(unicode name, unicode description, 

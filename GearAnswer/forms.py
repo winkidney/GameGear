@@ -77,24 +77,8 @@ class UserProfileForm(forms.Form):
     #username = forms.CharField(max_length=250, required=True)
     description = forms.CharField(max_length=250, required=False)
     website = forms.URLField(required=False)
-    goodat = forms.CharField(required=False)
+    good_at = forms.CharField(required=False)
     interests = forms.CharField(required=False)
-    
-    def save_data(self, user, request):
-        #to change , use a api function to do the save job
-        image = self.cleaned_data.get('avatar')
-        
-        if image:
-            if user.avatar:
-                user.avatar.delete()
-            file_ext = image.name.split('.')[1]
-            user.avatar.save('%s.%s' % (uuid.uuid1(), file_ext), 
-                         image)
-        user.description = self.cleaned_data.get('description')
-        user.website = self.cleaned_data.get('website')
-        user.good_at = self.cleaned_data.get('good_at')
-        user.interests = self.cleaned_data.get('interests')
-        user.save()
         
 class ReplyFrom(forms.Form):
     "You must run check_value method to ensure the data is valid"

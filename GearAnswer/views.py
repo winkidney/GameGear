@@ -56,9 +56,9 @@ def login_view(request, *args, **kwargs):
                 if user and user.is_active:
                         login(request, user)
                         title = _(u"Login successed!")
-                        content = _(u'Maybe you want to:<a href="%sgear/%s/profile/edit/">Edit your profile</a> or go back to <a href="%s">Home</a>' \
-                                    % (ROOT_URL, user.id, ROOT_URL))
-                        info = Info(title, content)
+                        content = _(u'Maybe you want to:<a href="%sgear/%s/profile/edit/">Edit your profile</a> or go back to <a href="%s">pre-page</a>' \
+                                    % (ROOT_URL, user.id, request.GET.get('next')))
+                        info = Info(title, content, request.GET.get('next'))
                         
                         return render_template(request, 'gearanswer/info.html',
                                         locals(),
@@ -229,11 +229,13 @@ def user_profile_view(request, uid, *args, **kwargs):
 @login_required(login_url=ROOT_URL+'login/')
 def user_profile_edit_view(request, uid, *args, **kwargs):
     uinfo_dict = get_uinfo(uid)
+    uid = int(uid)
     if not uinfo_dict:
         raise Http404
     #check if current user is the profie owner.
     if request.user.id != int(uid):
             raise PermissionDenied
+        
     if request.method == 'GET':
         pass
     elif request.method == 'POST':
@@ -241,8 +243,9 @@ def user_profile_edit_view(request, uid, *args, **kwargs):
                                            request.POST, 
                                            )
         if user_profile_form.is_valid():
-            user = User.objects.get(id=uid)
-            user_profile_form.save_data(user, request)
+            update_user(uid, request.FILES.get('avatar'),
+                        user_profile_form.cleaned_data)
+            
             info = Info(_(u'You have successfully change your profile!'),
                         _(u'Now you will be rediected to edit page.'),request.path)
             return render_template(request, 'gearanswer/info.html',

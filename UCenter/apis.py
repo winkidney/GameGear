@@ -12,6 +12,8 @@ def create_user(username, password, email):
 
 
 def create_superuser(username, password, email):
+    "Create super user by username, passwd, eamil"
+    
     return User.objects.create_superuser(username, email, password)
     
 def user_exist(username):
