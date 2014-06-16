@@ -13,7 +13,7 @@ def shared_data(request, *args, **kwagrs):
             'md_help' : 'http://wiki.gg-workshop.com/doku.php?id=%E6%96%87%E6%A1%A3:%E4%BD%BF%E7%94%A8markdown%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98',
             'none' : '',
             
-            'guide_url' : '',
+            'guide_url' : 'http://wiki.gg-workshop.com/doku.php?id=%E6%96%87%E6%A1%A3:%E7%A4%BE%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97',
             'art_url' : 'http://wiki.gg-workshop.com/doku.php?id=%E4%BC%81%E5%88%92:gamegear:gearart',
             'projects_url' : 'http://wiki.gg-workshop.com/doku.php?id=%E4%BC%81%E5%88%92:gamegear:gearprojects',
             }
