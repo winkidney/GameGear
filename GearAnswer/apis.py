@@ -58,18 +58,19 @@ def get_reply(reply_id):
     
     
 def update_avatar(avatar, avatar_file):
-    """ avatar is a models.ImageField instance,
-        avatar_file is the file object from html form's file-input-filed.
+    
+    """ [avatar] is a models.ImageField instance,
+        [avatar_file] is the file object from html form's file-input-filed.
         If successfully updated, return True.
     """
-    if isinstance(avatar_file, ImageFile):
-        raise ValueError, 'avatar_file %s is not a InMemoryFile instance!' % avatar_file
-    if avatar:
-        avatar.delete()
-    file_ext = avatar_file.name.split('.')[1]
-    avatar.save('%s.%s' % (uuid.uuid1(), file_ext), 
-                             avatar_file)
-    return True
+    if avatar_file:     
+        if avatar:
+            avatar.delete()
+        file_ext = avatar_file.name.split('.')[1]
+        avatar.save('%s.%s' % (uuid.uuid1(), file_ext), 
+                                 avatar_file)
+        return True
+    raise TypeError, "avatar_file argument must be a file object!"
     
 
 def create_user(username, password, email):
@@ -96,19 +97,14 @@ def update_user(uid, avatar_file, profile_dict):
         raise TypeError, "uid [%s] must be an int instance!" % uid
     user = get_user_by_id(uid)
     
-    #update avatar
+    
     #if not isinstance(avatar_file, ImageFile):
     #    raise ValueError, 'avatar_file %s is not a InMemoryFile instance!' % avatar_file
     for item in profile_dict.items():
         if item[0] != u'avatar':
             user.__setattr__(item[0], item[1])
-        
-    if avatar_file:        
-        if user.avatar:
-            user.avatar.delete()
-        file_ext = avatar_file.name.split('.')[1]
-        user.avatar.save('%s.%s' % (uuid.uuid1(), file_ext), 
-                                 avatar_file)
+            
+    update_avatar(user.avatar, avatar_file)
     
     
     
