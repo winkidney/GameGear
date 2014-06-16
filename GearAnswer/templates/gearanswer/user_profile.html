@@ -3,8 +3,8 @@
                             <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
                                 <div class="left-cell gray-text ">
                                     <strong>
-                                        <a href="#" >GearAnswer</a>
-                                        > 
+                                        <a href="{{ answer_url }}" >GearAnswer</a>
+                                        &gt;
                                         浏览用户信息
                                     </strong>
                                 </div><!--end a left-cell-->
@@ -18,9 +18,9 @@
                                         {% endif %}
                                         </div>
                                         <div class=" ">
-                                            <span><strong>&gt;&gt;{{ uinfo_dict.detail_dict.username }}</strong></span>
-                                            <span>&gt;&gt;于 {{ uinfo_dict.detail_dict.create_at }} 加入GeamGear </span>
-                                            <span>&gt;&gt;获得声望 : {{ uinfo_dict.detail_dict.reputation }} </span>
+                                            <span><strong>&gt;&gt;{{ uinfo_dict.username }}</strong></span>
+                                            <span>&gt;&gt;于 {{ uinfo_dict.create_at }} 加入GeamGear </span>
+                                            <span>&gt;&gt;获得声望 : {{ uinfo_dict.reputation }} </span>
                                         </div>
                                         <div class="clear"></div>
                                 </div><!--end a left-cell-->
@@ -36,7 +36,7 @@
                                 <div class="left-cell gray-text ">
                                     <strong>
                                         <a href="#" >GearAnswer</a>
-                                        > 
+                                        &gt; 
                                         详细信息
                                     </strong>
                                 </div><!--end a left-cell-->

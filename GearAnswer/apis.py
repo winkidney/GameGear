@@ -10,8 +10,9 @@ from django.core.exceptions import  ObjectDoesNotExist
 import logging
 
 from UCenter.models import User
-from GearAnswer.models import Topic,Node,Reply
+from GearAnswer.models import Topic,Node,Reply,UserProfile
 from UCenter.apis import get_user_by_id
+from UCenter.apis import create_user as uc_create_user
 
 def remove_xss_tags(html):
     """"escape the specified html tags from user's content"""
@@ -22,7 +23,7 @@ def get_node(node_name):
     try:
         node = Node.objects.get(name=node_name)
     except ObjectDoesNotExist:
-        logging.warn("Node object [%s] does not existed!" % node_name)
+        logging.info("Node object [%s] does not existed!" % node_name)
         return False
     return node
 
@@ -69,6 +70,43 @@ def update_avatar(avatar, avatar_file):
         return True
     raise ValueError, 'avatar_file %s is not a InMemoryFile instance!' % image
 
+def create_user(username, password, email):
+    
+    """ Create a user with its GearAnswer profile.
+        Return user,profile if succeed.
+    """
+    
+    user = uc_create_user(username, password, email)
+    profile = UserProfile()
+    profile.user = user
+    profile.save()
+    return user,profile
+    
+
+def update_user(uid, profile_dict):
+    """ Update a user profile by all the editable attributes.
+        update_user()
+    """
+    #tofix
+    if not isinstance(profile_dict, dict):
+        raise TypeError, "Profile dict [%s] is not a instance of dict!" % profile_dict
+    if not isinstance(uid, int):
+        raise TypeError, "uid [%s] must be an int instance!" % uid
+    user = get_user_by_id(uid)
+    image = profile_dict.get('avatar')
+    
+    if image:
+        if user.avatar:
+            user.avatar.delete()
+        file_ext = image.name.split('.')[1]
+        user.avatar.save('%s.%s' % (uuid.uuid1(), file_ext), 
+                         image)
+    del profile_dict['avatar']
+    for item in profile_dict.items():
+        user.__setattr__(item[0], item[1])
+    user.save()
+    pass
+
 def update_node(name, description, node_avatar=None, pnode=None, avatar=None):
     """ update_node(unicode name, unicode description, 
                     unicode node_avatar, unicode pnode, InMemoryFile avatar=None)
@@ -112,12 +150,13 @@ def update_topic(title, editor, content, node_name, uid, topic_id=None):    #to 
     topic.save()
     return topic
 
-def update_reply(content, article_id, uid, reply_id=None):
+def update_reply(editor, content, article_id, uid, reply_id=None):
     """ Create or update a reply.
         update_reply(unicode content,int article_id, int uid, int reply_id)
         If reply id does not exist,the function will create a new one.
     """
-    if isinstance(article_id, int):
+    #tofix
+    if not isinstance(article_id, int):
         raise TypeError, "article_id %s is not a int object" % article_id
     if reply_id:
         if isinstance(reply_id, int):
@@ -154,39 +193,44 @@ def get_uinfo(uid):
     """
     try:
         user = User.objects.get(id=uid)
+        
     except ObjectDoesNotExist:
         return None
     if user.avatar:
         avatar_url = user.avatar.url
     else:
         avatar_url = None
+    
     user_info_dict = {'avatar' : avatar_url,
-                      'detail' : (
-                      (_(u'Uid'), user.id),
-                      
-                      (_(u'Username'), user.name),
-                      (_(u'Email'), user.email),
-                      (_(u'Self description'), user.description),
-                      (_(u'Good at'), user.good_at),
-                      (_(u'Interests'), user.interests),
-                      (_(u'Website'), user.website),
-                      (_(u'Gears'), user.gears),
-                      (_(u'Reputation'), user.reputation),
-                      ),
-                      'detail_dict' : {
-                      'uid': user.id,
-                      'username' : user.name,
-                      'email' : user.email,
-                      'description' : user.description,
-                      'good_at' : user.good_at,
-                      'interests' : user.interests,
-                      'website' : user.website,
-                      'gears' : user.gears,
-                      'reputation' : user.reputation,
-                      'create_at' : user.created_at,
-                      },
                       'id': int(uid),
+                      'detail' : (
+                          (_(u'Uid'), user.id),
+                          
+                          (_(u'Username'), user.name),
+                          (_(u'Email'), user.email),
+                          (_(u'Self description'), user.description),
+                          (_(u'Good at'), user.good_at),
+                          (_(u'Interests'), user.interests),
+                          (_(u'Website'), user.website),
+                        ),
+                            'avatar' : avatar_url,
+                            'username' : user.name,
+                            'email' : user.email,
+                            'description' : user.description,
+                            'good_at' : user.good_at,
+                            'interests' : user.interests,
+                            'website' : user.website,
+                            'create_at' : user.created_at,
                       }
+    #GearAnswer profile
+    profiles = UserProfile.objects.filter(user_id=uid)
+    if profiles:
+        profile = profiles[0]
+        user_info_dict['gears'] = profile.gears
+        user_info_dict['ftopic_count'] = profile.ftopic_count
+        user_info_dict['fnode_count'] = profile.fnode_count
+        user_info_dict['fuser_count'] = profile.fuser_count
+        user_info_dict['unread_msg_count'] = profile.fuser_count
     return user_info_dict
 
   

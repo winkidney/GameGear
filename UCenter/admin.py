@@ -78,9 +78,9 @@ class GearAdmin(UserAdmin):
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
         (None, {'fields': ('name', 'email', 'password', 'avatar',)}),
-        (_(u'Personal info'), {'fields': ('gears', 'created_at', 'updated_at', 'description', 'good_at' , 'website', 'interests')}),
-        (_(u'GearArt'),{'fields' : ('reputation',)}),
-        (_(u'GearAnswer'),{'fields' : ('a_reputation',)}),
+        (_(u'Personal info'), {'fields': ('created_at', 'updated_at', 'description', 'good_at' , 'website', 'interests')}),
+        #(_(u'GearArt'),{'fields' : ('reputation',)}),
+        #(_(u'GearAnswer'),{'fields' : ('a_reputation',)}),
         
         #(
         #    'Open token info',

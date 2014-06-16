@@ -77,7 +77,7 @@ class UserProfileForm(forms.Form):
     #username = forms.CharField(max_length=250, required=True)
     description = forms.CharField(max_length=250, required=False)
     website = forms.URLField(required=False)
-    goodat = forms.CharField()
+    goodat = forms.CharField(required=False)
     interests = forms.CharField(required=False)
     
     def save_data(self, user, request):
@@ -92,7 +92,7 @@ class UserProfileForm(forms.Form):
                          image)
         user.description = self.cleaned_data.get('description')
         user.website = self.cleaned_data.get('website')
-        user.good_at = self.cleaned_data.get('goodat')
+        user.good_at = self.cleaned_data.get('good_at')
         user.interests = self.cleaned_data.get('interests')
         user.save()
         

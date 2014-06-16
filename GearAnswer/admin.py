@@ -6,7 +6,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from models import (Node, Tag, Reply, Topic, Nav, Setting)
+from models import (Node, Tag, Reply, Topic, Nav, Setting, UserProfile)
 
 
 admin.site.register(Node)
@@ -15,4 +15,4 @@ admin.site.register(Reply)
 admin.site.register(Topic)
 admin.site.register(Nav)
 admin.site.register(Setting)
-
+admin.site.register(UserProfile)

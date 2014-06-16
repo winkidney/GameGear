@@ -19,55 +19,6 @@ from django.forms import widgets
 
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
 
-class Message(models.Model):
-    
-    """message from a user to another.
-       max number for every user is 50.
-    """
-    
-    class Meta:
-        verbose_name_plural = _(u"insite message")
-        verbose_name = _(u"insite message")
-        
-    title = models.CharField(max_length=40, verbose_name=_(u'title'))
-    message = models.TextField(verbose_name=_(u'message'))
-    isread = models.BooleanField(verbose_name=_(u'is read'))
-    send_time = models.DateTimeField(auto_now_add=True,verbose_name=_(u'send_time'))
-    
-    def __unicode__(self):
-        return self.send_time
-    
-# class InterTag(models.Model):
-#     
-#     """interests tags of the user """
-#     
-#     class Meta:
-#         verbose_name_plural = _(u"interest tag")
-#         verbose_name = _(u"interest tag")
-#         
-#     name = models.CharField(max_length=30, verbose_name=_(u'interest tag'))
-#     count = models.IntegerField(default=0, verbose_name=_(u'person count'))
-#     
-#     def __unicode__(self):
-#         return self.name
-#     
-#     
-# class MajorType(models.Model):
-#     
-#     """ Major type of the art masterpiece.
-#         For example: 2d art,3d art,sound effects etc
-#     """
-#     
-#     class Meta:
-#         verbose_name_plural = _(u"major")
-#         verbose_name = _(u"major")
-#         
-#     name = models.CharField(max_length=250, db_index=True, verbose_name=_(u'major  name'))
-#     
-#     def __unicode__(self):
-#         return self.name
-
-
    
 class UserManager(BaseUserManager):
 
@@ -102,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _(u"users")
         verbose_name = _(u"user")
         
-    name = models.CharField(max_length=100, unique=True, verbose_name=_(u'user name'))
+    name = models.CharField(max_length=100, unique=True, verbose_name=_(u'username'))
     email = models.EmailField(max_length=100, unique=True, verbose_name=_(u'email'))
     avatar = models.ImageField(upload_to='avatars/%Y/%m/', verbose_name=_(u'avatar'))
     
@@ -115,22 +66,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     #private info
     description = models.TextField(blank=True, verbose_name=_(u'self description'))
-    #nickname = models.CharField(blank=True, max_length=100, verbose_name=_(u'nickname'))
-    #age = models.IntegerField(blank=False, default=0, verbose_name=_(u'age'))
     good_at = models.CharField(blank=True, max_length=250, verbose_name=_(u'good at'))
     website = models.URLField(blank=True, verbose_name=_(u'website'))
     interests = models.CharField(blank=True, max_length=250, verbose_name=_(u'interests'))
-    
 
-    gears = models.IntegerField(blank=False, default=0, verbose_name=_(u'gears'))
- 
-
-    reputation = models.IntegerField(blank=False, default=0, verbose_name=_(u'reputation'))   #积分，主题被评分可以获得
     
-    #Answer部分
-    a_reputation = models.IntegerField(blank=False,
-                                       verbose_name=_(u'a_reputation'),
-                                       default=0,)
     
     #token for Oauth
     #weibo_token = models.CharField(verbose_name=u'微博token',max_length=100, blank=True)
@@ -158,5 +98,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     def delete_avatar(self):
         self.avatar.delete()
 
+class Message(models.Model):
     
+    """message from a user to another.
+       max number for every user is 50.
+    """
+    
+    class Meta:
+        verbose_name_plural = _(u"insite message")
+        verbose_name = _(u"insite message")
+        
+    title = models.CharField(max_length=40, verbose_name=_(u'title'))
+    message = models.TextField(verbose_name=_(u'message'))
+    isread = models.BooleanField(verbose_name=_(u'is read'))
+    send_time = models.DateTimeField(auto_now_add=True,verbose_name=_(u'send_time'))
+    send_to = models.ForeignKey(User,blank=False, verbose_name=_(u"message's target user"))
+    
+    def __unicode__(self):
+        return "%s" % (self.id, self.send_time)   
 

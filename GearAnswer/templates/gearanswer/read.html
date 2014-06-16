@@ -3,9 +3,9 @@
                             <div class="left-box gray-bg topic-box radius-3 light-black-box-shadow ">
                                 <div class="left-cell gray-text ">
                                     <strong>
-                                        <a href="#" >GameGear</a>
-                                        >
-                                        <a href="#" >{{ topic.node.name }}</a> 
+                                        <a href="{{ answer_url }}" >GameGear</a>
+                                        &gt;
+                                        <a href="{{ answer_url }}node/{{ topic.node.name }}/" >{{ topic.node.name }}</a> 
                                     </strong>
                                 </div><!--end a left-cell-->
                                 <div class="left-cell left-cell-title ">
@@ -16,10 +16,16 @@
                                     <div id="voteit" class="topic-info">
                                         <p>
                                             <a href="#">{{ topic.author.name }}</a>
-                                            &nbsp;&nbsp;&nbsp;发表于 {{ topic.create_at }}
-                                            &nbsp;&nbsp;&nbsp;点击&nbsp;{{ topic.view_times }}&nbsp;&nbsp;&nbsp;
-                                            <span><a href="#">回复&nbsp;</a>{{ topic.reply_count }}&nbsp;<a>收藏&nbsp;</a>{{ topic.stars }}&nbsp;<a>
-                                                <a>感谢&nbsp;</a>{{ topic.useful }}&nbsp;<a><a>无用&nbsp;</a>{{ topic.useless }}&nbsp;
+                                            <span>&nbsp;&nbsp;&nbsp;发表于 {{ topic.create_at }}</span>
+                                            <span>&nbsp;&nbsp;&nbsp;点击&nbsp;{{ topic.view_times }}&nbsp;&nbsp;&nbsp;</span>
+                                            <span>
+                                                <a href="#reply-topic">回复&nbsp;</a>{{ topic.reply_count }}&nbsp;
+                                                <a>收藏&nbsp;</a>{{ topic.stars }}&nbsp;
+                                                <a>感谢&nbsp;</a>{{ topic.useful }}&nbsp;
+                                                <a>无用&nbsp;</a>{{ topic.useless }}&nbsp;
+                                            {% if topic.is_question %}                                            
+                                                <a href="#best-reply">查看答案&nbsp;</a>{{ topic.useless }}&nbsp;
+                                            {% endif %}
                                             </span>
                                         </p>
                                     </div>
@@ -70,7 +76,9 @@
                                     <div class="topic-comment-right left" id="comment-{{ reply.id }}">
                                         <div  class="comment-info border-bottom gray-text">
                                             <p>
-                                                <span class="right">采纳为最佳答案&nbsp;&nbsp;<a href="">{% if not reply.best %}√{% endif %}</a></span>
+                                                {% if topic.is_question %} 
+                                                <span class="right"><a href="">{% if not reply.best %}采纳为最佳答案&nbsp;&nbsp;{% endif %}</a></span>
+                                                {% endif %}
                                                 <span class="right"><a href="">感谢回复者&nbsp;</a>{{ reply.useful }}&nbsp;</span>
                                                 <span class="right"><a href="">问题无意义&nbsp;</a>{{ reply.useless }}&nbsp;</span>
                                                 <span class="left">{{ forloop.counter }}楼&nbsp;&nbsp;</span>
@@ -99,7 +107,7 @@
                         {% endif %}
 
 
-                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
+                            <div id="reply-topic" class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
                                 <div class="left-cell border-bottom">
                                     <strong>
                                         <span>&nbsp;发表回复</span>
@@ -117,7 +125,7 @@
                                             <input id="use-ueditor" type="radio" name="editor" value="ue"></input>
                                             <span>MarkDown</span>
                                             <input id="use-markdown" type="radio" name="editor" value="md"></input><br/>
-                                            <span class="right">帮助：<a href="#">MarkDown编辑器常见问题</a></span>
+                                            <span class="right">帮助：<a href="http://wiki.gg-workshop.com/doku.php?id=%E6%96%87%E6%A1%A3:%E4%BD%BF%E7%94%A8markdown%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">MarkDown编辑器常见问题</a></span>
                                             <div id="div-ue">
                                                 <textarea  name="comment_ue" style="height:250px;" id="editor-ue"></textarea>
                                             </div>
@@ -129,7 +137,7 @@
                                     </form>
                                 </div><!--end a left-cell-->
                                 <div class="left-cell font-11px border-bottom">
-                                    <span>帮助：<a href="#">使用MarkDown进行写作</a></span>
+                                    <span>帮助：<a href="http://wiki.gg-workshop.com/doku.php?id=%E6%96%87%E6%A1%A3:%E4%BD%BF%E7%94%A8markdown%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">使用MarkDown进行写作</a></span>
                                     <span class="right">>>>返回<a href="/">GearAnswer</a></span>
                                 </div><!--end a left-cell-->
 

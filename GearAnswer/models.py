@@ -13,10 +13,28 @@ EDITOR_TYPES = (
     ('md', _(u'markdown editor')),
     ('ue', _(u'ueditor')),
 )
-    
-class Node(models.Model):
+
+class UserProfile(models.Model):
     
     """Question Node ,the same topic Type"""
+    class Meta:
+        verbose_name_plural = _(u'users profile')
+        verbose_name = _(u'user profile ')
+        
+    user = models.OneToOneField(User, blank=False, verbose_name="profile owner")
+    ftopic_count = models.IntegerField(blank=False, default=0, 
+                                verbose_name=_(u"user's favorite's nodes count") )
+    fnode_count = models.IntegerField(blank=False, default=0, 
+                                      verbose_name=_(u"user's favorite nodes's count")) 
+    fuser_count = models.IntegerField(blank=False, default=0,
+                                      verbose_name=_(u"user's caring-user count"))
+    unread_msg_count = models.IntegerField(blank=False, default=0,
+                                      verbose_name=_(u"user's caring-user count"))
+    gears = models.IntegerField(blank=False, default=0, verbose_name=_(u'gears'))
+
+class Node(models.Model):
+    
+    """Topic Node ,the same as topic Type"""
     class Meta:
         verbose_name_plural = _(u'topic node')
         verbose_name = _(u'topic node ')
@@ -24,6 +42,7 @@ class Node(models.Model):
     name = models.CharField(unique=True, max_length=100, blank=False, verbose_name=_(u'node name'))
     avatar = models.ImageField(upload_to='nodes/', verbose_name=_(u'node avatar'))
     description = models.TextField(verbose_name=_(u'node description'))
+    help_text = models.TextField(verbose_name=_(u"node help text"))
     q_count = models.IntegerField(default=0, blank=False, verbose_name=_(u'topic count'))
     parent = models.ForeignKey('Node', default=0, blank=False, verbose_name=_(u"parent-node"))
     
@@ -34,7 +53,7 @@ class Node(models.Model):
 
 class Tag(models.Model):
     
-    """Question tag.Repution is needed for add new tag."""
+    """Topic tag.Repution is needed for add new tag."""
     
     class Meta:
         verbose_name_plural = _(u'question tag manager')
@@ -64,7 +83,9 @@ class Topic(models.Model):
     title = models.CharField(max_length=250, blank=False, 
                              db_index=True,
                              verbose_name=_(u'question title'))
+    
     content = models.TextField(blank=True, verbose_name=_(u'topic content'))
+    is_question = models.BooleanField(blank=False, default=False, verbose_name=_(u'If it is a question topic'))
     editor = models.CharField(max_length=5,
                               blank=False,
                               default='md',

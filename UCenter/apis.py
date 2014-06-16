@@ -5,13 +5,15 @@ from django.db import models
 from UCenter.models import User
 
 def create_user(username, password, email):
-    user = User()
-    user.name = username
-    user.set_password(password)
-    user.email = email
-    user.save()
-    return user
+    
+    "Create a User object, return User instance if succeed!"
+    
+    return User.objects.create_user(username, email, password)
 
+
+def create_superuser(username, password, email):
+    return User.objects.create_superuser(username, email, password)
+    
 def user_exist(username):
     "check if a user exists by its name."
     try:

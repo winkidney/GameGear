@@ -18,6 +18,7 @@ from GearAnswer.forms import (RegisterForm,LoginForm,UserProfileForm,
                               ReplyFrom)
 from GearAnswer.apis import (render_template,Info,get_uinfo,update_topic,
                              get_node,get_topic,get_replys,update_reply,
+                             update_user,
                              )
 
 
@@ -230,6 +231,7 @@ def user_profile_edit_view(request, uid, *args, **kwargs):
     uinfo_dict = get_uinfo(uid)
     if not uinfo_dict:
         raise Http404
+    #check if current user is the profie owner.
     if request.user.id != int(uid):
             raise PermissionDenied
     if request.method == 'GET':
@@ -237,7 +239,7 @@ def user_profile_edit_view(request, uid, *args, **kwargs):
     elif request.method == 'POST':
         user_profile_form = clean_err_form(UserProfileForm, 
                                            request.POST, 
-                                           request.FILES)
+                                           )
         if user_profile_form.is_valid():
             user = User.objects.get(id=uid)
             user_profile_form.save_data(user, request)
@@ -249,6 +251,7 @@ def user_profile_edit_view(request, uid, *args, **kwargs):
     return render_template(request, 'gearanswer/edit_user_profile.html',
                               locals(),
                               )
+    
 def messages_view(request, *args, **kwargs):
     #todo
     return render_template(request, 'gearanswer/messages.html',

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cn" lang="cn">
 
 <head>
-    <title>GearAnswer</title>
+    <title>GameGear| 游戏齿轮 - 独立游戏制作者们的社区</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" href="{{ static_url }}/answer/img/favicon.ico" />
     <!--jquery-ui-->
@@ -49,15 +49,15 @@
         <header>
             <div id="menu-bar" class='center'>
                 <a class="left" href="{{ answer_url }}">首页</a>
-                <a class="left" href="">我的账户</a>
-                <a class="left" href="#">收藏夹</a>
+                <a class="left" href="{{ answer_url }}myaccount/">我的账户</a>
+                <a class="left" href="{{ answer_url }}myaccount/favorites/">收藏夹</a>
             {% if logined %}
                 <a href="{{ answer_url }}logout/" class="left link">登出</a>
             {% else %}
                 <a href="{{ answer_url }}login/" class="left link">登录</a>
             {% endif %}
-                <a class="right">试试手气[]~(￣▽￣)~*</a><a class="clear"></a>
-                <form action="#" method="POST" class="right">
+                <a href="#" class="right">试试手气[]~(￣▽￣)~*</a><a class="clear"></a>
+                <form action="{{ answer_url }}search/" method="GET" class="right">
                     <input type="text" class="white-text shadow-light black-bg border-none" placeholder="搜索"/>
                     <input type="submit" style="display:none"/>
                 </form>
@@ -73,7 +73,7 @@
                                 <ul id="intro" class="no-list-style">
                                     <li class="black-gray-btn left"><a title="" href="#">社区使用指南</a></li>
                                     <li class="black-gray-btn left"><a title="" href="#">GearArt</a></li>
-                                    <li class="black-gray-btn left"><a title="" href="#">浏览用户</a></li>
+                                    <li class="black-gray-btn left"><a title="" href="#">GearProjects</a></li>
                                     <li class="black-gray-btn left"><a title="" href="#">回答问题</a></li>
                                     <li class="black-gray-btn right"><a title="" href="#">发表主题</a></li>
                                 </ul>
@@ -219,7 +219,7 @@
                                 </div><!--end a cell div-->
                                 <div class=" cell center text-center gray-text">
                                     <div class="center text-center">
-                                        <p>没有账户？ <a href="#">现在注册</a></p>
+                                        <p>没有账户？ <a href="{{ answer_url }}register/">现在注册</a></p>
                                     </div>
                                     <div class="clear"></div>
                                 </div><!--end a cell div-->
@@ -232,34 +232,38 @@
                             <div class="side-box light-black-box-shadow ">
                                 <div class="cell center">
                                     <div class="user-avatar left">
-                                        <a href="#">
-                                            <img src="{{ static_url }}/answer/img/avatar.png">
+                                        <a href="{{ answer_url }}gear/{{ current_user.id }}/profile/">
+                                        {% if current_user.avatar %}
+                                            <img src="{{ current_user.avatar }}"/>
+                                        {% else %}
+                                            <img src="{{ static_url }}/answer/img/avatar.png"/>
+                                        {% endif %}
                                         </a>
                                     </div>
-                                    <div class="username left"><a href="#">Winkidney</a></div>
+                                    <div class="username left"><a href="#">{{ current_user.username }}</a></div>
                                     <div class="clear"></div>
                                 </div><!--end a cell div-->
                                 <div class="cell center text-center gray-text border-bottom ">
                                     <div class="user-info left">
-                                        <p><a>3</a></p>
+                                        <p><a>{{ current_user.ftopic_count }}</a></p>
                                         <p>主题收藏</p>
                                     </div>
                                     <div class="user-info border-lr left">
-                                        <p><a>3</a></p>
-                                        <p>我的主题</p>
+                                        <p><a>{{ current_user.fnode_count }}</a></p>
+                                        <p>节点收藏</p>
                                     </div>
                                     <div class="user-info left">
-                                        <p><a>3</a></p>
-                                        <p>节点收藏</p>
+                                        <p><a>{{ current_user.fuser_count }}</a></p>
+                                        <p>关注的用户</p>
                                     </div>
                                     <div class="clear"></div>
                                 </div><!--end a cell div-->
                                 <div class="cell center text-center gray-text">
                                     <div class="left">
-                                        <p><a>3 条未读消息</a></p>
+                                        <p><a>{{ current_user.unread_msg_count }} 条未读消息</a></p>
                                     </div>
                                     <div class="right">
-                                        <p><a>200 财富</a></p>
+                                        <p><a>{{ current_user.gears }} 财富</a></p>
                                     </div>
                                     <div class="clear"></div>
                                 </div><!--end a cell div-->

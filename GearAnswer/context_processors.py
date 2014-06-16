@@ -8,7 +8,7 @@ from GearAnswer.apis import get_uinfo
 def shared_data(request, *args, **kwagrs):
     data = {'static_url': settings.STATIC_URL,
             'answer_url' : '/',
-            #'uinfo_dict': get_uinfo(uid),
+            'current_user': get_uinfo(request.user.id),
             }
     if logined(request):
         data['logined'] = True
