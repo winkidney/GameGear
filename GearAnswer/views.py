@@ -11,7 +11,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth import (authenticate, login, logout)
 from django.db import transaction
 
-from UCenter.models import User
+
 from UCenter.apis import user_exist,logined
 from GearAnswer.forms import (RegisterForm,LoginForm,UserProfileForm,
                               clean_err_form,NewTopicForm,
@@ -22,6 +22,7 @@ from GearAnswer.apis import (render_template,Info,get_uinfo,update_topic,
                              get_topics_bynode,get_topic_count_bynode,
                              update_topic_property,get_navs,
                              get_nav_byid,get_node_list,
+                             create_user,
                              )
 
 
@@ -116,7 +117,10 @@ def register_view(request, *args, **kwargs):
         if register_form.is_valid():
             #if form is valid, check the username, username and password.
             if register_form.check_value():
-                register_form.save_user()
+                data = register_form.cleaned_data.get
+                create_user(data('username'), 
+                            data('password1'), 
+                            data('email'))
                 user = authenticate(username=register_form.cleaned_data.get('username'), 
                                     password=register_form.cleaned_data.get('password1'))
                 login(request, user)
