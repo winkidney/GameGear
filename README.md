@@ -4,6 +4,10 @@ GameGear
 A game website like V2EX and opengameart for chinese.    
 Now building.    
 ###todo
++ 非明文登录表单
++ 验证码
++ 社交帐号登录
++ 自动标签功能
 + 发表主题和回复主题扣除积分，收到回复和收到感谢增加积分
 + 导航条定制部分
 + 首页文章列表

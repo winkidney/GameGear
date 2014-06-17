@@ -94,7 +94,7 @@ def login_view(request, *args, **kwargs):
 def logout_view(request, *args, **kwargs):
     if logined(request):
         logout(request)
-        title = _(u"Logout Successed!")
+        title = _(u"Logout Succeed!")
         content = _(u"Now you will be rediected to home page.")
         redirect_url = ROOT_URL
       
@@ -121,7 +121,7 @@ def register_view(request, *args, **kwargs):
                                     password=register_form.cleaned_data.get('password1'))
                 login(request, user)
                 
-                title = _(u"Register Successed!")
+                title = _(u"Register Succeed!")
                 content = _(u"Just enjoy it.Now you will be rediected to home page.")
                 redirect_url = ROOT_URL
                 
