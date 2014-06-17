@@ -13,7 +13,7 @@
                                                 <div class="topic-post">
                                                     <div class="user-avatar left">
                                                         <a href="{{ answer_url }}gear/{{ topic.aurhor.id }}/profile/">
-                                                        {% if topic.author.avatar %}
+                                                        {% if topic.author.get_avatar_url %}
                                                             <img src="{{ topic.aurhor.get_avatar_url }}">
                                                         {% else %}
                                                             <img src="{{ static_url }}/answer/img/avatar.png">
