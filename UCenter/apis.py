@@ -3,6 +3,7 @@
 #ver 0.1 - by winkidney - 2014.05.13
 from django.db import models
 from UCenter.models import User
+from django.core.exceptions import  ObjectDoesNotExist
 
 def create_user(username, password, email):
     
@@ -40,7 +41,7 @@ def email_exist(email):
     try:
         User.objects.get(email=email)
         return True
-    except models.Model.DoesNotExist:
+    except ObjectDoesNotExist:
         return False
     
 def uid_exist(uid):
