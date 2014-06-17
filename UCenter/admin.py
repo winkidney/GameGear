@@ -72,13 +72,13 @@ class GearAdmin(UserAdmin):
     form = UserChangeForm
     add_form = UserCreateForm
 
-    list_display = ('name', 'created_at', 'email', 'is_delete', 'is_staff')
+    list_display = ('name', 'create_at', 'email', 'is_delete', 'is_staff')
     search_fields = ('name', 'email')
     list_filter = ('is_staff',)
-    readonly_fields = ('created_at', 'updated_at')
+    readonly_fields = ('create_at', 'update_at')
     fieldsets = (
         (None, {'fields': ('name', 'email', 'password', 'avatar',)}),
-        (_(u'Personal info'), {'fields': ('created_at', 'updated_at', 'description', 'good_at' , 'website', 'interests')}),
+        (_(u'Personal info'), {'fields': ('create_at', 'update_at', 'description', 'good_at' , 'website', 'interests')}),
         #(_(u'GearArt'),{'fields' : ('reputation',)}),
         #(_(u'GearAnswer'),{'fields' : ('a_reputation',)}),
         
@@ -103,7 +103,7 @@ class GearAdmin(UserAdmin):
             }
         ),
     )
-    ordering = ('created_at',)
+    ordering = ('create_at',)
     filter_horizontal = ('groups', 'user_permissions',)
 
     

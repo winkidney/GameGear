@@ -57,8 +57,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=100, unique=True, verbose_name=_(u'email'))
     avatar = models.ImageField(blank=True, upload_to='avatars/%Y/%m/', verbose_name=_(u'avatar'))
     
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
-    updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
+    update_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
     
     is_delete = models.BooleanField(default=False, verbose_name=_(u'is deleted'))
     is_active = models.BooleanField(default=True, verbose_name=_(u'is active'))
@@ -83,8 +83,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'name'
     REQUIRED_FIELDS = ('email',)
 
-    class Meta:
-        ordering = ('-created_at',)
 
     def __unicode__(self):
         return self.name
@@ -97,7 +95,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     def delete_avatar(self):
         self.avatar.delete()
-
+        
+    def get_avatar_url(self):
+        return self.avatar.url
+    
 class Message(models.Model):
     
     """message from a user to another.

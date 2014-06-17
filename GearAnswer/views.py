@@ -19,7 +19,7 @@ from GearAnswer.forms import (RegisterForm,LoginForm,UserProfileForm,
 from GearAnswer.apis import (render_template,Info,get_uinfo,update_topic,
                              get_node,get_topic,get_replys,update_reply,
                              update_user,update_view_times,
-                             
+                             get_topics_bynode,get_topic_count_bynode,
                              )
 
 
@@ -135,13 +135,15 @@ def register_view(request, *args, **kwargs):
                                   )
     
 def node_view(request, node_name, *args, **kwargs):
-    #todo
+    #todo : add like function
     current_node = get_node(node_name)
+    page = request.GET.get('page', 1)
+    #if the editor is stand_alone
+    stand_alone = False
     if not current_node:
         raise Http404
-    
-    if not get_node(node_name):
-        raise Http404
+    topics = get_topics_bynode(current_node, page)
+    topic_count = get_topic_count_bynode(current_node)
     return render_template(request, 'gearanswer/node.html',
                               locals(),
                               )
@@ -150,6 +152,7 @@ def node_view(request, node_name, *args, **kwargs):
 @login_required(login_url=ROOT_URL+'login/')      
 @transaction.commit_on_success
 def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
+    stand_alone = True
     current_node = get_node(node_name)
     if not current_node:
         raise Http404
@@ -188,10 +191,11 @@ def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
     return render_template(request, 'gearanswer/new_topic.html',
                               locals(),
                               )
+
 @login_required(login_url=ROOT_URL+'login/')
 @transaction.commit_on_success
 def reply_view(request, article_id, *args, **kwargs):
-    #to be fixed
+    #fixed
     topic = get_topic(article_id)
     if not topic:
         raise Http404

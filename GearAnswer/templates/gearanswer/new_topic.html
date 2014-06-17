@@ -1,58 +1,6 @@
 {% extends "gearanswer/base.html" %}
-{% block left_box %}
-                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
-                                <div class="left-cell gray-text ">
-                                    <strong>
-                                        <a href="{{ answer_url }}" >{{ site_name }}</a>
-                                        &gt;
-                                        <a href="{{ answer_url }}node/{{ node_name }}/" >{{ current_node.name }}</a>
-                                        &gt; 发表新主题
-                                    </strong>
-                                </div><!--end a left-cell-->
-
-                                <div class="left-cell font-11px">
-                                    <form id="reply-to" action="" method="POST">
-                                        <div class="border-bottom padding-bottom-5">
-                                            {% csrf_token %}
-                                            <label class="width-8 block">&gt;&gt;&gt;文章标题</label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="title" placeholder="title"></input><br>
-                                            <!--label class="width-8 block">>>>标签</label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="tag" placeholder="使用英文逗号隔开"></input><br-->
-                                            <label class="width-8 block">&gt;&gt;&gt;正文</label>
-                                            <span>&nbsp;UEditor</span>
-                                            <input id="use-ueditor" type="radio" name="editor" value="ue"></input>
-                                            <span>MarkDown</span>
-                                            <input id="use-markdown" type="radio" name="editor" value="md"></input><br/>
-                                            <div id="div-ue">
-                                                <textarea  name="content_ue" style="height:250px;" id="editor-ue"></textarea>
-                                            </div>
-                                            <div id="div-md">
-                                                <textarea  name="content_md"  class="shadow-light radius-5" id="editor-md"></textarea>
-                                            </div>
-                                        </div>
-                                        <input type="submit" class="white-gray-btn no-border radius-3 submit-comment" value="提交回复"/>
-                                    </form>
-                                </div><!--end a left-cell-->
-                                <div class="left-cell font-11px border-bottom">
-                                    <span>帮助：<a href="{{ md_help }}">使用MarkDown进行写作</a></span>
-                                    <span class="right">&gt;&gt;&gt;<a href="{{ answer_url }}">{{ site_name }}</a></span>
-                                </div><!--end a left-cell-->
-                                
-                                <div class="left-cell  border-bottom gray-text">
-                                    <div class="md-render">
-##主题创建指南
-###信息量 Make Sense
-+ 提问型主题：请用准确的语言描述你遇到的问题，如果问题足够在标题中写完，那么正文是不用填写的，在正文中写 RT 是完全没有必要的。提问请参考[提问的艺术]()
-+ 分享型主题：欢迎你在这里分享你在网上看到的有趣事物，因为GameGear是一个关于独立游戏的社区，所以游戏相关话题大家会更感兴趣。请不要在 GameGear 分享社会新闻。
-+ 作品发布型专题：非常欢迎你在这里发布自己的新作品，我们大家都非常乐意去尝试你的新作。需要注意的是，发布作品请在 分享创造 节点，而非其他节点。
-+ 具体技术讨论：请为你的话题选择一个合适的节点，GameGear 为部分编程语言、策划、美术等等都建立了专门的节点，访问方式是在 URL 中直接输入 /node/nodename
-###一个友好的社区   Be Nice to the Community
-我们希望 GemeGear 能够成为中文游戏开发世界中氛围最好的社区，而实现这个目标，需要我们所有人的共同努力：友善，公平，尊重知识和事实。 
-                                    </div>
-                                </div><!--end a left-cell-->
-
-                            </div><!--end left-box-->
-{% endblock left_box %} 
+{% block top_nav %}{% endblock %}
+{% block node_list %}{% endblock %}
 {% block site_echo %}{% endblock %}
 {% block hot_post %}{% endblock %}
 {% block new_nodes %}{% endblock %}

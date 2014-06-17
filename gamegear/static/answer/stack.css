@@ -7,7 +7,7 @@ body,html {
 	font-weight: inherit;
 	line-height: 21px;
 	height: 100%;
-    font-family: "Consolas","Monospace","黑体","宋体";
+    font-family: "Consolas","Monospace","Terminal","文泉驿正黑","微软雅黑","黑体";
 }
 p{
 	margin:0;
@@ -338,7 +338,7 @@ header a{
     margin-bottom: 15px;
 }
 .topic-post{
-	border-bottom:solid 1px #666666;
+	/*border-bottom:solid 1px #666666;*/
 	height: 72px;
 	width: 100%;
 }
@@ -375,7 +375,7 @@ header a{
 	height: 100%;
 }
 .vote-block{
-	margin: 30px 0;
+	margin: 25px 0;
 	font-size: 15px;
 }
 .vote-block a:hover{

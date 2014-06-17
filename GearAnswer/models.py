@@ -39,17 +39,32 @@ class Node(models.Model):
         verbose_name_plural = _(u'topic node')
         verbose_name = _(u'topic node ')
       
-    name = models.CharField(unique=True, max_length=100, blank=False, verbose_name=_(u'node name'))
-    avatar = models.ImageField(upload_to='nodes/', verbose_name=_(u'node avatar'))
-    description = models.TextField(verbose_name=_(u'node description'))
-    help_text = models.TextField(verbose_name=_(u"node help text"))
-    q_count = models.IntegerField(default=0, blank=False, verbose_name=_(u'topic count'))
-    parent = models.ForeignKey('Node', default=0, blank=False, verbose_name=_(u"parent-node"))
+    name = models.CharField(blank=False, unique=True, 
+                            max_length=100, 
+                            verbose_name=_(u'node name'))
+    avatar = models.ImageField(blank=True,
+                               upload_to='nodes/', 
+                               verbose_name=_(u'node avatar'))
+    description = models.TextField(blank=True,
+                                   verbose_name=_(u'node description'))
+    help_text = models.TextField(blank=True,
+                                 verbose_name=_(u"node help text"))
+    q_count = models.IntegerField(blank=False,
+                                  default=0, verbose_name=_(u'topic count'))
+    parent = models.ForeignKey('Node', 
+                               default=0, 
+                               blank=False, verbose_name=_(u"parent-node"))
     
     def __unicode__(self):
         
         return self.name
-
+    
+    def get_avatar_url(self):
+        
+        return self.avatar.url
+    
+    def get_abs_url(self):
+        return u"/node/%s/" % self.name
 
 class Tag(models.Model):
     
@@ -79,6 +94,8 @@ class Topic(models.Model):
     class Meta:
         verbose_name_plural = _(u"topics")
         verbose_name = _(u"topic")
+        get_latest_by = "-create_at"
+        ordering = ['-update_at']
         
     title = models.CharField(max_length=250, blank=False, 
                              db_index=True,
@@ -95,15 +112,29 @@ class Topic(models.Model):
     reply_count = models.IntegerField(blank=False, default=0, verbose_name=_(u'reply count'))
     
     create_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
-    updated_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
+    update_at = models.DateTimeField(auto_now=True, verbose_name=_(u'updated at'))
+    last_reply_id = models.CharField(max_length=15, blank=True, default='0',
+                                     verbose_name=_(u"last reply's id"))
+    
     work_out = models.BooleanField(blank=False, default=False, verbose_name=_(u'if the question worked out'))
     useful = models.IntegerField(blank=False, default=0, verbose_name=_(u'useful'))
     stars = models.IntegerField(blank=False, default=0, verbose_name=_(u'stared count'))
     useless = models.IntegerField(blank=False, default=0, verbose_name=_(u'useless'))
+    
     view_times = models.IntegerField(blank=False, default=0, verbose_name=_(u'view times'))
+    
     #answers = models.ManyToManyField(Answer, blank=True, verbose_name=_(u'response to the topic'))
     tags = models.ManyToManyField(Tag, blank=True, verbose_name=_(u'topic tags'))
     node = models.ForeignKey(Node, blank=False, verbose_name=_(u'topic node'))
+    @property
+    def last_reply(self):
+        if self.last_reply_id != '0':
+            try:
+                return Reply.objects.get(id=self.last_reply_id)
+            except:
+                return None
+        else:
+            return None
     
     def get_abs_url(self):
         return """/articles/%s/""" % self.id

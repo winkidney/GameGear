@@ -4,7 +4,7 @@ GameGear
 A game website like V2EX and opengameart for chinese.    
 Now building.    
 ###todo
-+ node 文章列表
++ 发表主题和回复主题扣除积分，收到回复和收到感谢增加积分
 + 导航条定制部分
 + 首页文章列表
 + 最热文章列表和访问计数
@@ -14,8 +14,13 @@ Now building.
 + 站点公告
 + 用户资料编辑页面的未显示内容和样式调整
 + 模板文件中”关于社区积分“的显示和设置
++ 修正：每次有新回复就更新一次文章的更新时间
++ node文章数量cache
+
 ###done
 + 修复发表回复的表单中不会指定编辑器类型的错误,GearAnswer/apis.py和views中 done
+
++ node 文章列表
 
 ###process 70%.    
 

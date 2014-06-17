@@ -15,6 +15,7 @@ from UCenter.models import User
 from GearAnswer.models import Topic,Node,Reply,UserProfile
 from UCenter.apis import get_user_by_id
 from UCenter.apis import create_user as uc_create_user
+from GearAnswer.config import *
 
 def remove_xss_tags(html):
     """"escape the specified html tags from user's content"""
@@ -28,7 +29,27 @@ def get_node(node_name):
         logging.info("Node object [%s] does not existed!" % node_name)
         return False
     return node
+def get_topics_bynode(node, page):
+    """ Get topics by node object and return given page's topic list.
+        get_topics_bynode(Node node, int/str/unicode page)
+    """
+    if not isinstance(page, (int,str,unicode)):
+        raise TypeError, "page argument [%s] must be a int/str/unicode instance!" \
+            % page
+    if not isinstance(node, Node):
+        raise TypeError,"node argument [%s] must be a Node instance"\
+            % node
+    page = int(page)
+    topics = Topic.objects.filter(node=node)[(page-1):(page*TOPICS_PER_PAGE_FOR_NODE-1)]
+    return topics
 
+def get_topic_count_bynode(node):
+    """Get topic count by Node object"""
+    #todo : add cache here
+    if not isinstance(node, Node):
+        raise TypeError, "node argument [%s] must be a Node instance!"
+    return Topic.objects.filter(node=node).count()
+    
 def get_topic(topic_id):
     "Get a Topic object by its id,return Node instance if successfully done,False if failed"
     try:
@@ -208,7 +229,7 @@ def get_uinfo(uid):
     except ObjectDoesNotExist:
         return None
     if user.avatar:
-        avatar_url = user.avatar.url
+        avatar_url = user.get_avatar_url
     else:
         avatar_url = None
     
@@ -231,7 +252,7 @@ def get_uinfo(uid):
                             'good_at' : user.good_at,
                             'interests' : user.interests,
                             'website' : user.website,
-                            'create_at' : user.created_at,
+                            'create_at' : user.create_at,
                       }
     #GearAnswer profile
     profiles = UserProfile.objects.filter(user_id=uid)
