@@ -31,7 +31,7 @@
                                                                 <span>作者 ：&nbsp;<a href="{{ answer_url }}gear/{{ topic.author.id }}/profile/">{{ topic.author.name }}</a></span>
                                                                 {% if topic.last_reply %}
                                                                 <span>&nbsp;&nbsp;•&nbsp;最后回复于 {{ topic.last_reply.create_at }}</span>
-                                                                <span>&nbsp;&nbsp;•&nbsp;来自&nbsp;<a href="{{ topic.last_reply.author.id }}">{{ topic.last_reply.author.name }}</a></span>
+                                                                <span>&nbsp;&nbsp;•&nbsp;来自&nbsp;<a href="{{ answer_url }}gear/{{ topic.last_reply.author.id }}/profile/">{{ topic.last_reply.author.name }}</a></span>
                                                                 {% endif %}
                                                                </p> 
                                                             </div>
