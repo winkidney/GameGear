@@ -13,7 +13,7 @@ PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)),os.pardi
 AUTH_USER_MODEL = 'UCenter.User'
 
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
