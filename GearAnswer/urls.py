@@ -9,7 +9,7 @@ from  GearAnswer import views
 
 urlpatterns = patterns('',
     url(r'^$', views.home_view),
-    url(r'^ajax/tab/(\d*?)/$', views.tab_view),
+    url(r'^ajax/nav/(\d*?)/$', views.nav_view),
     
     url(r'^login/$', views.login_view),
     url(r'^logout/$', views.logout_view),

@@ -7,12 +7,14 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.core.exceptions import  ObjectDoesNotExist
-from django.core.files.images import ImageFile
+from django.db.models.query import QuerySet
 import logging
 import uuid
 
 from UCenter.models import User
-from GearAnswer.models import Topic,Node,Reply,UserProfile
+from GearAnswer.models import (Topic,Node,Reply,
+                               UserProfile,Nav
+                               )
 from UCenter.apis import get_user_by_id
 from UCenter.apis import create_user as uc_create_user
 from GearAnswer.config import *
@@ -21,7 +23,7 @@ def remove_xss_tags(html):
     """"escape the specified html tags from user's content"""
     return remove_tags(html, 'script html body')
 
-def get_node(node_name):
+def get_node_byname(node_name):
     "Get a Node object by its name,return Node instance if successfully done,False if failed"
     try:
         node = Node.objects.get(name=node_name)
@@ -29,6 +31,25 @@ def get_node(node_name):
         logging.info("Node object [%s] does not existed!" % node_name)
         return False
     return node
+
+def get_node_list():
+    """ Get a node list cotains parent and children.
+    
+    """
+    result = []
+    pnodes = Node.objects.filter(parent_id=1).exclude(name='none')
+    for pnode in pnodes:
+        result.append({'parent' : pnode, 
+                       'children': Node.objects.filter(parent=pnode)}
+                      )
+    return result 
+
+def get_hotnodes():
+    """ Get hot nodes depend on its update and total topics 
+        Return a list of them.
+    """
+    return 
+
 def get_topics_bynode(node, page):
     """ Get topics by node object and return given page's topic list.
         get_topics_bynode(Node node, int/str/unicode page)
@@ -36,13 +57,14 @@ def get_topics_bynode(node, page):
     if not isinstance(page, (int,str,unicode)):
         raise TypeError, "page argument [%s] must be a int/str/unicode instance!" \
             % page
-    if not isinstance(node, Node):
-        raise TypeError,"node argument [%s] must be a Node instance"\
-            % node
+    
+    if not isinstance(node, (Node, QuerySet)):
+        raise TypeError,"node argument [%s] must be a Node instance or QuerySet instance!"\
+                % node
     page = int(page)
     topics = Topic.objects.filter(node=node)[(page-1):(page*TOPICS_PER_PAGE_FOR_NODE-1)]
     return topics
-
+    
 def get_topic_count_bynode(node):
     """Get topic count by Node object"""
     #todo : add cache here
@@ -76,7 +98,20 @@ def get_reply(reply_id):
         logging.warn("Reply object [%s] does not existed!" % reply_id)
         return None
     return reply
-    
+
+def get_navs():
+    #todo : add cache
+    return Nav.objects.exclude(name="none")
+
+def get_nav_byid(nav_id):
+    """get a nav tab by nav_id"""
+    #to do : add cache
+    if not isinstance(nav_id, (int, str, unicode)):
+        raise TypeError,"Local var topic id %s is not a int instance" % nav_id
+    try:
+        return Nav.objects.get(id=nav_id)
+    except ObjectDoesNotExist:
+        return None
     
 def update_avatar(avatar, avatar_file):
     
@@ -116,20 +151,16 @@ def update_user(uid, avatar_file, profile_dict):
     #to test
     if not isinstance(profile_dict, dict):
         raise TypeError, "Profile dict [%s] is not a instance of dict!" % profile_dict
-    if not isinstance(uid, int):
-        raise TypeError, "uid [%s] must be an int instance!" % uid
-    user = get_user_by_id(uid)
+    if not isinstance(uid, (int,str,unicode)):
+        raise TypeError, "uid [%s] must be an int/str/unicode instance!" % uid
+    user = get_user_by_id(int(uid))
     
-    
-   
     for item in profile_dict.items():
         if item[0] != u'avatar':
             user.__setattr__(item[0], item[1])
             
     update_avatar(user.avatar, avatar_file)
-    
-    
-    
+
     user.save()
     return user
 
@@ -161,18 +192,19 @@ def update_view_times(topic):
     topic.view_times = topic.view_times + 1
     topic.save()
         
-    
-def update_topic(title, editor, content, node_name, uid, topic_id=None):    #to do
+def update_topic_property(topic, **kwargs):
+    """Modify Topic object property by keyword arguments"""
+    if not isinstance(topic, Topic):
+        raise TypeError,"topic argument [%s] must be a Topic instance!" % topic
+    for property in kwargs.items():
+        topic.__setattr__(property[0], property[1])
+    topic.save()
+   
+def update_topic(title, editor, content, node_name, uid):    
     """ create_topic(unicode title, unicode topic, unicode node, int uid)
-        Update a topic while create a new topic if the topic_id is given.
-        return Topic instance if success, an error will be raised if fail by detail.
+        return Topic instance if success, an error will be raised if fail.
     """
-    if topic_id:
-        topic = get_topic(topic_id)
-    else:
-        topic = None
-    if not topic:
-        topic = Topic()
+    topic = Topic()
     topic.author = get_user_by_id(uid)
     topic.title = title
     topic.editor = editor
@@ -200,6 +232,7 @@ def update_reply(editor, content, article_id, uid, reply_id=None):
                       author=User.objects.get(id=uid)
                       )
         reply.save()
+    return reply
     
 def render_template(request, template, data=None):
     "Wrapper around render_to_response that fills in context_instance for you."

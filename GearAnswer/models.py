@@ -8,6 +8,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import  ObjectDoesNotExist
 from UCenter.models import User
+from GearAnswer.config import ANSWER_ROOT as ROOT_URL 
 
 EDITOR_TYPES = (
     ('md', _(u'markdown editor')),
@@ -64,7 +65,7 @@ class Node(models.Model):
         return self.avatar.url
     
     def get_abs_url(self):
-        return u"/node/%s/" % self.name
+        return u"%snode/%s/" % (ROOT_URL, self.name)
 
 class Tag(models.Model):
     
@@ -79,7 +80,7 @@ class Tag(models.Model):
     
     
     def get_abs_url(self):
-        return """/tags/%s/""" % self.name
+        return u"%stags/%s/" % (ROOT_URL, self.name)
     
     def __unicode__(self):
         
@@ -137,7 +138,7 @@ class Topic(models.Model):
             return None
     
     def get_abs_url(self):
-        return """/articles/%s/""" % self.id
+        return u"%sarticles/%s/" % (ROOT_URL, self.id)
     
     def __unicode__(self):
         
@@ -180,16 +181,20 @@ class Nav(models.Model):
     
     """Nav tabs from Tag,The data to generate nav menu"""
     class Meta:
-        verbose_name_plural = _(u'nav setting')
-        verbose_name = _(u'nav setting')
-    
-    name = models.CharField(max_length=100, verbose_name=_(u'Nav setting'))
+        verbose_name_plural = _(u'Navigations')
+        verbose_name = _(u'Navigation')
+        ordering = ['display_order']
+        
+    name = models.CharField(max_length=50, verbose_name=_(u'Navigation name'))
     display_order = models.IntegerField(blank=False, default=0, verbose_name=_(u'display order'))
-    Nodes = models.ManyToManyField(Node, verbose_name=_(u'nav child-nodes'))
+    child_nodes = models.ManyToManyField(Node,verbose_name=_(u'nav child-nodes'))
     
     def __unicode__(self):
-        return self.name
-    
+        return u"%s" % self.name
+
+    def get_children(self):
+        return self.child_nodes.all()
+        
 class Setting(models.Model):
     
     """global settings of the website"""

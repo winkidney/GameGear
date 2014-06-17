@@ -17,25 +17,38 @@ from GearAnswer.forms import (RegisterForm,LoginForm,UserProfileForm,
                               clean_err_form,NewTopicForm,
                               ReplyFrom)
 from GearAnswer.apis import (render_template,Info,get_uinfo,update_topic,
-                             get_node,get_topic,get_replys,update_reply,
+                             get_node_byname,get_topic,get_replys,update_reply,
                              update_user,update_view_times,
                              get_topics_bynode,get_topic_count_bynode,
+                             update_topic_property,get_navs,
+                             get_nav_byid,get_node_list,
                              )
 
 
-ROOT_URL = '/'
+from GearAnswer.config import ANSWER_ROOT as ROOT_URL 
 
 
 
 def test_view(request):
-    #todo
+    #todo : i18n test
     return HttpResponse(_(u"You have already logined!"))
+
 def home_view(request):
+    navigations = get_navs()
+    node_list = get_node_list()
     return render_template(request, 'gearanswer/base.html',
                               locals(),
                               )
-def tab_view(request, tab_id, *args, **kwargs):
-    #todo
+    
+    
+def nav_view(request, nav_id, *args, **kwargs):
+    #todo : 
+    page = request.GET.get('page', 1)
+    nav = get_nav_byid(nav_id)
+    if not nav:
+        raise Http404
+    nodes = nav.get_children()
+    topics = get_topics_bynode(nodes, page)
     return render_template(request, 'gearanswer/tab.html',
                               locals(),
                               )
@@ -60,7 +73,7 @@ def login_view(request, *args, **kwargs):
                         title = _(u"Login successed!")
                         content = _(u'Maybe you want to:<a href="%sgear/%s/profile/edit/">Edit your profile</a> or go back to <a href="%s">pre-page</a>' \
                                     % (ROOT_URL, user.id, request.GET.get('next')))
-                        info = Info(title, content, request.GET.get('next'))
+                        info = Info(title, content, request.GET.get('next', ROOT_URL))
                         
                         return render_template(request, 'gearanswer/info.html',
                                         locals(),
@@ -136,7 +149,7 @@ def register_view(request, *args, **kwargs):
     
 def node_view(request, node_name, *args, **kwargs):
     #todo : add like function
-    current_node = get_node(node_name)
+    current_node = get_node_byname(node_name)
     page = request.GET.get('page', 1)
     #if the editor is stand_alone
     stand_alone = False
@@ -153,7 +166,7 @@ def node_view(request, node_name, *args, **kwargs):
 @transaction.commit_on_success
 def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
     stand_alone = True
-    current_node = get_node(node_name)
+    current_node = get_node_byname(node_name)
     if not current_node:
         raise Http404
     if request.method == "POST":
@@ -197,6 +210,7 @@ def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
 def reply_view(request, article_id, *args, **kwargs):
     #fixed
     topic = get_topic(article_id)
+    
     if not topic:
         raise Http404
     
@@ -210,12 +224,17 @@ def reply_view(request, article_id, *args, **kwargs):
                 content = rfd('comment_ue')
             else:
                 raise ValueError, "editor type is required!"
-            update_reply(rfd('editor'),
+            reply = update_reply(rfd('editor'),
                          content,
                          int(article_id),
                          int(request.user.id,) 
                          )
-                    
+            #update the topic last reply information
+            update_topic_property(topic,
+                                  last_reply_id=reply.id,
+                                  reply_count=topic.reply_count+1
+                                  )
+            
             info = Info(_(u"Reply published!"), 
                         _(u"Now you will be redirected to topic page!"), 
                         topic.get_abs_url())

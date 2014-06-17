@@ -29,7 +29,7 @@
     <link href="{{ static_url }}/answer/js/pagedown-bootstrap/css/jquery.pagedown-bootstrap.css" rel="stylesheet">
     <script src="http://cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="{{ static_url }}/answer/js/showdown/compressed/showdown.syntaxhighter.js"></script>
     <script src="{{ static_url }}/answer/js/showdown/compressed/extensions/github.js"></script>
     <!--end markdown editor-->
@@ -90,88 +90,17 @@
 
                         {% block left_box %}
                             {% block top_nav %}
+                            {% if navigations %}
                             <div id="core-tabs" class="jqtab-kstyle light-black-box-shadow">
                                 <ul>
-                                    <li><a href="#tabs-1">程序设计</a></li>
-                                    <li><a href="/ajax/tab/1/">美术</a></li>
-                                    <li><a href="/ajax/tab/1/">策划</a></li>
+                                {% for nav in navigations %}
+                                    <li><a href="{{ answer_url }}ajax/nav/{{ nav.id }}/?page=1">{{ nav.name }}</a></li>
+                                {% endfor %}
                                 </ul>
-                                <div id="tabs-1">
-                                    <div class="node-list left">
-                                        <ul class="no-list-style">
-                                            <li><a href="#">c++</a></li>
-                                            <li><a href="#">shading language</a></li>
-                                        </ul>
-                                    </div><!--end div node-list-->
-                                    <div class="node-detail left">
-                                        <ul class='no-list-style topic'>
-                                           <li>
-                                                <div class="topic-post">
-                                                    <div class="user-avatar left">
-                                                        <a href="#">
-                                                            <img src="{{ static_url }}/answer/img/avatar.png">
-                                                        </a>
-                                                    </div>
-                                                    <div class="detail-center left">
-                                                        <div class="topic-detail left">
-                                                            <div class="topic-title">
-                                                                <a href="#">IOS游戏开发是使用什么语言呢？</a>
-                                                            </div>
-                                                            <div class="topic-info">
-                                                               <p>
-                                                                <a class="gray-bg-link" href="#">C++</a>
-                                                                &nbsp;&nbsp;•&nbsp;<a href="#">winkidney</a>
-                                                                &nbsp;&nbsp;•&nbsp;最后回复于 2014-04-12 12:20
-                                                                &nbsp;&nbsp;•&nbsp;来自&nbsp;<a href="#">阿毛</a>
-                                                               </p> 
-                                                            </div>
-                                                        </div>
-                                                    </div><!--end div topic-center-->
-                                                    <div class="detail-vote left">
-                                                        <div class="vote-block">
-                                                            <span><a href="#">回复&nbsp;</a>5&nbsp;<a>♥&nbsp;</a>10&nbsp;<a><a>有用&nbsp;</a>3&nbsp;<a><a>无用&nbsp;</a>0&nbsp;</span>
-                                                        </div>
-                                                    </div><!--end div detail-vote-->
-                                                </div>
-                                                <div class="clear"></div>
-                                           </li><!--end li topic-post-->
-                                           <li>
-                                                <div class="topic-post">
-                                                    <div class="user-avatar left">
-                                                        <a href="#">
-                                                            <img src="{{ static_url }}/answer/img/avatar.png">
-                                                        </a>
-                                                    </div>
-                                                    <div class="detail-center left">
-                                                        <div class="topic-detail left">
-                                                            <div class="topic-title">
-                                                                <a href="#">IOS游戏开发是使用什么语言呢？</a>
-                                                            </div>
-                                                            <div class="topic-info">
-                                                               <p>
-                                                                <a class="gray-bg-link " href="#">C++</a>
-                                                                &nbsp;&nbsp;•&nbsp;<a href="#">winkidney</a>
-                                                                &nbsp;&nbsp;•&nbsp;最后回复于 2014-04-12 12:20
-                                                                &nbsp;&nbsp;•&nbsp;来自&nbsp;<a href="#">阿毛</a>
-                                                               </p> 
-                                                            </div>
-                                                        </div>
-                                                    </div><!--end div topic-center-->
-                                                    <div class="detail-vote left">
-                                                        <div class="vote-block">
-                                                            <span><a href="#">回复&nbsp;</a>5&nbsp;<a>♥&nbsp;</a>10&nbsp;<a><a>有用&nbsp;</a>3&nbsp;<a><a>无用&nbsp;</a>0&nbsp;</span>
-                                                        </div>
-                                                    </div><!--end div detail-vote-->
-                                                </div>
-                                                <div class="clear"></div>
-                                           </li><!--end li topic-post-->
-                                        </ul><!-- end ul topic-->
-                                    </div><!--end div node-detail-->
-
-                                    <div class="clear"></div>
-                                </div><!--end tabs-1-->
+                                
                             </div><!--end div core-tabs-->
-                            {% endblock %}
+                            {% endif %}
+                            {% endblock top_nav %}
 
                             {% block node_list %}
                             <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
@@ -180,83 +109,27 @@
                                         <span>节点列表</span>
                                     </strong>
                                 </div><!--end a left-cell-->
-
+                                
+                                {% for node in node_list %}
                                 <div class="left-cell font-11px border-bottom">
                                     <table>
                                         <td class="nodes-box-left">
-                                            <p>游戏策划</p>
+                                            <p>{{ node.parent.name }}</p>
                                         </td>
                                         <td class="nodes-box-right">
-                                            <a href="#" title="动作" class="padding-5 left black-gray-btn radius-5 shadow-light-no-ease">动作游戏</a>
-                                            <a href="#" title="解谜" class="padding-5 left black-gray-btn radius-5 shadow-light-no-ease">解谜游戏</a>
+                                            {% for cnode in node.children %}
+                                            <a href="{{ cnode.get_abs_url }}" title="{{ cnode.name }}" class="padding-5 left black-gray-btn radius-5 shadow-light-no-ease">{{ cnode.name }}</a>
+                                            {% endfor %}
                                         </td>
                                     </table>
                                     
                                 </div><!--end a left-cell-->
-
-                            </div><!--end left-box-->
-                            {% endblock %}
-
-
-                            {% block editor %}
-                            
-                            <div class="left-box gray-bg reply-box radius-3 light-black-box-shadow ">
-                                <div class="left-cell gray-text ">
-                                    <strong>
-                                    {% if stand_alone %}
-                                        <a href="{{ answer_url }}" >{{ site_name }}</a>
-                                        &gt;
-                                        <a href="{{ answer_url }}node/{{ node_name }}/" >{{ current_node.name }}</a>
-                                    {% endif %}
-                                        &gt; 发表新主题
-                                    </strong>
-                                </div><!--end a left-cell-->
-
-                                <div class="left-cell font-11px">
-                                    <form id="new-topic" action="{{ current_node.get_abs_url }}input/" method="POST">
-                                        <div class="border-bottom padding-bottom-5">
-                                            {% csrf_token %}
-                                            <label class="width-8 block">&gt;&gt;&gt;文章标题<span class="error margin-l-10">{{ topic_form.errors.title }}</span></label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="title" placeholder="title"></input><br>
-                                            <!--label class="width-8 block">>>>标签</label>
-                                            <input type="text" class="dark-bg white-text shadow-light width-98" name="tag" placeholder="使用英文逗号隔开"></input><br-->
-                                            <label class="width-8 block">&gt;&gt;&gt;正文</label>
-                                            <span>&nbsp;UEditor</span>
-                                            <input id="use-ueditor" type="radio" name="editor" value="ue"></input>
-                                            <span>MarkDown</span>
-                                            <input id="use-markdown" type="radio" name="editor" value="md"></input><br/>
-                                            <div id="div-ue">
-                                                <textarea  name="content_ue" style="height:250px;" id="editor-ue"></textarea>
-                                            </div>
-                                            <div id="div-md">
-                                                <textarea  name="content_md"  class="shadow-light radius-5" id="editor-md"></textarea>
-                                            </div>
-                                        </div>
-                                        <input type="submit" class="white-gray-btn no-border radius-3 submit-comment" value="提交回复"/>
-                                    </form>
-                                </div><!--end a left-cell-->
-                                <div class="left-cell font-11px border-bottom">
-                                    <span>帮助：<a href="{{ md_help }}">使用MarkDown进行写作</a></span>
-                                    <span class="right">&gt;&gt;&gt;<a href="{{ answer_url }}">{{ site_name }}</a></span>
-                                </div><!--end a left-cell-->
+                                {% endfor %}
                                 
-                                <div class="left-cell  border-bottom gray-text">
-                                    <div class="md-render">
-##主题创建指南
-###信息量 Make Sense
-+ 提问型主题：请用准确的语言描述你遇到的问题，如果问题足够在标题中写完，那么正文是不用填写的，在正文中写 RT 是完全没有必要的。提问请参考[提问的艺术]()
-+ 分享型主题：欢迎你在这里分享你在网上看到的有趣事物，因为GameGear是一个关于独立游戏的社区，所以游戏相关话题大家会更感兴趣。请不要在 GameGear 分享社会新闻。
-+ 作品发布型专题：非常欢迎你在这里发布自己的新作品，我们大家都非常乐意去尝试你的新作。需要注意的是，发布作品请在 分享创造 节点，而非其他节点。
-+ 具体技术讨论：请为你的话题选择一个合适的节点，GameGear 为部分编程语言、策划、美术等等都建立了专门的节点，访问方式是在 URL 中直接输入 /node/nodename
-###一个友好的社区   Be Nice to the Community
-我们希望 GemeGear 能够成为中文游戏开发世界中氛围最好的社区，而实现这个目标，需要我们所有人的共同努力：友善，公平，尊重知识和事实。 
-                                    </div>
-                                </div><!--end a left-cell-->
-
                             </div><!--end left-box-->
-
-                            {% endblock %}
-
+                            {% endblock node_list %}
+                            
+                            {% block editor %}{% endblock %}
 
                         {% endblock left_box %}
                         </div><!--end div core-left-->
@@ -343,7 +216,7 @@
                         {% block site_echo %}
                             <div class="side-box light-black-box-shadow ">
                                 <div class="cell center gray-text">
-                                    <p><a id="site-statement" href="#">站点公告</a></p>
+                                    <p><a id="site-statement" href="#">{{ site_echo }}</a></p>
                                 </div><!--end a cell div-->                                                                
                                 <div class="clear"></div>
                             </div><!--end side-box-->

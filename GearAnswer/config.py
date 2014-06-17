@@ -3,3 +3,4 @@
 #ver 0.1 - 2014-06-17 by winkidney
 
 TOPICS_PER_PAGE_FOR_NODE = 30
+ANSWER_ROOT = '/'

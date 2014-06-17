@@ -16,6 +16,7 @@ def shared_data(request, *args, **kwagrs):
             'guide_url' : 'http://wiki.gg-workshop.com/doku.php?id=%E6%96%87%E6%A1%A3:%E7%A4%BE%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97',
             'art_url' : 'http://wiki.gg-workshop.com/doku.php?id=%E4%BC%81%E5%88%92:gamegear:gearart',
             'projects_url' : 'http://wiki.gg-workshop.com/doku.php?id=%E4%BC%81%E5%88%92:gamegear:gearprojects',
+            'site_echo' : '游戏齿轮ALPHA 0.1上线～',
             }
     if logined(request):
         data['logined'] = True

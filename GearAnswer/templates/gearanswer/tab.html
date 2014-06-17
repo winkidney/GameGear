@@ -1,74 +1,56 @@
-
+                                <div id="tab-{{ nav.id }}">
                                     <div class="node-list left">
                                         <ul class="no-list-style">
-                                            <li><a href="#">c++</a></li>
-                                            <li><a href="#">shading language</a></li>
+                                            {% for node in nodes %}
+                                            <li><a href="{{ answer_url }}node/{{ node.name }}/">{{ node.name }}</a></li>
+                                            {% endfor %}
                                         </ul>
                                     </div><!--end div node-list-->
                                     <div class="node-detail left">
                                         <ul class='no-list-style topic'>
-                                           <li>
+                                        {% for topic in topics %}
+                                           <li class="border-bottom">
                                                 <div class="topic-post">
                                                     <div class="user-avatar left">
-                                                        <a href="#">
+                                                        <a href="{{ answer_url }}gear/{{ topic.aurhor.id }}/profile/">
+                                                        {% if topic.author.avatar %}
+                                                            <img src="{{ topic.aurhor.get_avatar_url }}">
+                                                        {% else %}
                                                             <img src="{{ static_url }}/answer/img/avatar.png">
+                                                        {% endif %}
                                                         </a>
                                                     </div>
                                                     <div class="detail-center left">
                                                         <div class="topic-detail left">
                                                             <div class="topic-title">
-                                                                <a href="#">IOS游戏开发是使用什么语言呢？</a>
+                                                                <a href="{{ answer_url }}articles/{{ topic.id }}/">{{ topic.title }}</a>
                                                             </div>
                                                             <div class="topic-info">
                                                                <p>
-                                                                &nbsp;&nbsp;<a class="gray-bg-link" href="#">C++</a>
-                                                                &nbsp;&nbsp;•&nbsp;<a href="#">winkidney</a>
-                                                                &nbsp;&nbsp;•&nbsp;最后回复于 2014-04-12 12:20
-                                                                &nbsp;&nbsp;•&nbsp;来自&nbsp;<a href="#">阿毛</a>
+                                                                <a class="gray-bg-link" href="{{ topic.node.get_abs_url }}">{{ topic.node.name }}</a>
+                                                                <span>作者 ：&nbsp;<a href="{{ answer_url }}gear/{{ topic.author.id }}/profile/">{{ topic.author.name }}</a></span>
+                                                                {% if topic.last_reply %}
+                                                                <span>&nbsp;&nbsp;•&nbsp;最后回复于 {{ topic.last_reply.create_at }}</span>
+                                                                <span>&nbsp;&nbsp;•&nbsp;来自&nbsp;<a href="{{ topic.last_reply.author.id }}">{{ topic.last_reply.author.name }}</a></span>
+                                                                {% endif %}
                                                                </p> 
                                                             </div>
                                                         </div>
                                                     </div><!--end div topic-center-->
                                                     <div class="detail-vote left">
                                                         <div class="vote-block">
-                                                            <span><a href="#">回复&nbsp;</a>5&nbsp;<a>♥&nbsp;</a>10&nbsp;<a><a>有用&nbsp;</a>3&nbsp;<a><a>无用&nbsp;</a>0&nbsp;</span>
+                                                            <span>回复&nbsp;{{ topic.reply_count }}&nbsp;</span>
+                                                            <span>♥&nbsp;{{ topic.stars }}&nbsp;</span>
+                                                            <span>有用&nbsp;{{ topic.useful }}&nbsp;</span>
+                                                            <span>无用&nbsp;{{ topic.useless }}&nbsp;</span>
                                                         </div>
                                                     </div><!--end div detail-vote-->
                                                 </div>
                                                 <div class="clear"></div>
                                            </li><!--end li topic-post-->
-                                           <li>
-                                                <div class="topic-post">
-                                                    <div class="user-avatar left">
-                                                        <a href="#">
-                                                            <img src="{{ static_url }}/answer/img/avatar.png">
-                                                        </a>
-                                                    </div>
-                                                    <div class="detail-center left">
-                                                        <div class="topic-detail left">
-                                                            <div class="topic-title">
-                                                                <a href="#">IOS游戏开发是使用什么语言呢？</a>
-                                                            </div>
-                                                            <div class="topic-info">
-                                                               <p>
-                                                                &nbsp;&nbsp;<a class="gray-bg-link" href="#">C++</a>
-                                                                &nbsp;&nbsp;•&nbsp;<a href="#">winkidney</a>
-                                                                &nbsp;&nbsp;•&nbsp;最后回复于 2014-04-12 12:20
-                                                                &nbsp;&nbsp;•&nbsp;来自&nbsp;<a href="#">阿毛</a>
-                                                               </p> 
-                                                            </div>
-                                                        </div>
-                                                    </div><!--end div topic-center-->
-                                                    <div class="detail-vote left">
-                                                        <div class="vote-block">
-                                                            <span><a href="#">回复&nbsp;</a>5&nbsp;<a>♥&nbsp;</a>10&nbsp;<a><a>有用&nbsp;</a>3&nbsp;<a><a>无用&nbsp;</a>0&nbsp;</span>
-                                                        </div>
-                                                    </div><!--end div detail-vote-->
-                                                </div>
-                                                <div class="clear"></div>
-                                           </li><!--end li topic-post-->
+                                        {% endfor %}   
                                         </ul><!-- end ul topic-->
                                     </div><!--end div node-detail-->
 
                                     <div class="clear"></div>
-
+                                </div><!--end tabs-1-->

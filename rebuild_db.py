@@ -22,13 +22,18 @@ from GearAnswer.apis import create_user
 def add_default_node():
     update_node('none', 
                 'system default node, if your node has no parent node ,set it to this node')
+    update_node('程序设计', 
+                '程序设计节点，这里讨论游戏程序设计的问题')
+    update_node('游戏服务器', 
+                '游戏服务器程序设计',
+                node_avatar=None, pnode='程序设计')
     
 def test_info(name, passwd, email):
     user = create_user(name, passwd, email)
     update_topic("游戏齿轮诞生～", 
                  'md', 
                  "游戏齿轮alpha版，由GearDirver强力驱动～～", 
-                 'none', 
+                 '游戏服务器', 
                  1, 
                  )
     update_reply('md', 
