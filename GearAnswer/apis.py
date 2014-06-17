@@ -168,7 +168,7 @@ def update_node(name, description, node_avatar=None, pnode=None, avatar=None):
     """ update_node(unicode name, unicode description, 
                     unicode node_avatar, unicode pnode, InMemoryFile avatar=None)
     """
-    node = get_node(name)
+    node = get_node_byname(name)
     if not node:
         node = Node()
     node.name = name
@@ -209,7 +209,7 @@ def update_topic(title, editor, content, node_name, uid):
     topic.title = title
     topic.editor = editor
     topic.content = remove_xss_tags(content)
-    topic.node = get_node(node_name)
+    topic.node = get_node_byname(node_name)
     topic.save()
     return topic
 
