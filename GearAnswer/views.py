@@ -22,7 +22,7 @@ from GearAnswer.apis import (render_template,Info,get_uinfo,update_topic,
                              get_topics_bynode,get_topic_count_bynode,
                              update_topic_property,get_navs,
                              get_nav_byid,get_node_list,
-                             create_user,
+                             create_user,get_today_hot,
                              )
 
 
@@ -37,6 +37,7 @@ def test_view(request):
 def home_view(request):
     navigations = get_navs()
     node_list = get_node_list()
+    hot_topics = get_today_hot()
     return render_template(request, 'gearanswer/base.html',
                               locals(),
                               )
@@ -234,6 +235,7 @@ def reply_view(request, article_id, *args, **kwargs):
                          int(request.user.id,) 
                          )
             #update the topic last reply information
+            #and update the reply count
             update_topic_property(topic,
                                   last_reply_id=reply.id,
                                   reply_count=topic.reply_count+1
@@ -256,6 +258,11 @@ def reply_view(request, article_id, *args, **kwargs):
     redirect_url = topic.get_abs_url()
     return HttpResponseRedirect(redirect_url)
 
+def set_like_view(request, *args, **kwargs):
+    #todo : build
+    pass
+
+
 def set_best_view(request, *args, **kwargs):
     #todo
     return HttpResponse('set best success')
@@ -269,7 +276,7 @@ def set_useful_view(request, *args, **kwargs):
     return HttpResponse('set useless success')
 
 def user_profile_view(request, uid, *args, **kwargs):
-    
+    #todo : change the default data that displays
     uinfo_dict = get_uinfo(uid)
     if not uinfo_dict:
         raise Http404
@@ -279,6 +286,7 @@ def user_profile_view(request, uid, *args, **kwargs):
     
 @login_required(login_url=ROOT_URL+'login/')
 def user_profile_edit_view(request, uid, *args, **kwargs):
+    
     uinfo_dict = get_uinfo(uid)
     uid = int(uid)
     if not uinfo_dict:
@@ -298,7 +306,8 @@ def user_profile_edit_view(request, uid, *args, **kwargs):
                         user_profile_form.cleaned_data)
             
             info = Info(_(u'You have successfully change your profile!'),
-                        _(u'Now you will be rediected to edit page.'),request.path)
+                        _(u'Now you will be rediected to edit page.'),
+                        request.path)
             return render_template(request, 'gearanswer/info.html',
                                         locals(),
                                         )

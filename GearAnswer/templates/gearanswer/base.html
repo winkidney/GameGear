@@ -227,22 +227,24 @@
                                 <div class="cell border-bottom center gray-text">
                                     <p><strong>今日热议</strong></p>
                                 </div><!--end a cell div-->
+                                {% if hot_topics %}
                                 <div class="cell center gray-text">
                                     <ul class="mini-topic no-list-style ">
+                                        {% for topic in hot_topics %}
                                         <li class="border-bottom">
                                            <table>
+                                                {% if topic.node.avatar %}
+                                                <td><img src="{{ topic.node.get_avatar_url }}"/></td>
+                                                {% else %}
                                                 <td><img src="{{ static_url }}/answer/img/avatar.png"/></td>
-                                                <td><a class="gray-text">nodejs究竟有什么优势呢？nodejs究竟有什么优势呢？</a></td>
+                                                {% endif %}
+                                                <td><a href="{{ topic.get_abs_url }}" class="gray-text">{{ topic.title }}</a></td>
                                             </table>
                                         </li>
-                                        <li class="border-bottom">
-                                            <table>
-                                                <td><img src="{{ static_url }}/answer/img/avatar.png"/></td>
-                                                <td><a class="gray-text">nodejs究竟有什么优势呢？</a></td>
-                                            </table>
-                                        </li>
+                                        {% endfor %}
                                     </ul>
-                                </div><!--end a cell div-->                                                              
+                                </div><!--end a cell div-->
+                                {% endif %}                                                            
                                 <div class="clear"></div>
                             </div><!--end side-box-->
                         {% endblock %}

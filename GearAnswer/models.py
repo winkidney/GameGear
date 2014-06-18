@@ -50,7 +50,7 @@ class Node(models.Model):
                                    verbose_name=_(u'node description'))
     help_text = models.TextField(blank=True,
                                  verbose_name=_(u"node help text"))
-    q_count = models.IntegerField(blank=False,
+    topic_count = models.IntegerField(blank=False,
                                   default=0, verbose_name=_(u'topic count'))
     parent = models.ForeignKey('Node', 
                                default=0, 

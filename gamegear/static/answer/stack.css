@@ -476,12 +476,14 @@ ul.topic {
     width: 30%;
     margin: 10px 0 0 0;
 }
-.mini-topic li{
+.mini-topic a{
+    padding-left: 5px;
 }
 .mini-topic img{
     margin: 5px 0 0 0;
     width: 24px;
     height: 24px;
+    border-radius: 2px;
 }
 .sidebar-node-list li{
     padding: 2px 5px;

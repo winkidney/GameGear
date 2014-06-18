@@ -81,6 +81,14 @@ def get_topic(topic_id):
         return False
     return topic
 
+def get_today_hot():
+    """ Return a list contains DEFAULT_HOT_COUNT's Topic object.
+    """
+    from datetime import date
+    
+    topics = Topic.objects.filter(update_at__day=date.today().day).order_by('reply_count')   #.values('id','title','node')
+    return topics
+
 def get_replys(topic_id):
     """ Get a topic's reply by topic id.
         Return a list contains query result.
@@ -101,7 +109,7 @@ def get_reply(reply_id):
 
 def get_navs():
     #todo : add cache
-    return Nav.objects.exclude(name="none")
+    return Nav.objects.all()
 
 def get_nav_byid(nav_id):
     """get a nav tab by nav_id"""
@@ -112,6 +120,28 @@ def get_nav_byid(nav_id):
         return Nav.objects.get(id=nav_id)
     except ObjectDoesNotExist:
         return None
+
+def create_nav(name, display_order, children):
+    """
+        create nav by name ,display_order and its child-nodes
+    """
+    if not isinstance(display_order, (int, str, unicode)):
+        raise TypeError,"argument display_order [%s]  is not a int/str/unicode instance" \
+            % display_order
+    if not isinstance(name, (str, unicode)):
+        raise TypeError,"argument name [%s]  is not a int/str/unicode instance" \
+            % name
+    if not isinstance(children, (Node, QuerySet)):
+        raise TypeError,"argument children [%s]  must be  a Node/QuerySet instance" \
+            % children
+            
+    nav = Nav(name=name,
+              display_order=display_order,
+              )
+    nav.save()
+    nav.child_nodes.add(children)
+    nav.save()
+    return nav   
     
 def update_avatar(avatar, avatar_file):
     
