@@ -158,8 +158,8 @@ def update_user(uid, avatar_file, profile_dict):
     for item in profile_dict.items():
         if item[0] != u'avatar':
             user.__setattr__(item[0], item[1])
-            
-    update_avatar(user.avatar, avatar_file)
+    if avatar_file:       
+        update_avatar(user.avatar, avatar_file)
 
     user.save()
     return user
