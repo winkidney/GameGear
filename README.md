@@ -25,7 +25,7 @@ Now building.
 ###done
 + 修复发表回复的表单中不会指定编辑器类型的错误,GearAnswer/apis.py和views中 done
 + 修正：每次有新回复就更新一次文章的更新时间
-
++ 修正：头像字段为空引发的500错误
 + node 文章列表
 
 ###process 70%.    

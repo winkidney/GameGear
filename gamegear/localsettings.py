@@ -12,7 +12,7 @@ PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)),os.pardi
 
 AUTH_USER_MODEL = 'UCenter.User'
 
-
+ALLOWED_HOSTS = ['*']
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
