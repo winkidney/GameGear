@@ -194,7 +194,10 @@ def update_topic_view(request, node_name, new_topic=True, *args, **kwargs):
                          node_name, 
                          request.user.id, 
                          )
-            
+                #update topic_count in this node
+                current_node.topic_count += 1
+                current_node.save()
+                
                 title = _(u"Topic published!")
                 content = _(u"Now you will be rediected to your topic page.")
                 redirect_url = topic.get_abs_url()
