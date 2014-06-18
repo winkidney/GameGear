@@ -255,9 +255,13 @@
                                     <p><strong>最热节点</strong></p>
                                 </div><!--end a cell div-->
                                 <div class="cell center gray-text">
+                                    {% if hot_nodes %}
                                    <ul class="sidebar-node-list no-list-style">
-                                        <li class="black-gray-btn radius-3 left"><a>c++</a></li>
+                                        {% for node in hot_nodes %}
+                                        <li class="black-gray-btn radius-3 left"><a href="{{ node.get_abs_url }}">{{ node.name }}</a></li>
+                                        {% endfor %}
                                    </ul>
+                                   {% endif %}
                                 </div><!--end a cell div-->                                                              
                                 <div class="clear"></div>
                             </div><!--end side-box-->
@@ -268,9 +272,13 @@
                                     <p><strong>新增节点</strong></p>
                                 </div><!--end a cell div-->
                                 <div class="cell center gray-text">
+                                    {% if new_nodes %}
                                    <ul class="sidebar-node-list no-list-style">
-                                        <li class="black-gray-btn radius-3 left"><a>c++</a></li>
+                                        {% for node in new_nodes %}
+                                        <li class="black-gray-btn radius-3 left"><a href="{{ node.get_abs_url }}">{{ node.name }}</a></li>
+                                        {% endfor %}
                                    </ul>
+                                   {% endif %}
                                 </div><!--end a cell div-->                                                              
                                 <div class="clear"></div>
                             </div><!--end side-box-->

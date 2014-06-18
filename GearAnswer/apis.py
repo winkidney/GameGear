@@ -44,11 +44,25 @@ def get_node_list():
                       )
     return result 
 
-def get_hotnodes():
-    """ Get hot nodes depend on its update and total topics 
+def get_newnodes():
+    """ Get new nodes depend on its creating time.
         Return a list of them.
     """
-    return 
+    return Node.objects.exclude(name='none').order_by('-create_at')[0:DEFAULT_NEW_COUNT]
+
+def get_hotnodes():
+    """ Get hot nodes depend on its total topics (based on its table's data)
+        Return a list of them.
+    """
+    return Node.objects.exclude(name='none').order_by('-topic_count')[0:DEFAULT_HOT_COUNT]
+
+def get_related_nodes(node):
+    """
+        Get related node by based on its parent.
+    """
+    if not isinstance(node, Node):
+        raise TypeError,"node argument [%s] must be a Node instance!" % node
+    return Node.objects.filter(parent=node.parent)
 
 def get_topics_bynode(node, page):
     """ Get topics by node object and return given page's topic list.
@@ -66,7 +80,7 @@ def get_topics_bynode(node, page):
     return topics
     
 def get_topic_count_bynode(node):
-    """Get topic count by Node object"""
+    """Get topic count by Node object based on Topic table."""
     #todo : add cache here
     if not isinstance(node, Node):
         raise TypeError, "node argument [%s] must be a Node instance!"

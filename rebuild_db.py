@@ -24,9 +24,11 @@ def add_default_node():
                 'system default node, if your node has no parent node ,set it to this node')
     update_node('创意', 
                 '讨论创意有关的话题，新点子？游戏模式？文案？都可以放到这里')
-    update_node('杂谈', 
+    node = update_node('杂谈', 
                 '这里是灌水专用我会乱说么=w=',
-                node_avatar=None, pnode='创意')
+                node_avatar=None, pnode='创意',)
+    node.help_text = '[>用音乐充实你的创造生活](http://www.xiami.com/radio/play/type/4/oid/5066869)'
+    node.save()
     
 def test_info(name, passwd, email):
     user = create_user(name, passwd, email)

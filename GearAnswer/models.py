@@ -43,6 +43,7 @@ class Node(models.Model):
     name = models.CharField(blank=False, unique=True, 
                             max_length=100, 
                             verbose_name=_(u'node name'))
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
     avatar = models.ImageField(blank=True,
                                upload_to='nodes/', 
                                verbose_name=_(u'node avatar'))

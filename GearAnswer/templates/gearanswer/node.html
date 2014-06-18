@@ -18,7 +18,7 @@
                                                     <strong>
                                                         <a href="{{ answer_url }}" >{{ site_name }}</a>
                                                         &gt; 
-                                                        <a href="{{ answer_url }}node/{{ node_name }}/" >{{ current_node.name }}</a>
+                                                        <a href="{{ current_node.get_abs_url }}" >{{ current_node.name }}</a>
                                                     </strong>
                                                     <span class="font-11px right">{{ topic_count }} 个主题 · <a href="like/">加入收藏</a></span>
                                                 <div class=" gray-text">
@@ -155,43 +155,44 @@
                                     <p><strong>{{ current_node.name }}</strong></p>
                                 </div><!--end a cell div-->
                                 <div class="cell pread-mini center">
-                                    <p><a href="#">&gt;Python Offical Website</a></p>
-                                    <p><a href="#">&gt;Learning Python</a></p>
-                                    <p><a href="#">&gt;Python科学计算</a></p>
+                                {% autoescape off %}
+                                    <div class="md-render">
+{{ current_node.help_text }}
+                                    </div>
+                                {% endautoescape %}
                                 </div><!--end a cell div-->                                                              
                                 <div class="clear"></div>
                             </div><!--end side-box-->
                             <div class="side-box light-black-box-shadow ">
-
+                                
+                            {% if current_node.parent.name != 'none' %}
                             <div class="cell border-bottom center gray-text">
                                     <p><strong>父节点</strong></p>
                                     <p>
+                                        {% if current_node.parent.avatar %}
+                                        <img class="node-mini-avatar" src="{{ current.parent.get_avatar_url }}"></img>
+                                        {% else %}
                                         <img class="node-mini-avatar" src="{{ static_url }}/answer/img/avatar.png"></img>
-                                        <a href="#">编程</a>
+                                        {% endif %}
+                                        <a href="{{ current_node.parent.get_abs_url }}">{{ current_node.parent.name }}</a>
                                     </p>
                                 </div><!--end a cell div-->
                                 <div class="cell pread-mini center gray-text">
                                     <p><strong>相关节点</strong></p>
+                                    {% for node in related_nodes %}
                                     <p>
+                                        {% if node.avatar %}
+                                        <img class="node-mini-avatar" src="{{ node.get_avatar_url }}"></img>
+                                        {% else %}
                                         <img class="node-mini-avatar" src="{{ static_url }}/answer/img/avatar.png"></img>
-                                        <a href="#">编程</a>
+                                        {% endif %}
+                                        <a href="{{ node.get_abs_url }}">{{ node.name }}</a>
                                     </p>
-                                    <p>
-                                        <img class="node-mini-avatar" src="{{ static_url }}/answer/img/avatar.png"></img>
-                                        <a href="#">编程</a>
-                                    </p>
-                                    <p>
-                                        <img class="node-mini-avatar" src="{{ static_url }}/answer/img/avatar.png"></img>
-                                        <a href="#">编程</a>
-                                    </p>
-                                    <p>
-                                        <img class="node-mini-avatar" src="{{ static_url }}/answer/img/avatar.png"></img>
-                                        <a href="#">编程</a>
-                                    </p>
+                                    {% endfor %}
                                 </div><!--end a cell div-->                                                              
                                 <div class="clear"></div>
                             </div><!--end side-box-->
-                            
+                            {% endif %}
 {% endblock right_box_extra %} 
 {% block extra_js %}
     <script type="text/javascript" charset="utf-8" src="{{ static_url }}/answer/js/editor.js"></script>

@@ -22,7 +22,8 @@ from GearAnswer.apis import (render_template,Info,get_uinfo,update_topic,
                              get_topics_bynode,get_topic_count_bynode,
                              update_topic_property,get_navs,
                              get_nav_byid,get_node_list,
-                             create_user,get_today_hot,
+                             create_user,get_today_hot,get_hotnodes,
+                             get_newnodes,get_related_nodes,
                              )
 
 
@@ -38,6 +39,8 @@ def home_view(request):
     navigations = get_navs()
     node_list = get_node_list()
     hot_topics = get_today_hot()
+    hot_nodes = get_hotnodes()
+    new_nodes = get_newnodes()
     return render_template(request, 'gearanswer/base.html',
                               locals(),
                               )
@@ -156,12 +159,13 @@ def node_view(request, node_name, *args, **kwargs):
     #todo : add like function
     current_node = get_node_byname(node_name)
     page = request.GET.get('page', 1)
-    #if the editor is stand_alone
+    #if the topic create page is stand_alone
     stand_alone = False
+    related_nodes = get_related_nodes(current_node)
     if not current_node:
         raise Http404
     topics = get_topics_bynode(current_node, page)
-    topic_count = get_topic_count_bynode(current_node)
+    topic_count = current_node.topic_count
     return render_template(request, 'gearanswer/node.html',
                               locals(),
                               )
