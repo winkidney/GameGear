@@ -110,11 +110,13 @@ class Message(models.Model):
         verbose_name = _(u"insite message")
         
     title = models.CharField(max_length=40, verbose_name=_(u'title'))
-    message = models.TextField(verbose_name=_(u'message'))
+    content = models.TextField(verbose_name=_(u'message'))
     isread = models.BooleanField(verbose_name=_(u'is read'))
-    send_time = models.DateTimeField(auto_now_add=True,verbose_name=_(u'send_time'))
+    create_at = models.DateTimeField(auto_now_add=True,verbose_name=_(u'send_time'))
+    
+    author = models.ForeignKey(User,related_name="author",
+                               blank=False, verbose_name=_(u"message's target user"))
     send_to = models.ForeignKey(User,blank=False, verbose_name=_(u"message's target user"))
     
     def __unicode__(self):
-        return "%s" % (self.id, self.send_time)   
-
+        return "%s" % (self.id, self.create_at)

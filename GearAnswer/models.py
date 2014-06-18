@@ -1,38 +1,23 @@
 #!/usr/bin/evn python
 #coding:utf-8
 #GearAnswer/models.py - models file
-#by winkidney - ver 0.1
-#2014
+#by winkidney - 2014年6月18日
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.core.exceptions import  ObjectDoesNotExist
-from UCenter.models import User
-from GearAnswer.config import ANSWER_ROOT as ROOT_URL 
+#from django.core.exceptions import  ObjectDoesNotExist
+from UCenter.models import User,Message
+from GearAnswer.config import *
 
 EDITOR_TYPES = (
     ('md', _(u'markdown editor')),
     ('ue', _(u'ueditor')),
 )
 
-class UserProfile(models.Model):
-    
-    """Question Node ,the same topic Type"""
-    class Meta:
-        verbose_name_plural = _(u'users profile')
-        verbose_name = _(u'user profile ')
-        
-    user = models.OneToOneField(User, blank=False, verbose_name="profile owner")
-    ftopic_count = models.IntegerField(blank=False, default=0, 
-                                verbose_name=_(u"user's favorite's nodes count") )
-    fnode_count = models.IntegerField(blank=False, default=0, 
-                                      verbose_name=_(u"user's favorite nodes's count")) 
-    fuser_count = models.IntegerField(blank=False, default=0,
-                                      verbose_name=_(u"user's caring-user count"))
-    unread_msg_count = models.IntegerField(blank=False, default=0,
-                                      verbose_name=_(u"user's caring-user count"))
-    gears = models.IntegerField(blank=False, default=0, verbose_name=_(u'gears'))
 
+
+
+        
 class Node(models.Model):
     
     """Topic Node ,the same as topic Type"""
@@ -66,7 +51,7 @@ class Node(models.Model):
         return self.avatar.url
     
     def get_abs_url(self):
-        return u"%snode/%s/" % (ROOT_URL, self.name)
+        return u"%snode/%s/" % (ANSWER_ROOT, self.name)
 
 class Tag(models.Model):
     
@@ -77,11 +62,11 @@ class Tag(models.Model):
         verbose_name = _(u'question tag manager')
     
     name = models.CharField(max_length=100, blank=False, verbose_name=_(u'tag name'))
-    q_count = models.IntegerField(blank=False, verbose_name=_(u'question count'))
+    topic_count = models.IntegerField(blank=False, verbose_name=_(u'question count'))
     
     
     def get_abs_url(self):
-        return u"%stags/%s/" % (ROOT_URL, self.name)
+        return u"%stags/%s/" % (ANSWER_ROOT, self.name)
     
     def __unicode__(self):
         
@@ -105,6 +90,7 @@ class Topic(models.Model):
     
     content = models.TextField(blank=True, verbose_name=_(u'topic content'))
     is_question = models.BooleanField(blank=False, default=False, verbose_name=_(u'If it is a question topic'))
+    work_out = models.BooleanField(blank=False, default=False, verbose_name=_(u'if the question worked out'))
     editor = models.CharField(max_length=5,
                               blank=False,
                               default='md',
@@ -118,16 +104,24 @@ class Topic(models.Model):
     last_reply_id = models.CharField(max_length=15, blank=True, default='0',
                                      verbose_name=_(u"last reply's id"))
     
-    work_out = models.BooleanField(blank=False, default=False, verbose_name=_(u'if the question worked out'))
+    
     useful = models.IntegerField(blank=False, default=0, verbose_name=_(u'useful'))
+    #todo : 有更好的设计么？
+    useful_uids = models.CharField(max_length=UIDS_RESERVE_LENGTH,
+                                   blank=True, 
+                                   verbose_name=_(u"uids that mark this topic useful."))
     stars = models.IntegerField(blank=False, default=0, verbose_name=_(u'stared count'))
     useless = models.IntegerField(blank=False, default=0, verbose_name=_(u'useless'))
-    
+    #todo : 有更好的设计么？
+    useless_uids = models.CharField(max_length=UIDS_RESERVE_LENGTH,
+                                   blank=True, 
+                                   verbose_name=_(u"uids that mark this topic useful."))
     view_times = models.IntegerField(blank=False, default=0, verbose_name=_(u'view times'))
     
     #answers = models.ManyToManyField(Answer, blank=True, verbose_name=_(u'response to the topic'))
     tags = models.ManyToManyField(Tag, blank=True, verbose_name=_(u'topic tags'))
     node = models.ForeignKey(Node, blank=False, verbose_name=_(u'topic node'))
+    
     @property
     def last_reply(self):
         if self.last_reply_id != '0':
@@ -139,12 +133,48 @@ class Topic(models.Model):
             return None
     
     def get_abs_url(self):
-        return u"%sarticles/%s/" % (ROOT_URL, self.id)
+        return u"%sarticles/%s/" % (ANSWER_ROOT, self.id)
     
     def __unicode__(self):
         
         return self.title
     
+    def check_digit_input(self, value):
+        "check if the input value is digit.Return value if True."
+        if not isinstance(value, (int,str,unicode)):
+            raise TypeError,"value [%s] must be an int/str/unicode type object" % value
+        value = str(value)
+        if not value.isdigit():
+            raise TypeError,'value [%s] must be digit.' % value
+        return value
+    
+    def in_useful(self, uid):
+        "Check if the given uid in the useful_uids,return True or false"
+        uid = self.check_digit_input(uid)
+        uids = self.useful_uids.split('_')
+        self.useful_checked = True
+        if str(uid) in uids:
+            return True
+        else:
+            return False
+        
+        
+    def insert_useful_uid(self, uid):
+        try:
+            self.useful_checked
+        except:
+            raise NotImplementedError,"You must call in_useful function first before call this."
+        uid = self.check_digit_input(uid)
+        uids = self.useful_uids.split('_')
+        while len(self.useful_uids) > UIDS_MAX_LENGTH:
+            uids = self.useful_uids.split('_')
+            uids.pop(0)
+            self.useful_uids = '_'.join(uids)
+        uids.append(uid)
+        self.useful_uids = '_'.join(uids)
+        self.save()
+        del self.useful_checked
+
 class Reply(models.Model):
     
     """Answer for Question"""
@@ -176,6 +206,37 @@ class Reply(models.Model):
     def __unicode__(self):
         
         return u'%s - %s' %(self.id, self.topic.title)
+
+
+class UserProfile(models.Model):
+    
+    """Question Node ,the same topic Type"""
+    class Meta:
+        verbose_name_plural = _(u'users profile')
+        verbose_name = _(u'user profile ')
+        
+    user = models.OneToOneField(User, blank=False, verbose_name="profile owner")
+    fav_topics = models.ManyToManyField(Topic,
+                                       blank=True, 
+                                verbose_name=_(u"user's favorite's nodes count") )
+    fav_nodes = models.ManyToManyField(Node,
+                                      blank=True, 
+                                      verbose_name=_(u"user's favorite nodes's count")) 
+    fav_users = models.ManyToManyField(User,related_name="fav_user",
+                                      blank=True,
+                                      verbose_name=_(u"user's caring-user count"))
+    
+    gears = models.IntegerField(blank=False, default=DEFAULT_GEARS, verbose_name=_(u'gears'))
+    reputation = models.IntegerField(blank=False, default=0, 
+                                     verbose_name=_(u"reputation in GameGear"))
+    
+    def __unicode__(self):
+        return "%s %s" % (self.user.id, self.user)
+    
+    def unread_msg_count(self):
+        #todo : add msg_get function
+        pass
+
 
 #settings start
 class Nav(models.Model):

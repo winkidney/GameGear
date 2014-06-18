@@ -47,7 +47,7 @@ def home_view(request):
     
     
 def nav_view(request, nav_id, *args, **kwargs):
-    #todo : 
+    #to display ajax tab view
     page = request.GET.get('page', 1)
     nav = get_nav_byid(nav_id)
     if not nav:
@@ -75,7 +75,7 @@ def login_view(request, *args, **kwargs):
                                     password=login_form.cleaned_data.get('password'))
                 if user and user.is_active:
                         login(request, user)
-                        title = _(u"Login successed!")
+                        title = _(u"Login succeed!")
                         content = _(u'Maybe you want to:<a href="%sgear/%s/profile/edit/">Edit your profile</a> or go back to <a href="%s">pre-page</a>' \
                                     % (ROOT_URL, user.id, request.GET.get('next')))
                         info = Info(title, content, request.GET.get('next', ROOT_URL))
@@ -265,8 +265,9 @@ def reply_view(request, article_id, *args, **kwargs):
     redirect_url = topic.get_abs_url()
     return HttpResponseRedirect(redirect_url)
 
-def set_like_view(request, *args, **kwargs):
+def like_node_view(request, node_name, *args, **kwargs):
     #todo : build
+    
     pass
 
 
