@@ -228,7 +228,7 @@ def update_node(name, description, node_avatar=None, pnode=None, avatar=None):
     else:
         node.parent = Node.objects.get(id=1)
     node.save()
-    return True
+    return node
     
 def update_view_times(topic):
     if not isinstance(topic, Topic):
