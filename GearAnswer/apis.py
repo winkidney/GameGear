@@ -336,10 +336,10 @@ def get_uinfo(uid):
     if profiles:
         profile = profiles[0]
         user_info_dict['gears'] = profile.gears
-        user_info_dict['ftopic_count'] = profile.ftopic_count
-        user_info_dict['fnode_count'] = profile.fnode_count
-        user_info_dict['fuser_count'] = profile.fuser_count
-        user_info_dict['unread_msg_count'] = profile.fuser_count
+        user_info_dict['ftopic_count'] = profile.fav_topics.all().count()
+        user_info_dict['fnode_count'] = profile.fav_nodes.all().count()
+        user_info_dict['fuser_count'] = profile.fav_users.all().count()
+        user_info_dict['unread_msg_count'] = profile.unread_msg_count
     return user_info_dict
 
   

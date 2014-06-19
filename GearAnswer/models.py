@@ -233,12 +233,13 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return "%s %s" % (self.user.id, self.user)
     
+    @property
     def unread_msg_count(self):
         #todo : add msg_get function
-        pass
+        return 0
 
 
-#settings start
+
 class Nav(models.Model):
     
     """Nav tabs from Tag,The data to generate nav menu"""
