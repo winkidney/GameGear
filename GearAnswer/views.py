@@ -2,32 +2,27 @@
 #GearAnswer/views.py
 #2014.05.14
 
-from django.shortcuts import render_to_response
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.exceptions import PermissionDenied
-from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.contrib.auth import (authenticate, login, logout)
 from django.db import transaction
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 from UCenter.apis import user_exist,logined
 from GearAnswer.forms import (RegisterForm,LoginForm,UserProfileForm,
                               clean_err_form,NewTopicForm,
                               ReplyFrom)
-from GearAnswer.apis import (render_template,Info,get_uinfo,update_topic,
-                             get_node_byname,get_topic,get_replys,update_reply,
-                             update_user,update_view_times,
-                             get_topics_bynode,get_topic_count_bynode,
-                             update_topic_property,get_navs,
-                             get_nav_byid,get_node_list,
-                             create_user,get_today_hot,get_hotnodes,
-                             get_newnodes,get_related_nodes,
-                             )
+from GearAnswer.apis import *
 
 
 from GearAnswer.config import ANSWER_ROOT as ROOT_URL 
+from astroid.__pkginfo__ import description
+
 
 
 
@@ -271,15 +266,44 @@ def like_node_view(request, node_name, *args, **kwargs):
     pass
 
 
-def set_best_view(request, *args, **kwargs):
+def topic_star_view(request, *args, **kwargs):
     #todo
     return HttpResponse('set best success')
 
-def set_useless_view(request, *args, **kwargs):
-    #todo
-    return HttpResponse('set useful success')
+@login_required(login_url=ROOT_URL+'login/')
+@csrf_exempt
+def topic_useless_view(request, *args, **kwargs):
+    if request.method != 'POST':
+        print request.method
+        raise PermissionDenied
 
-def set_useful_view(request, *args, **kwargs):
+    jrequest = json_loads(request.body)
+    result = ''
+    description = ''
+    if jrequest and jrequest.has_key('topic_id'):
+        topic_id = str(jrequest['topic_id'])
+        if topic_id.isdigit():
+            topic = get_topic(topic_id)
+            if topic:
+                if mark_topic_useless(topic, request.user.id):
+                    result = 'success'
+                    description = _(u"You have successfully marked the topic as useless")
+                else:
+                    result = 'already_marked'
+                    description = _(u"You have already marked it!Don't do it again!")
+            else:
+                result = 'topic_not_exist'
+                description = _(u"Given topic does not exist!")
+        else:
+            result = 'argument_invalid'
+            description = _(u"Your topic_id argument is invalid")
+    else:
+        result = 'data_valid'
+        description = _(u"Your json data is invalid")
+    return HttpResponse('"{"result":"%s", "description" : "%s"}"' \
+                        % (result, description))
+
+def topic_useful_view(request, *args, **kwargs):
     #todo
     return HttpResponse('set useless success')
 

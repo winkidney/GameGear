@@ -9,6 +9,8 @@ from django.utils.translation import ugettext as _
 from django.core.exceptions import  ObjectDoesNotExist
 from django.db.models.query import QuerySet
 import logging
+import json
+
 import uuid
 
 from UCenter.models import User
@@ -19,6 +21,14 @@ from UCenter.apis import get_user_by_id
 from UCenter.apis import create_user as uc_create_user
 from GearAnswer.config import *
 
+logger = logging.getLogger(__name__)
+
+def json_loads(data):
+    try: 
+        return json.loads(data)
+    except ValueError:
+        return None
+
 def remove_xss_tags(html):
     """"escape the specified html tags from user's content"""
     return remove_tags(html, 'script html body')
@@ -28,7 +38,7 @@ def get_node_byname(node_name):
     try:
         node = Node.objects.get(name=node_name)
     except ObjectDoesNotExist:
-        logging.info("Node object [%s] does not existed!" % node_name)
+        logger.info("Node object [%s] does not existed!" % node_name)
         return False
     return node
 
@@ -91,7 +101,7 @@ def get_topic(topic_id):
     try:
         topic = Topic.objects.get(id=topic_id)
     except ObjectDoesNotExist:
-        logging.warn("Topic object [%s] does not existed!" % topic_id)
+        logger.warn("Topic object [%s] does not existed!" % topic_id)
         return False
     return topic
 
@@ -117,7 +127,7 @@ def get_reply(reply_id):
     try:
         reply = Reply.objects.get(id=reply_id)
     except ObjectDoesNotExist:
-        logging.warn("Reply object [%s] does not existed!" % reply_id)
+        logger.warn("Reply object [%s] does not existed!" % reply_id)
         return None
     return reply
 
@@ -291,6 +301,7 @@ class Info(object):
         self.title = title
         self.content = content
         self.redirect_url = redirect_url
+        
 def is_topic_owner(request, topic_id):    
     if request.id == get_topic.author.id:
         return True
@@ -342,5 +353,56 @@ def get_uinfo(uid):
         user_info_dict['unread_msg_count'] = profile.unread_msg_count
     return user_info_dict
 
-  
+def check_topic(topic):
+    if not isinstance(topic, Topic):
+        raise TypeError,"topic [%s] must be a Topic instance!" % topic
+
+def mark_topic_useful(topic, uid):
+    "Return True if success, return False is uid existed in useful uids."
+    check_topic(topic)
+    #todo : decrease user's point
+    return topic.insert(uid)
+
+def mark_topic_useless(topic, uid):
+    "Return True if success, return False is uid existed in useful uids."
+    #todo : decrease user's point
+    check_topic(topic)
+    if topic.insert_useless_uid(uid):
+        topic.useless += 1
+        topic.save()
+        return True
+    else:
+        return False
+
+def mark_topic_star(topic, uid):
+
+    "Return True if success, return False if existed."
+    check_topic(topic)
+    profile = UserProfile.objects.get(user_id=uid)
+    if profile.fav_topics.exists(topic):
+        return False
+    topic.star += 1
+    topic.save()
+    return True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

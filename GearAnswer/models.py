@@ -99,7 +99,7 @@ class Topic(models.Model):
                               default='md',
                               choices=EDITOR_TYPES,verbose_name=_(u'topic type')
                               )
-    author = models.ForeignKey(User, blank=False, verbose_name=_(u'topic author'))
+    author = models.ForeignKey(User, db_index=True,blank=False, verbose_name=_(u'topic author'))
     reply_count = models.IntegerField(blank=False, default=0, verbose_name=_(u'reply count'))
     
     create_at = models.DateTimeField(auto_now_add=True, verbose_name=_(u'create at'))
@@ -114,6 +114,8 @@ class Topic(models.Model):
                                    blank=True, 
                                    verbose_name=_(u"uids that mark this topic useful."))
     stars = models.IntegerField(blank=False, default=0, verbose_name=_(u'stared count'))
+    
+    
     useless = models.IntegerField(blank=False, default=0, verbose_name=_(u'useless'))
     #todo : 有更好的设计么？
     useless_uids = models.CharField(max_length=UIDS_RESERVE_LENGTH,
@@ -151,13 +153,13 @@ class Topic(models.Model):
             raise TypeError,'value [%s] must be digit.' % value
         return value
     
-    def _in_useful(self, field, uid):
+    def _in_field(self, field_value, uid):
         """
-            Check if the given uid in the field(such as useful_uids field),
+            Check if the given uid in the strings(such as useful_uids string),
             return True or false
         """
         uid = self._check_digit_input(uid)
-        uids = field.split('_')
+        uids = field_value.split('_')
         if uid in uids:
             return True
         else:
@@ -167,26 +169,31 @@ class Topic(models.Model):
         """
             Insert a uid into given field.
             it will check if the uid in uidlist,if true,it will not insert.
+            Return True if succeed,False if the uid existed.
         """
+        field_value = self.__getattribute__(field)
         uid = self._check_digit_input(uid)
-        if self._in_useful(field, uid):
-            logger.info("uid [%s] has already in field [%s], will not insert." % (uid, field))
-            return
-        uids = field.split('_')
-        while len(field) > UIDS_MAX_LENGTH:
-            uids = field.split('_')
+        if self._in_field(field_value, uid):
+            logger.info("uid [%s] has already in field [%s], will not insert." \
+                        % (uid, field))
+            return False
+        uids = field_value.split('_')
+        while len(field_value) > UIDS_MAX_LENGTH:
+            uids = field_value.split('_')
             uids.pop(0)
-            field = '_'.join(uids)
+            field_value = '_'.join(uids)
         uids.append(uid)
-        field = '_'.join(uids)
-        self.save()
+        self.__setattr__(field,'_'.join(uids))
         logger.info("uid [%s] instered to field [%s]" % (uid, field))
-        
+        return True
+    
     def insert_useful_uid(self, uid):
-        self._insert_uid(self.useful_uids, uid)
+        "Note:This method will not save data to database!"
+        return self._insert_uid('useful_uids', uid)
     
     def insert_useless_uid(self, uid):
-        self._insert_uid(self.useless_uids, uid)
+        "Note:This method will not save data to database!"
+        return self._insert_uid('useless_uids', uid)
         
 
 

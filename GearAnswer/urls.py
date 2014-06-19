@@ -17,15 +17,17 @@ urlpatterns = patterns('',
     
     url(r'^node/(\w*?)/$', views.node_view),
     url(r'^node/(\w*?)/input/$', views.update_topic_view),
-    url(r'^setbest/(\d)/$', views.set_best_view),
-    url(r'^setuseless/(\d)/$', views.set_useless_view),
-    url(r'^setuseful/(\d)/$', views.set_useful_view),
+
     url(r'^gear/(\d)/profile/$', views.user_profile_view),
     url(r'^gear/(\d)/profile/edit/$', views.user_profile_edit_view),    
     url(r'^gear/(\d)/profile/messages/$', views.messages_view),
+
     
     url(r'^articles/(\d*?)/$', views.read_view),
     url(r'^articles/(\d*?)/reply/$', views.reply_view),
+    url(r'^ajax/topic/star/$', views.topic_star_view),
+    url(r'^ajax/topic/useful/$', views.topic_useful_view),
+    url(r'^ajax/topic/useless/$', views.topic_useless_view),
     
     url(r'^test/$', views.test_view),
     
