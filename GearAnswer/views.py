@@ -260,21 +260,28 @@ def reply_view(request, article_id, *args, **kwargs):
     redirect_url = topic.get_abs_url()
     return HttpResponseRedirect(redirect_url)
 
+def mark_as_given(request, node_name, given_type):
+    pass
+
 def like_node_view(request, node_name, *args, **kwargs):
     #todo : build
     
     pass
 
-
+@login_required(login_url=ROOT_URL+'login/')
+@csrf_exempt
 def topic_star_view(request, *args, **kwargs):
     #todo
-    return HttpResponse('set best success')
+    pass
+    
+
 
 @login_required(login_url=ROOT_URL+'login/')
 @csrf_exempt
 def topic_useless_view(request, *args, **kwargs):
+    #todo : add user request number control
     if request.method != 'POST':
-        print request.method
+
         raise PermissionDenied
 
     jrequest = json_loads(request.body)
