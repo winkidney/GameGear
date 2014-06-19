@@ -5,6 +5,9 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+import logging
+
+
 #from django.core.exceptions import  ObjectDoesNotExist
 from UCenter.models import User,Message
 from GearAnswer.config import *
@@ -14,7 +17,7 @@ EDITOR_TYPES = (
     ('ue', _(u'ueditor')),
 )
 
-
+logger = logging.getLogger(__name__)
 
 
         
@@ -139,7 +142,7 @@ class Topic(models.Model):
         
         return self.title
     
-    def check_digit_input(self, value):
+    def _check_digit_input(self, value):
         "check if the input value is digit.Return value if True."
         if not isinstance(value, (int,str,unicode)):
             raise TypeError,"value [%s] must be an int/str/unicode type object" % value
@@ -148,32 +151,44 @@ class Topic(models.Model):
             raise TypeError,'value [%s] must be digit.' % value
         return value
     
-    def in_useful(self, uid):
-        "Check if the given uid in the useful_uids,return True or false"
-        uid = self.check_digit_input(uid)
-        uids = self.useful_uids.split('_')
-        self.useful_checked = True
-        if str(uid) in uids:
+    def _in_useful(self, field, uid):
+        """
+            Check if the given uid in the field(such as useful_uids field),
+            return True or false
+        """
+        uid = self._check_digit_input(uid)
+        uids = field.split('_')
+        if uid in uids:
             return True
         else:
             return False
         
+    def _insert_uid(self, field,  uid):
+        """
+            Insert a uid into given field.
+            it will check if the uid in uidlist,if true,it will not insert.
+        """
+        uid = self._check_digit_input(uid)
+        if self._in_useful(field, uid):
+            logger.info("uid [%s] has already in field [%s], will not insert." % (uid, field))
+            return
+        uids = field.split('_')
+        while len(field) > UIDS_MAX_LENGTH:
+            uids = field.split('_')
+            uids.pop(0)
+            field = '_'.join(uids)
+        uids.append(uid)
+        field = '_'.join(uids)
+        self.save()
+        logger.info("uid [%s] instered to field [%s]" % (uid, field))
         
     def insert_useful_uid(self, uid):
-        try:
-            self.useful_checked
-        except:
-            raise NotImplementedError,"You must call in_useful function first before call this."
-        uid = self.check_digit_input(uid)
-        uids = self.useful_uids.split('_')
-        while len(self.useful_uids) > UIDS_MAX_LENGTH:
-            uids = self.useful_uids.split('_')
-            uids.pop(0)
-            self.useful_uids = '_'.join(uids)
-        uids.append(uid)
-        self.useful_uids = '_'.join(uids)
-        self.save()
-        del self.useful_checked
+        self._insert_uid(self.useful_uids, uid)
+    
+    def insert_useless_uid(self, uid):
+        self._insert_uid(self.useless_uids, uid)
+        
+
 
 class Reply(models.Model):
     
