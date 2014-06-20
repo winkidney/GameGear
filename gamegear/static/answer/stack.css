@@ -1,16 +1,16 @@
 body,html {
-	background-color:#222222;
-	padding: 0;
-	margin: 0;
-	color: white;
-	font-size: 14px;
-	font-weight: inherit;
-	line-height: 21px;
-	height: 100%;
+    background-color:#222222;
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-size: 14px;
+    font-weight: inherit;
+    line-height: 21px;
+    height: 100%;
     font-family: "Consolas","Monospace","Terminal","文泉驿正黑","微软雅黑","黑体";
 }
 p{
-	margin:0;
+    margin:0;
 }
 a,
 .topic-title a,
@@ -20,10 +20,10 @@ a,
 .black-gray-btn,
 .default-link,
 .default-link{
-	cursor: pointer;
-	color: rgb(238, 136, 135);
+    cursor: pointer;
+    color: rgb(238, 136, 135);
     /*color: #0077DD;*/
-	text-decoration: none;
+    text-decoration: none;
     transition: all 0.5s ease 0s;
 }
 a:hover,
@@ -32,25 +32,25 @@ a:hover,
 .topic-info a:hover,
 .vote-block a:hover,
 .node-list a:hover{
-	color: rgb(255, 170, 174);
-	text-decoration: none;
+    color: rgb(255, 170, 174);
+    text-decoration: none;
     transition: all 0.15s ease 0s;
 }
 .left {
-	float: left;
-	}
+    float: left;
+    }
 .right {
-	float: right;
-	}
+    float: right;
+    }
 .clear {
-	clear: both;
-	}
+    clear: both;
+    }
 .hide {
-	display: none;
-	}
+    display: none;
+    }
 .center {
-	margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 .text-center{
     text-align: center;
@@ -90,12 +90,12 @@ a:hover,
     border-bottom: 1px solid #666666;;
 }
 .no-list-style{
-	list-style: none;
-	padding: 0;
-	margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 .single-title{
-	font-size: 1.2em;
+    font-size: 1.2em;
 }
 h2{
     margin: 0 0 20px 5px;
@@ -111,36 +111,36 @@ h5{
     background-color: #111111;
 }
 .white-text{
-	color: white;
+    color: white;
 }
 .deep-bg{
     background-color: #2E2E2E;
 }
 .dark-bg{
-	background-color: #222;
+    background-color: #222;
 }
 .shadow-light-no-ease{
-	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
 }
 .shadow-light-no-ease:focus,
 .shadow-light-no-ease:hover{
-	box-shadow: 0px 0px 3px 0px rgba(238, 136, 135, 0.7);
+    box-shadow: 0px 0px 3px 0px rgba(238, 136, 135, 0.7);
 }
 .shadow-light{
-	border: none;
-	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
-	transition: all 0.1s ease 0s;
+    border: none;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
+    transition: all 0.1s ease 0s;
 }
 .shadow-light:focus{
-	box-shadow: 0px 0px 3px 0px rgba(238, 136, 135, 0.7);
-	transition: all 0.3s ease 0s;
+    box-shadow: 0px 0px 3px 0px rgba(238, 136, 135, 0.7);
+    transition: all 0.3s ease 0s;
 }
 .gray-bg-link{
     padding: 2px 5px;
-	border-radius: 1px;
+    border-radius: 1px;
 }
 .gray-bg-link:hover{
-	background-color: #222222;
+    background-color: #222222;
 }
 .radius-5{
     border-radius: 5px;
@@ -149,13 +149,13 @@ h5{
     border-radius: 3px;
 }
 .width-98{
-	width: 98%;
+    width: 98%;
 }
 .block{
-	display: block;
+    display: block;
 }
 .width-90{
-	width: 90%;
+    width: 90%;
 }
 
 .width-75{
@@ -172,11 +172,11 @@ h5{
     color: black;
     font-weight: bold;
     font-size: 15px;
-    
+
 }
 .white-gray-btn:hover{
     background-color: #EBEBEB; /*gray*/
-    
+
     transition: all 0.15s ease 0s;
 }
 .black-gray-btn{
@@ -188,7 +188,7 @@ h5{
 .black-gray-btn:hover{
     /*background-color: rgb(51, 0, 0);*//*red*/
     background-color: #2E2E2E; /*gray*/
-    
+
     transition: all 0.15s ease 0s;
 }
 .light-black-box-shadow {
@@ -206,7 +206,7 @@ h5{
     font-size: 12px;
 }
 .div-read{
-	font-family: "微软雅黑","宋体";
+    font-family: "微软雅黑","宋体";
     font-size: 14px;
     line-height: 24px;
 }
@@ -217,7 +217,7 @@ pre{
     white-space:pre-wrap;
 }
 .font-11px{
-	font-size: 11.5px;
+    font-size: 11.5px;
 }
 /*#666666*/
 .ico-music{
@@ -232,29 +232,29 @@ pre{
 
 /*div boxed*/
 #boxed {
-	width: 100%;
+    width: 100%;
 }
 
 /*header*/
 
 header {
-	padding: 2px 0px;
-	/*background-color: #222222;*/
-	/*border-bottom:solid 1px #666666;*/
-	width: 100%;
-	padding: 0 0;
-	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
+    padding: 2px 0px;
+    /*background-color: #222222;*/
+    /*border-bottom:solid 1px #666666;*/
+    width: 100%;
+    padding: 0 0;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
     background-color: #2E2E2E;
 }
 header a{
-	padding: 0 5px;
+    padding: 0 5px;
 }
 /*menu-bar-cpoy*/
 #menu-bar {
-	padding: 2px 0px;
-	
-	/*border-bottom:solid 1px #666666;*/
-	width: 1220px;
+    padding: 2px 0px;
+
+    /*border-bottom:solid 1px #666666;*/
+    width: 1220px;
 
 }
 /* end menu-bar-copy */
@@ -263,13 +263,13 @@ header a{
 /*div main*/
 
 #main{
-	width: 100%;
+    width: 100%;
 }
 #container{
-	width: 1100px;
+    width: 1100px;
 }
 #info {
-	padding: 20px 0;
+    padding: 20px 0;
 }
 #intro {
     margin-top: 40px;
@@ -280,14 +280,14 @@ header a{
     }
 /*logo*/
 #logo{
-	height: 75px;
-	width: 228px;
+    height: 75px;
+    width: 228px;
 }
 /* end logo*/
 /* start info-detail*/
 #info-detail{
-	height: 75px;
-	width: 720px;
+    height: 75px;
+    width: 720px;
 }
 /* end info-detail*/
 
@@ -304,82 +304,82 @@ header a{
     margin-bottom: 20px;
 }
 .node-list{
-	width: 100%;
-	background-color: #4f4f4f;
-	box-shadow: 5px 5px 5px #111111;
-	
+    width: 100%;
+    background-color: #4f4f4f;
+    box-shadow: 5px 5px 5px #111111;
+
 }
 .node-list ul{
-	padding: 0 10px;
+    padding: 0 10px;
 }
 .node-list li{
-	float: left;
-	padding: 2px;
-	margin-right: 3px;
+    float: left;
+    padding: 2px;
+    margin-right: 3px;
 }
 .topic-title a,
 .vote-block a,
 .topic-info a,
 .node-list a{
-	cursor: pointer;
-	text-decoration: none;
+    cursor: pointer;
+    text-decoration: none;
     transition: all 0.5s ease 0s;
 }
 .topic-title a:hover,
 .topic-info a:hover,
 .vote-block a:hover,
 .node-list a:hover{
-	text-decoration: underline;
+    text-decoration: underline;
     transition: all 0.15s ease 0s;
 }
 .node-detail{
-	color: #C6C6C6;
-	width: 100%;
+    color: #C6C6C6;
+    width: 100%;
     margin-bottom: 15px;
 }
 .topic-post{
-	/*border-bottom:solid 1px #666666;*/
-	height: 72px;
-	width: 100%;
+    /*border-bottom:solid 1px #666666;*/
+    height: 72px;
+    width: 100%;
 }
 .user-avatar {
-	width: 72px;
-	/*height: 100%;*/
+    width: 72px;
+    /*height: 100%;*/
 }
 .user-avatar img{
-	height: 48px;
-	width: 48px;
-	border-radius: 5px;
-	margin: 12px;
+    height: 48px;
+    width: 48px;
+    border-radius: 5px;
+    margin: 12px;
 }
 .node-mini-avatar{
     width: 24px;
     height: 24px;
 }
 .detail-center{
-	width: 508px;
-	height: 100%;
+    width: 480px;
+    height: 100%;
 }
 .topic-title{
-	overflow: hidden;
-	/*height:24px;*/
-	padding: 12px 0 0 0;
-	width: 100%;
-	font-size: 18px;
+    overflow: hidden;
+    /*height:24px;*/
+    padding: 12px 0 0 0;
+    width: 100%;
+    font-size: 18px;
 }
 .topic-info {
-	font-size: 11.5px;
-	overflow: hidden;
+    font-size: 11.5px;
+    overflow: hidden;
 }
 .detail-vote{
-	height: 100%;
+    height: 100%;
 }
 .vote-block{
-	margin: 25px 0;
-	font-size: 15px;
+    margin: 25px 0;
+    font-size: 15px;
 }
 .vote-block a:hover{
-	text-decoration: none;
+    text-decoration: none;
 }
 /*start left-box*/
 .left-box{
@@ -396,11 +396,11 @@ header a{
     color: white;
     font-size: 20px;
     font-weight: bold;
-    
+
     }
  .comment-info{
- 	font-size: 11.5px;
- 	padding: 5px 2px;
+    font-size: 11.5px;
+    padding: 5px 2px;
  }
 .topic-comment-left{
     width: 72px;
@@ -450,21 +450,21 @@ ul.topic {
 /*end core-left*/
 /*start core-sidebar*/
 .side-box{
-	width: 100%;
-	background-color: #333333;
-	margin-left: 15px;
-	margin-bottom: 20px;
+    width: 100%;
+    background-color: #333333;
+    margin-left: 15px;
+    margin-bottom: 20px;
     padding: 5px 0;
 }
 .cell{
-	width: 95%;
+    width: 95%;
     margin-bottom: 5px;
 }
 .username {
-	margin: 25px 5px;
+    margin: 25px 5px;
 }
 .user-info {
-	width: 33%;
+    width: 33%;
     font-size: 11px;
     margin: 8px 0;
 }
@@ -514,17 +514,17 @@ ul.topic {
 
 /*menu-bar-cpoy*/
 #menu-bar-copy {
-	padding: 2px 0px;
-	position: fixed;
-	background-color: #222222;
-	/*border-bottom:solid 1px #666666;*/
-	width: 100%;
-	padding: 0 0;
-	top: 0;
-	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
-	display: none;
+    padding: 2px 0px;
+    position: fixed;
+    background-color: #222222;
+    /*border-bottom:solid 1px #666666;*/
+    width: 100%;
+    padding: 0 0;
+    top: 0;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
+    display: none;
 }
 #menu-bar-copy a{
-	padding: 0 5px;
+    padding: 0 5px;
 }
 /* end menu-bar-copy */
