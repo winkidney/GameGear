@@ -21,7 +21,7 @@ from GearAnswer.apis import *
 
 
 from GearAnswer.config import ANSWER_ROOT as ROOT_URL 
-from astroid.__pkginfo__ import description
+
 
 
 
