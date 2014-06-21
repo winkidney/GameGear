@@ -86,7 +86,7 @@ def get_topics_bynode(node, page):
         raise TypeError,"node argument [%s] must be a Node instance or QuerySet instance!"\
                 % node
     page = int(page)
-    topics = Topic.objects.filter(node=node)[(page-1):(page*TOPICS_PER_PAGE_FOR_NODE-1)]
+    topics = Topic.objects.filter(node=node).order_by('-create_at')[(page-1):(page*TOPICS_PER_PAGE_FOR_NODE-1)]
     return topics
     
 def get_topic_count_bynode(node):
@@ -95,7 +95,9 @@ def get_topic_count_bynode(node):
     if not isinstance(node, Node):
         raise TypeError, "node argument [%s] must be a Node instance!"
     return Topic.objects.filter(node=node).count()
-    
+def get_random_topic_id():
+    return Topic.objects.order_by('?')[0].id
+        
 def get_topic(topic_id):
     "Get a Topic object by its id,return Node instance if successfully done,False if failed"
     try:
@@ -281,7 +283,7 @@ def update_reply(editor, content, article_id, uid, reply_id=None):
             raise TypeError, "reply_id %s is not a int object" % article_id
         reply = get_reply(reply_id)
     else:
-        reply = Reply(content=content,
+        reply = Reply(content=remove_xss_tags(content),
                       topic=Topic.objects.get(id=article_id),
                       author=User.objects.get(id=uid)
                       )

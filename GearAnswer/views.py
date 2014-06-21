@@ -371,7 +371,16 @@ def read_view(request, article_id, *args, **kwargs):
     return render_template(request, 'gearanswer/read.html',
                               locals(),
                               )
-    
-    
 
+def random_view(request):
+    topic_id = get_random_topic_id()  
+    return HttpResponseRedirect('%sarticles/%s/' % (ANSWER_ROOT, topic_id)) 
+    
+def building_view(request):
+    info = Info(_(u'页面构建中~'),
+                _(u'即将跳转到首页'),
+                ANSWER_ROOT)
+    return render_template(request, 'gearanswer/info.html',
+                                        locals(),
+                                        )
 

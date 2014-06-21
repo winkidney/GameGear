@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^login/$', views.login_view),
     url(r'^logout/$', views.logout_view),
     url(r'^register/$', views.register_view),
+    url(r'^input/$', views.building_view),
     
     url(r'^node/(\w*?)/$', views.node_view),
     url(r'^node/(\w*?)/input/$', views.update_topic_view),
@@ -21,10 +22,14 @@ urlpatterns = patterns('',
     url(r'^gear/(\d)/profile/$', views.user_profile_view),
     url(r'^gear/(\d)/profile/edit/$', views.user_profile_edit_view),    
     url(r'^gear/(\d)/profile/messages/$', views.messages_view),
+    url(r'^myaccount/$', views.building_view),
+    url(r'^myaccount/favorites/$', views.building_view),
 
     
     url(r'^articles/(\d*?)/$', views.read_view),
     url(r'^articles/(\d*?)/reply/$', views.reply_view),
+    url(r'^random/$', views.random_view),
+    
     url(r'^ajax/topic/star/$', views.topic_star_view),
     url(r'^ajax/topic/useful/$', views.topic_useful_view),
     url(r'^ajax/topic/useless/$', views.topic_useless_view),
