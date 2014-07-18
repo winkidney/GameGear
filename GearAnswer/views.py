@@ -10,7 +10,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth import (authenticate, login, logout)
 from django.db import transaction
 from django.views.decorators.csrf import csrf_exempt
-
+from datetime import datetime
 
 
 from UCenter.apis import user_exist,logined
@@ -240,7 +240,8 @@ def reply_view(request, article_id, *args, **kwargs):
             #and update the reply count
             update_topic_property(topic,
                                   last_reply_id=reply.id,
-                                  reply_count=topic.reply_count+1
+                                  reply_count=topic.reply_count+1,
+                                  update_at = datetime.now(),
                                   )
             
             info = Info(_(u"Reply published!"), 

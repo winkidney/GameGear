@@ -7,9 +7,9 @@
                                         <div class="user-avatar left">
                                             <a href="{{ answer_url }}node/{{ current_node.name }}/">
                                             {% if current_node.avatar %}
-                                                <img src="{{ current_node.get_avatar_url }}">
+                                                <img src="{{ current_node.get_avatar_url }}" alt="{{ current_node.name }}">
                                             {% else %}
-                                                <img src="{{ static_url }}/answer/img/avatar.png">
+                                                <img src="{{ static_url }}/answer/img/avatar.png" {{ current_node.name }}>
                                             {% endif %}
                                             </a>
                                         </div>

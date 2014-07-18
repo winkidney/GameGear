@@ -174,9 +174,9 @@
                                     <div class="user-avatar left">
                                         <a href="{{ answer_url }}gear/{{ current_user.id }}/profile/edit/">
                                         {% if current_user.avatar %}
-                                            <img src="{{ current_user.avatar }}"/>
+                                            <img src="{{ current_user.avatar }}" alt="{{ topic.author.name }}-avatar" />
                                         {% else %}
-                                            <img src="{{ static_url }}/answer/img/avatar.png"/>
+                                            <img src="{{ static_url }}/answer/img/avatar.png" alt="{{ topic.author.name }}-avatar" />
                                         {% endif %}
                                         </a>
                                     </div>

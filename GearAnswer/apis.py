@@ -10,7 +10,7 @@ from django.core.exceptions import  ObjectDoesNotExist
 from django.db.models.query import QuerySet
 import logging
 import json
-
+from datetime import datetime
 import uuid
 
 from UCenter.models import User
@@ -86,7 +86,7 @@ def get_topics_bynode(node, page):
         raise TypeError,"node argument [%s] must be a Node instance or QuerySet instance!"\
                 % node
     page = int(page)
-    topics = Topic.objects.filter(node=node).order_by('-create_at')[(page-1):(page*TOPICS_PER_PAGE_FOR_NODE-1)]
+    topics = Topic.objects.filter(node=node).order_by('-update_at')[(page-1):(page*TOPICS_PER_PAGE_FOR_NODE-1)]
     return topics
     
 def get_topic_count_bynode(node):
@@ -247,14 +247,18 @@ def update_view_times(topic):
         raise TypeError, "argument topic [%s] must be a Topic instance!" % topic
     topic.view_times = topic.view_times + 1
     topic.save()
-        
+
+
+    
 def update_topic_property(topic, **kwargs):
-    """Modify Topic object property by keyword arguments"""
+    """ Modify Topic object property by keyword arguments
+    """
     if not isinstance(topic, Topic):
         raise TypeError,"topic argument [%s] must be a Topic instance!" % topic
     for property in kwargs.items():
         topic.__setattr__(property[0], property[1])
     topic.save()
+    return topic
    
 def update_topic(title, editor, content, node_name, uid):    
     """ create_topic(unicode title, unicode topic, unicode node, int uid)
@@ -287,6 +291,7 @@ def update_reply(editor, content, article_id, uid, reply_id=None):
                       topic=Topic.objects.get(id=article_id),
                       author=User.objects.get(id=uid)
                       )
+        
         reply.save()
     return reply
     

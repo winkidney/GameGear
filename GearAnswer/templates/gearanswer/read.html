@@ -67,7 +67,7 @@
                                     <div class="topic-comment-left user-avatar left">
                                         <a title="{{ reply.author.name }}" href="{{ answer_url }}gear/{{ reply.author.id }}/profile/">
                                             {% if reply.author.avatar %}
-                                            <img src="{{ reply.author.avatar.url }}" alt="{{ reply.author.name }}">
+                                            <img src="{{ reply.author.get_avatar_url }}" alt="{{ reply.author.name }}">
                                             {% else %}
                                             <img src="{{ static_url }}/answer/img/avatar.png" alt="{{ reply.author.name }}">
                                             {% endif %}
